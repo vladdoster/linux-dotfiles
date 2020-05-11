@@ -54,6 +54,13 @@ set clipboard+=unnamedplus
     else
         let NERDTreeBookmarksFile = '~/.vim' . '/NERDTreeBookmarks'
     endif
+    
+" Vim Wiki
+  map <leader>v :VimwikiIndex
+  let wiki = {}
+  let wiki.path = '~/vimwiki/'
+  let wiki.nested_syntaxes = {'python': 'python', 'bash': 'bash'}
+  let g:vimwiki_list = [wiki]
 
 " Shortcutting split navigation, saving a keypress:
 	map <C-h> <C-w>h
@@ -80,7 +87,6 @@ set clipboard+=unnamedplus
 	autocmd VimLeave *.tex !texclear %
 
 " Ensure files are read as what I want:
-	map <leader>v :VimwikiIndex
 	autocmd BufRead,BufNewFile /tmp/calcurse*,~/.calcurse/notes/* set filetype=markdown
 	autocmd BufRead,BufNewFile *.ms,*.me,*.mom,*.man set filetype=groff
 	autocmd BufRead,BufNewFile *.tex set filetype=tex
