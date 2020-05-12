@@ -2,35 +2,28 @@
 
 # Use neovim for vim if present.
 command -v nvim >/dev/null && alias vim="nvim" vimdiff="nvim -d"
-
 # Verbosity and settings that you pretty much just always are going to want.
 alias \
 	cp="cp -iv" \
 	mv="mv -iv" \
 	rm="rm -vI" \
 	mkd="mkdir -pv" \
-	ffmpeg="ffmpeg -hide_banner"
-
 # Colorize commands when possible.
 alias \
 	ls="ls --literal -l --human-readable --color=auto --group-directories-first" \
 	grep="grep -n --color=auto" \
 	diff="diff --color=auto" \
 	ccat="highlight --out-format=ansi"
-
-# These common commands are just too long! Abbreviate them.
+# These commands are too long! Abbreviate them.
 alias \
 	ka="killall" \
 	g="git" \
-	sdn="sudo shutdown -h now" \
 	f="$FILE" \
 	e="$EDITOR" \
 	v="$EDITOR" \
 	p="sudo pacman" \
 	z="zathura"
-
 alias \
 	magit="nvim -c MagitOnly" \
 	ref="shortcuts >/dev/null; source ${XDG_CONFIG_HOME:-$HOME/.config}/shortcutrc ; source ${XDG_CONFIG_HOME:-$HOME/.config}/zshnameddirrc" \
 	tmux="tmux -f ${XDG_CONFIG_HOME:-$HOME/.config}/tmux/tmux.conf" \
-	weath="less -S ${XDG_DATA_HOME:-$HOME/.local/share}/weatherreport" \
