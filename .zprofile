@@ -44,7 +44,6 @@ export LESS_TERMCAP_ue="$(printf '%b' '[0m')"
 export LESSOPEN="| /usr/bin/highlight -O ansi %s 2>/dev/null"
 export QT_QPA_PLATFORMTHEME="gtk2"	# Have QT use gtk2 theme.
 export _JAVA_AWT_WM_NONREPARENTING=1	# Java doesn't understand tiling windows
-export AWT_TOOLKIT="MToolkit wmname LG3D"	#May have to install wmname
 
 [ ! -f ${XDG_CONFIG_HOME:-$HOME/.config}/shortcutrc ] && shortcuts >/dev/null 2>&1 &
 
