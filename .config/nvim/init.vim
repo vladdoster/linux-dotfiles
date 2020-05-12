@@ -54,9 +54,11 @@ set clipboard+=unnamedplus
     else
         let NERDTreeBookmarksFile = '~/.vim' . '/NERDTreeBookmarks'
     endif
-    
+
 " Vim Wiki
   map <leader>v :VimwikiIndex
+  let g:vimwiki_list = [{'path': '~/vimwiki/',
+                      \ 'syntax': 'default', 'ext': '.md'}]
   let wiki = {}
   let wiki.path = '~/vimwiki/'
   let wiki.nested_syntaxes = {'python': 'python', 'bash': 'bash'}
