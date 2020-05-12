@@ -1,7 +1,5 @@
 #!/bin/sh
 
-# The famous "get a menu of emojis to copy" script.
-
 # Must have xclip installed to even show menu.
 xclip -h 2>/dev/null || exit 1
 
