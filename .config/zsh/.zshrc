@@ -1,4 +1,4 @@
-#Config for the Zoomer Shell
+#--- Zoomer Shell ---#
 
 # Enable colors and change prompt:
 autoload -U colors && colors
@@ -11,12 +11,12 @@ HISTSIZE=30000
 SAVEHIST=30000
 HISTFILE=${XDG_CONFIG_HOME:-$HOME/.config}/zsh/history
 
-# Load aliases and shortcuts if existent.
+# Load aliases and shortcuts
 [ -f "${XDG_CONFIG_HOME:-$HOME/.config}/shortcutrc" ] && source "${XDG_CONFIG_HOME:-$HOME/.config}/shortcutrc"
 [ -f "${XDG_CONFIG_HOME:-$HOME/.config}/aliasrc" ] && source "${XDG_CONFIG_HOME:-$HOME/.config}/aliasrc"
 [ -f "${XDG_CONFIG_HOME:-$HOME/.config}/zshnameddirrc" ] && source "${XDG_CONFIG_HOME:-$HOME/.config}/zshnameddirrc"
 
-# Basic auto/tab complete:
+# auto/tab complete:
 autoload -U compinit
 zstyle ':completion:*' menu select
 zmodload zsh/complist
@@ -27,14 +27,14 @@ _comp_options+=(globdots)		# Include hidden files.
 bindkey -v
 export KEYTIMEOUT=1
 
-# Use vim keys in tab complete menu:
+# vim keys in tab complete menu:
 bindkey -M menuselect 'h' vi-backward-char
 bindkey -M menuselect 'k' vi-up-line-or-history
 bindkey -M menuselect 'l' vi-forward-char
 bindkey -M menuselect 'j' vi-down-line-or-history
 bindkey -v '^?' backward-delete-char
 
-# Change cursor shape for different vi modes.
+# cursor shape for different vi modes.
 function zle-keymap-select {
   if [[ ${KEYMAP} == vicmd ]] ||
      [[ $1 = 'block' ]]; then
@@ -46,18 +46,20 @@ function zle-keymap-select {
     echo -ne '\e[5 q'
   fi
 }
+
 zle -N zle-keymap-select
 zle-line-init() {
     zle -K viins # initiate `vi insert` as keymap
     echo -ne "\e[5 q"
 }
-zle -N zle-line-init
-echo -ne '\e[5 q' # Use beam shape cursor on startup.
-preexec() { echo -ne '\e[5 q' ;} # Use beam shape cursor for each new prompt.
 
-# Beam shape cursor on startup.
+zle -N zle-line-init
+echo -ne '\e[5 q' # Beam cursor on startup.
+preexec() { echo -ne '\e[5 q' ;} # Beam cursor for each new prompt.
+
+# Beam cursor on startup.
 echo -ne '\e[5 q'
-# Beam shape cursor for each new prompt.
+# Beam cursor for each new prompt.
 preexec() { echo -ne '\e[5 q' ;}
 
 bindkey -s '^a' 'bc -l\n'
