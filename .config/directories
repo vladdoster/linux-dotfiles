@@ -1,7 +1,6 @@
 cf       ${XDG_CONFIG_HOME:-$HOME/.config}
 cac      ${XDG_CACHE_HOME:-$HOME/.cache}
-h        ~/
-d        ~/downloads
-gh       ~/github
-lb       ~/.local/bin
-mn       /mnt
+h        ${XDG_CACHE_HOME:-$HOME/}
+d        ${XDG_CACHE_HOME:-$HOME/downloads}
+gh       ${XDG_CACHE_HOME:-$HOME/github}
+lb       ${XDG_CACHE_HOME:-$HOME/.local/bin}
