@@ -1,0 +1,9 @@
+#!/bin/sh
+
+# ~/.config/assets/wallpaper.png == location of system wallpaper.
+# if: argument, moves it there. 
+# else: sets ~/.config/assets/wallpaper.png as the wallpaper
+
+[ ! -z "$1" ] && cp "$1" ~/.config/assets/wallpaper.png \
+              && notify-send -i "$HOME/.config/assets/wallpaper.png" "Wallpaper changed."
+xwallpaper --focus ~/.config/assets/wallpaper.png

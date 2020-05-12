@@ -1,9 +1,0 @@
-#!/bin/sh
-
-# ~/.config/assets/wallpaper.png is the location of the system wallpaper.  This
-# script, if given an argument, moves it there.  This script without an
-# argument sets ~/.config/assets/wallpaper.png as the wallpaper, which is required on login
-# if you don't want a black screen.
-
-[ ! -z "$1" ] && cp "$1" ~/.config/assets/wallpaper.png && notify-send -i "$HOME/.config/assets/wallpaper.png" "Wallpaper changed."
-xwallpaper --focus ~/.config/assets/wallpaper.png
