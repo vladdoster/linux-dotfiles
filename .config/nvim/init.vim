@@ -82,6 +82,12 @@ set clipboard+=unnamedplus
 " Compile document, be it groff/LaTeX/markdown/etc.
 	map <leader>c :w! \| !compiler <c-r>%<CR>
 
+" Compile dwm-blocks each time I exit config.h
+        autocmd BufWritePost ~/.local/src/dwmblocks/config.h \
+	                     !cd ~/.local/src/dwmblocks/; \
+			     sudo make install \
+			     && { killall -q dwmblocks;setsid dwmblocks & }
+			     
 " Open corresponding .pdf/.html or preview
 	map <leader>p :!opout <c-r>%<CR><CR>
 
@@ -114,13 +120,11 @@ set clipboard+=unnamedplus
 	autocmd BufWritePost *sxhkdrc !pkill -USR1 sxhkd
 
 " Code completion stuff
-" ########################
 set nobackup
 set nowritebackup
 
 " Use Microsoft python language server
-
-"python.jediEnabled": false
+" python.jediEnabled": false
 
 " Use tab for trigger completion with characters ahead and navigate.
 " Use command ':verbose imap <tab>' to make sure tab is not mapped by other plugin.
