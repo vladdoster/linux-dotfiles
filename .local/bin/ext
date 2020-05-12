@@ -1,10 +1,8 @@
 #!/bin/sh
 
-# A general, all-purpose extraction script. Not all extraction programs here
-# are installed by LARBS automatically.
-#
-# Default behavior: Extract archive into new directory
-# Behavior with `-c` option: Extract contents into current directory
+# All-purpose extraction script. 
+# No args: Extract archive into new directory
+# `-c` flag: Extract contents into current directory
 
 while getopts "hc" o; do case "${o}" in
 	c) extracthere="True" ;;
