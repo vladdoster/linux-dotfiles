@@ -1,6 +1,6 @@
 #!/bin/sh
 
-#This script "rotates" the content of a dir based on the first chosen file
+# This script "rotates" the content of a dir based on the first chosen file
 # so that if I open the 15th image, if I press next, it will go to the 16th etc.
 # Autistic, I know, but this is why sxiv is great.
 
