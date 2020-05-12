@@ -3,5 +3,5 @@ bd	    ${XDG_CONFIG_HOME:-$HOME/.config}/directories
 cfa	    ${XDG_CONFIG_HOME:-$HOME/.config}/aliasrc
 cfv	    ${XDG_CONFIG_HOME:-$HOME/.config}/nvim/init.vim
 cfi	    ${XDG_CONFIG_HOME:-$HOME/.config}/i3/config
-cft     ${XDG_CONFIG_HOME:-$HOME/.config}/tmux/.tmux.conf
+cft	    ${XDG_CONFIG_HOME:-$HOME/.config}/tmux/.tmux.conf
 cfz	    $ZDOTDIR/.zshrc
