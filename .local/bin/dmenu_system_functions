@@ -2,13 +2,14 @@
 
 # A dmenu wrapper script for system functions.
 
+
 cmds="\
-lock         slock
-logout dwm   kill -TERM $(pidof -s dwm)
-reload dwm   kill -HUP $(pidof -s dwm)
-hibernate    sudo -A systemctl suspend-then-hibernate
-reboot       sudo -A reboot
-shutdown     sudo -A shutdown -h now"
+🔒 lock		slock
+🚪 leave dwm	kill -TERM $(pidof -s dwm)
+♻ renew dwm	kill -HUP $(pidof -s dwm)
+🐻 hibernate	${hib:-sudo -A systemctl suspend-then-hibernate}
+🔃 reboot	${reb:-sudo -A reboot}
+🖥 shutdown	${shut:-sudo -A shutdown -h now}"
 
 choice="$(echo "$cmds" | cut -d'	' -f 1 | dmenu)" || exit 1
 
