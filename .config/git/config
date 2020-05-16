@@ -19,6 +19,7 @@
   p  = push
   pu = pull
   st = status -uno
+  stu = status
   co = checkout
   cm = commit -m
   br = branch
