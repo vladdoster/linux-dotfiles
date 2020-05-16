@@ -4,4 +4,5 @@ h        ${XDG_CACHE_HOME:-$HOME/}
 d        ${XDG_CACHE_HOME:-$HOME/downloads}
 gh       ${XDG_CACHE_HOME:-$HOME/github}
 lb       ${XDG_CACHE_HOME:-$HOME/.local/bin}
-dwms     ${XDG_CACHE_HOME:-$HOME/.local/src/dwm}
+lsd      ${XDG_LOCAL_HOME:-$HOME/.local/src/dwm}
+lsdb      ${XDG_LOCAL_HOME:-$HOME/.local/src/dwmblocks.git}

@@ -1,12 +1,10 @@
 #!/bin/sh
 
-# This file runs when a DM logs you into a graphical session.
 # If you use startx/xinit like a Chad, this file will also be sourced.
 
-login_key_remap    &		# run the login_key_remap script, switching caps/esc and more
-set_background     &		# run `set_background` script
-#xrdb ${XDG_CONFIG_HOME:-$HOME/.config}/Xresources &	# Use Xresources colors/settings on startup
-xcompmgr           &		# xcompmgr for transparency
-dunst              &		# dunst for notifications
-xset r rate 300 50 &		# Speed xrate up
-unclutter          &		# Remove mouse when idle
+login_key_remap    &	# switch caps/esc
+set_background     &	# self explanatory
+xcompmgr           &	# transparency
+dunst              &	# notifications
+xset r rate 300 50 &	# Speed xrate up
+unclutter          &	# Remove mouse when idle
