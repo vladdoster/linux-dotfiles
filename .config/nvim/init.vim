@@ -49,6 +49,7 @@ set clipboard+=unnamedplus
 " Nerd tree
 	map <leader>n :NERDTreeToggle<CR>
 	autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+	let NERDTreeShowHidden=1
     if has('nvim')
         let NERDTreeBookmarksFile = stdpath('data') . '/NERDTreeBookmarks'
     else
@@ -83,11 +84,8 @@ set clipboard+=unnamedplus
 	map <leader>c :w! \| !compiler <c-r>%<CR>
 
 " Compile dwm-blocks each time I exit config.h
-        autocmd BufWritePost ~/.local/src/dwmblocks/config.h \
-	                     !cd ~/.local/src/dwmblocks/; \
-			     sudo make install \
-			     && { killall -q dwmblocks;setsid dwmblocks & }
-			     
+        autocmd BufWritePost ~/.local/src/dwmblocks/config.h !cd ~/.local/src/dwmblocks/; sudo make install && { killall -q dwmblocks;setsid dwmblocks & }
+
 " Open corresponding .pdf/.html or preview
 	map <leader>p :!opout <c-r>%<CR><CR>
 

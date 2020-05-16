@@ -1,6 +1,6 @@
 #!/bin/sh
 
-system_wallpaper="~/.config/assets/wallpaper.png"
+system_wallpaper="/home/vlad/.config/assets/wallpaper.png"
 
 [ ! -z "$1" ] && cp "$1" "$system_wallpaper" \
               && notify-send -i "$system_wallpaper" "Wallpaper changed."
