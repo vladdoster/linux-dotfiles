@@ -1,7 +1,7 @@
 bf	    ${XDG_CONFIG_HOME:-$HOME/.config}/files
 bd	    ${XDG_CONFIG_HOME:-$HOME/.config}/directories
 cfa	    ${XDG_CONFIG_HOME:-$HOME/.config}/aliasrc
+cfd         ${XDG_CONFIG_HOME:-$HOME/.local/src/dwm/config.h
 cfv	    ${XDG_CONFIG_HOME:-$HOME/.config}/nvim/init.vim
-cfi	    ${XDG_CONFIG_HOME:-$HOME/.config}/i3/config
 cft	    ${XDG_CONFIG_HOME:-$HOME/.config}/tmux/.tmux.conf
 cfz	    $ZDOTDIR/.zshrc
