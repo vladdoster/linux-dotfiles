@@ -9,7 +9,7 @@ stty stop undef	# Disable ctrl-s to freeze terminal.
 # History in cache directory:
 HISTSIZE=30000
 SAVEHIST=30000
-HISTFILE=${XDG_CONFIG_HOME}/zsh/history
+HISTFILE=${ZDOTDIR}/history
 
 # Load aliases and shortcuts
 [ -f "${XDG_CONFIG_HOME}/shortcutrc" ] && source "${XDG_CONFIG_HOME}/shortcutrc"
