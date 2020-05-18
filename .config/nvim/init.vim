@@ -1,13 +1,13 @@
 let mapleader =","
 
-if ! filereadable(system('echo -n "${XDG_CONFIG_HOME:-$HOME/.config}/nvim/autoload/plug.vim"'))
+if ! filereadable(system('echo -n "${XDG_CONFIG_HOME}/nvim/autoload/plug.vim"'))
 	echo "Downloading junegunn/vim-plug to manage plugins..."
-	silent !mkdir -p ${XDG_CONFIG_HOME:-$HOME/.config}/nvim/autoload/
-	silent !curl "https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim" > ${XDG_CONFIG_HOME:-$HOME/.config}/nvim/autoload/plug.vim
+	silent !mkdir -p ${XDG_CONFIG_HOME}/nvim/autoload/
+	silent !curl "https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim" > ${XDG_CONFIG_HOME/}/.config}/nvim/autoload/plug.vim
 	autocmd VimEnter * PlugInstall
 endif
 
-call plug#begin(system('echo -n "${XDG_CONFIG_HOME:-$HOME/.config}/nvim/plugged"'))
+call plug#begin(system('echo -n "${XDG_CONFIG_HOME}/nvim/plugged"'))
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'tpope/vim-surround'
 Plug 'preservim/nerdtree'
@@ -58,10 +58,10 @@ set clipboard+=unnamedplus
 
 " Vim Wiki
   map <leader>v :VimwikiIndex
-  let g:vimwiki_list = [{'path': '~/vimwiki/',
+  let g:vimwiki_list = [{'path': '~/.local/src/vimwiki.git/',
                       \ 'syntax': 'default', 'ext': '.md'}]
   let wiki = {}
-  let wiki.path = '~/vimwiki/'
+  let wiki.path = '~/.local/src/vimwiki.git/'
   let wiki.nested_syntaxes = {'python': 'python', 'bash': 'bash'}
   let g:vimwiki_list = [wiki]
 
