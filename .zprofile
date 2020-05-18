@@ -17,7 +17,6 @@ export PYLINTHOME="$XDG_CACHE_HOME"/pylint
 export PYTHON_EGG_CACHE="$XDG_CACHE_HOME"/python-eggs
 ## Config
 export XDG_CONFIG_HOME="$HOME"/.config
-export ALSA_CONFIG_PATH="$XDG_CONFIG_HOME"/alsa/asoundrc
 export DOCKER_CONFIG="$XDG_CONFIG_HOME"/docker
 export GTK2_RC_FILES="${XDG_CONFIG_HOME}/gtk-2.0/gtkrc-2.0"
 export INPUTRC="$XDG_CONFIG_HOME"/inputrc
