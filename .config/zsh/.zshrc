@@ -14,7 +14,6 @@ HISTFILE=${ZDOTDIR}/history
 # Load aliases and shortcuts
 [ -f "${XDG_CONFIG_HOME}/shortcutrc" ] && source "${XDG_CONFIG_HOME}/shortcutrc"
 [ -f "${XDG_CONFIG_HOME}/aliasrc" ] && source "${XDG_CONFIG_HOME}/aliasrc"
-[ -f "${XDG_CONFIG_HOME}/zshnameddirrc" ] && source "${XDG_CONFIG_HOME}/zshnameddirrc"
 
 # auto/tab complete
 autoload -U compinit
