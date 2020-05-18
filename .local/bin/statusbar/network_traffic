@@ -8,7 +8,7 @@ txfile="${XDG_CACHE_HOME:-$HOME/.cache}/txlog"
 rxcurrent="$(cat /sys/class/net/*/statistics/rx_bytes | paste -sd '+' | bc)"
 txcurrent="$(cat /sys/class/net/*/statistics/tx_bytes | paste -sd '+' | bc)"
 
-printf " 🔻%04dKiB 🔺%04dKiB " \
+printf " 🔻%04d🔺%04d KiB " \
 	"$(printf -- "(%s-%s)/1024\\n" "$rxcurrent" "$(cat "$rxfile")" | bc)" \
 	"$(printf -- "(%s-%s)/1024\\n" "$txcurrent" "$(cat "$txfile")" | bc)"
 
