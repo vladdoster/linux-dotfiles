@@ -12,9 +12,9 @@ export READER="zathura"
 # ~/ Clean-up:
 ## Cache
 export XDG_CACHE_HOME="$HOME}"/.cache
-export CUDA_CACHE_PATH="$XDG_CACHE_HOME"/nv
-export PYLINTHOME="$XDG_CACHE_HOME}"/pylint
-export PYTHON_EGG_CACHE="$XDG_CACHE_HOME}"/python-eggs
+export CUDA_CACHE_PATH="${XDG_CACHE_HOME}"/nv
+export PYLINTHOME="${XDG_CACHE_HOME}"/pylint
+export PYTHON_EGG_CACHE="${XDG_CACHE_HOME}"/python-eggs
 ## Config
 export XDG_CONFIG_HOME="${HOME}"/.config
 export DOCKER_CONFIG="${XDG_CONFIG_HOME}"/docker
