@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 
 # Unactivated progs should go to /dev/null.
-shell_shortcuts="${XDG_CONFIG_HOME}/shortcutrc"
-ranger_shortcuts="${XDG_CONFIG_HOME}/ranger/shortcuts.conf"
+shell_shortcuts="$XDG_CONFIG_HOME/shortcutrc"
+ranger_shortcuts="$XDG_CONFIG_HOME/ranger/shortcuts.conf"
 
 # Remove, prepare files
 rm -f "$ranger_shortcuts" 2>/dev/null
