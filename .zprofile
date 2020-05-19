@@ -10,13 +10,14 @@ export BROWSER="google-chrome-stable"
 export READER="zathura"
 
 # ~/ Clean-up:
-## Cache
 export XDG_CACHE_HOME="$HOME}"/.cache
+export XDG_CONFIG_HOME="${HOME}"/.config
+export XDG_DATA_HOME="${HOME}/.local/share"
+## Cache
 export CUDA_CACHE_PATH="${XDG_CACHE_HOME}"/nv
 export PYLINTHOME="${XDG_CACHE_HOME}"/pylint
 export PYTHON_EGG_CACHE="${XDG_CACHE_HOME}"/python-eggs
 ## Config
-export XDG_CONFIG_HOME="${HOME}"/.config
 export DOCKER_CONFIG="${XDG_CONFIG_HOME}"/docker
 export GTK2_RC_FILES="${XDG_CONFIG_HOME}"/gtk-2.0/gtkrc-2.0
 export INPUTRC="${XDG_CONFIG_HOME}"/inputrc
@@ -29,7 +30,6 @@ export WGETRC="${XDG_CONFIG_HOME}"/wget/wgetrc
 export XINITRC="${XDG_CONFIG_HOME}"/X11/xinitrc
 export ZDOTDIR="${XDG_CONFIG_HOME}"/zsh
 # Data
-export XDG_DATA_HOME="${HOME}"/.local/share
 export CARGO_HOME="${XDG_DATA_HOME}"/cargo
 export GNUPGHOME="${XDG_DATA_HOME}"/gnupg
 export GOPATH="${XDG_DATA_HOME}"/go
@@ -53,7 +53,7 @@ export LESS_TERMCAP_se="$(printf '%b' '[0m')"
 export LESS_TERMCAP_us="$(printf '%b' '[1;32m')"
 export LESS_TERMCAP_ue="$(printf '%b' '[0m')"
 export QT_QPA_PLATFORMTHEME="gtk2"	# Have QT use gtk2 theme.
-export SUDO_ASKPASS="${HOME}"/.local/bin/dmenu_pass
+export SUDO_ASKPASS="${HOME}/.local/bin/dmenu_pass"
 export _JAVA_AWT_WM_NONREPARENTING=1	# Java doesn't understand tiling windows
 
 [ ! -f "${XDG_CONFIG_HOME}"/shortcutrc ] && generate_shortcuts >/dev/null 2>&1 &
