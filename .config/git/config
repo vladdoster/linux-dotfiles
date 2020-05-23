@@ -4,7 +4,7 @@
   bare = false
   logallrefupdates = true
   editor = vim
-  excludesfile = ~/.gitignore
+  excludesfile = ${XDG_CONFIG_HOME:-$HOME/.config}/git/gitignore
 [user]
   name = Vlad Doster
   email = mvdoster@gmail.com
