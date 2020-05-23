@@ -1,13 +1,13 @@
 let mapleader =","
 
-if ! filereadable(system('echo -n "${XDG_CONFIG_HOME}/nvim/autoload/plug.vim"'))
+if ! filereadable(system('echo -n "${XDG_CONFIG_HOME:-$HOME/.config}/nvim/autoload/plug.vim"'))
 	echo "Downloading junegunn/vim-plug to manage plugins..."
-	silent !mkdir -p ${XDG_CONFIG_HOME}/nvim/autoload/
-	silent !curl "https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim" > ${XDG_CONFIG_HOME}/nvim/autoload/plug.vim
+	silent !mkdir -p ${XDG_CONFIG_HOME:-$HOME/.config}/nvim/autoload/
+	silent !curl "https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim" > ${XDG_CONFIG_HOME:-$HOME/.config}/nvim/autoload/plug.vim
 	autocmd VimEnter * PlugInstall
 endif
 
-call plug#begin(system('echo -n "${XDG_CONFIG_HOME}/nvim/plugged"'))
+call plug#begin(system('echo -n "${XDG_CONFIG_HOME:-$HOME/.config}/nvim/plugged"'))
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'tpope/vim-surround'
 Plug 'preservim/nerdtree'
@@ -58,10 +58,10 @@ set clipboard+=unnamedplus
 
 " Vim Wiki
   map <leader>v :VimwikiIndex
-  let g:vimwiki_list = [{'path': '~/.local/src/vimwiki.git/',
+  let g:vimwiki_list = [{'path': '${XDG_USER_LOCAL:-$HOME/.local}/src/vimwiki.git/',
                       \ 'syntax': 'default', 'ext': '.md'}]
   let wiki = {}
-  let wiki.path = '~/.local/src/vimwiki.git/'
+  let wiki.path = '${XDG_USER_LOCAL:-$HOME/.local}/src/vimwiki.git/'
   let wiki.nested_syntaxes = {'python': 'python', 'bash': 'bash'}
   let g:vimwiki_list = [wiki]
 
@@ -84,7 +84,7 @@ set clipboard+=unnamedplus
 	map <leader>c :w! \| !compiler <c-r>%<CR>
 
 " Compile dwm-blocks each time I exit config.h
-        autocmd BufWritePost ~/.local/src/dwmblocks/config.h !cd ~/.local/src/dwmblocks/; sudo make install && { killall -q dwmblocks;setsid dwmblocks & }
+        autocmd BufWritePost ${XDG_USER_LOCAL:-$HOME/.local}/src/dwmblocks/config.h !cd ~${XDG_USER_LOCAL:-$HOME/.local}/src/dwmblocks/; sudo make install && { killall -q dwmblocks;setsid dwmblocks & }
 
 " Open corresponding .pdf/.html or preview
 	map <leader>p :!opout <c-r>%<CR><CR>
@@ -92,19 +92,8 @@ set clipboard+=unnamedplus
 " Runs a script that cleans out tex build files whenever I close out of a .tex file.
 	autocmd VimLeave *.tex !texclear %
 
-" Ensure files are read as what I want:
-	autocmd BufRead,BufNewFile /tmp/calcurse*,~/.calcurse/notes/* set filetype=markdown
-	autocmd BufRead,BufNewFile *.ms,*.me,*.mom,*.man set filetype=groff
-	autocmd BufRead,BufNewFile *.tex set filetype=tex
-
 " Save file as sudo on files that require root permission
 	cnoremap w!! execute 'silent! write !sudo tee % >/dev/null' <bar> edit!
-
-" Enable Goyo by default for mutt writting
-	autocmd BufRead,BufNewFile /tmp/neomutt* let g:goyo_width=80
-	autocmd BufRead,BufNewFile /tmp/neomutt* :Goyo | set bg=light
-	autocmd BufRead,BufNewFile /tmp/neomutt* map ZZ :Goyo\|x!<CR>
-	autocmd BufRead,BufNewFile /tmp/neomutt* map ZQ :Goyo\|q!<CR>
 
 " Automatically deletes all trailing whitespace and newlines at end of file on save.
 	autocmd BufWritePre * %s/\s\+$//e
@@ -112,10 +101,6 @@ set clipboard+=unnamedplus
 
 " When shortcut files are updated, renew bash and ranger configs with new material:
 	autocmd BufWritePost files,directories !generate_shortcuts
-" Run xrdb whenever Xdefaults or Xresources are updated.
-	autocmd BufWritePost *Xresources,*Xdefaults !xrdb %
-" Update binds when sxhkdrc is updated.
-	autocmd BufWritePost *sxhkdrc !pkill -USR1 sxhkd
 
 " Code completion stuff
 set nobackup
