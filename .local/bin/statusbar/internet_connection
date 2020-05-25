@@ -4,20 +4,21 @@
 # Show 🌐 if connected to ethernet or ❎ if none.
 
 case $BLOCK_BUTTON in
-	1) setsid "$TERMINAL" -e nmtui & ;;
-	3) notify-send "🌐 Internet module" "\- Click to connect
+  1) setsid "$TERMINAL" -e nmtui & ;;
+  3) notify-send "🌐 Internet module" "\- Click to connect
 📡: no wifi connection
 📶: wifi connection with quality
 ❎: no ethernet
 🌐: ethernet working
 " ;;
-	6) "$TERMINAL" -e "$EDITOR" "$0" ;;
+  6) "$TERMINAL" -e "$EDITOR" "$0" ;;
 esac
 
-case "$(cat /sys/class/net/w*/operstate 2>/dev/null)" in
-	down) wifiicon="No Wifi" ;;
-	up) wifiicon=" $(nmcli connection show | awk '{ if ($5=="wlo1" ) {print ""$1}}'
-) $(awk '/^\s*w/ { print int($3 * 100 / 70) "% " }' /proc/net/wireless)" ;;
+case "$(cat /sys/class/net/w*/operstate 2> /dev/null)" in
+  down) wifiicon="No Wifi" ;;
+  up) wifiicon=" $(
+    nmcli connection show | awk '{ if ($5=="wlo1" ) {print ""$1}}'
+  ) $(awk '/^\s*w/ { print int($3 * 100 / 70) "% " }' /proc/net/wireless)" ;;
 esac
 
-printf "%s%s\n" "$wifiicon" "$(sed "s/down/❎/;s/up/🌐/" /sys/class/net/e*/operstate 2>/dev/null)"
+printf "%s%s\n" "$wifiicon" "$(sed "s/down/❎/;s/up/🌐/" /sys/class/net/e*/operstate 2> /dev/null)"
