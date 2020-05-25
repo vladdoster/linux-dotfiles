@@ -8,15 +8,16 @@ if ! filereadable(system('echo -n "${XDG_CONFIG_HOME:-$HOME/.config}/nvim/autolo
 endif
 
 call plug#begin(system('echo -n "${XDG_CONFIG_HOME:-$HOME/.config}/nvim/plugged"'))
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
-Plug 'tpope/vim-surround'
-Plug 'preservim/nerdtree'
-Plug 'junegunn/goyo.vim'
-Plug 'jreybert/vimagit'
-Plug 'vimwiki/vimwiki'
-Plug 'bling/vim-airline'
-Plug 'tpope/vim-commentary'
 Plug 'ap/vim-css-color'
+Plug 'bling/vim-airline'
+Plug 'jreybert/vimagit'
+Plug 'junegunn/goyo.vim'
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'preservim/nerdtree'
+Plug 'tpope/vim-commentary'
+Plug 'tpope/vim-surround'
+Plug 'vimwiki/vimwiki'
+Plug 'z0mbix/vim-shfmt', { 'for': 'sh' }
 call plug#end()
 
 set bg=light
@@ -32,8 +33,10 @@ set clipboard+=unnamedplus
 	syntax on
 	set encoding=utf-8
 	set number
+
 " Enable autocompletion:
 	set wildmode=longest,list,full
+
 " Disables automatic commenting on newline:
 	autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
 
@@ -56,12 +59,17 @@ set clipboard+=unnamedplus
         let NERDTreeBookmarksFile = '~/.vim' . '/NERDTreeBookmarks'
     endif
 
+" Shfmt
+" indent, indent switch cases, add space after redirect operators, simplify code
+let g:shfmt_extra_args = '-i 2 -ci -sr -s'
+let g:shfmt_fmt_on_save = 1
+
 " Vim Wiki
   map <leader>v :VimwikiIndex
-  let g:vimwiki_list = [{'path': '${XDG_USER_LOCAL:-$HOME/.local}/src/vimwiki.git/',
-                      \ 'syntax': 'default', 'ext': '.md'}]
+  let g:vimwiki_list = [{'path':system('echo -n "${XDG_USER_LOCAL:-$HOME/.local}/src/vimwiki.git/"'),
+                       \ 'syntax': 'default', 'ext': '.md'}]
   let wiki = {}
-  let wiki.path = '${XDG_USER_LOCAL:-$HOME/.local}/src/vimwiki.git/'
+  let wiki.path = system('echo -n "${XDG_USER_LOCAL:-$HOME/.local}/src/vimwiki.git/"')
   let wiki.nested_syntaxes = {'python': 'python', 'bash': 'bash'}
   let g:vimwiki_list = [wiki]
 
@@ -88,9 +96,6 @@ set clipboard+=unnamedplus
 
 " Open corresponding .pdf/.html or preview
 	map <leader>p :!opout <c-r>%<CR><CR>
-
-" Runs a script that cleans out tex build files whenever I close out of a .tex file.
-	autocmd VimLeave *.tex !texclear %
 
 " Save file as sudo on files that require root permission
 	cnoremap w!! execute 'silent! write !sudo tee % >/dev/null' <bar> edit!
@@ -139,7 +144,6 @@ command! -nargs=? Fold :call     CocAction('fold', <f-args>)
 
 " use `:OR` for organize import of current buffer
 command! -nargs=0 OR   :call     CocAction('runCommand', 'editor.action.organizeImport')
-
 
 " Turns off highlighting on the bits of code that are changed, so the line that is changed is highlighted but the actual text that has changed stands out on the line and is readable.
 if &diff
