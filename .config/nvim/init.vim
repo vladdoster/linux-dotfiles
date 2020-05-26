@@ -142,6 +142,8 @@ nnoremap <leader>cr :CocRestart
 nmap <leader>gh :diffget //3<CR>
 nmap <leader>gu :diffget //2<CR>
 nmap <leader>gs :G<CR>
+nmap <leader>ga :Git add -u<CR>
+nmap <leader>gc :Git commit<CR>
 
 " # --- Nerd tree --- #
 map <leader>n :NERDTreeToggle<CR>
