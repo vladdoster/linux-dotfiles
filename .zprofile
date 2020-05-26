@@ -56,7 +56,7 @@ export QT_QPA_PLATFORMTHEME="gtk2"	# Have QT use gtk2 theme.
 export SUDO_ASKPASS="${HOME}/.local/bin/dmenu_pass"
 export _JAVA_AWT_WM_NONREPARENTING=1	# Java doesn't understand tiling windows
 
-[ ! -f "${XDG_CONFIG_HOME}"/shortcutrc ] && generate_shortcuts >/dev/null 2>&1 &
+[ ! -f "${XDG_CONFIG_HOME:-$HOME/.config}/shortcutrc" ] && generate_shortcuts >/dev/null 2>&1 &
 
 # Start graphical server on tty1 if not already running.
 [ "$(tty)" = "/dev/tty1" ] && ! ps -e | grep -qw Xorg && exec startx "${XINITRC}"
