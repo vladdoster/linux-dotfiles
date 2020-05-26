@@ -114,13 +114,6 @@ languages:
     - <<: *sh-shellcheck
     - <<: *sh-shfmt
 
-  javascript:
-    - <<: *javascript-eslint
-
-  php:
-    - <<: *php-phpstan
-    - <<: *php-psalm
-
   html:
     - <<: *html-prettier
 
