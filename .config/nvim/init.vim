@@ -1,5 +1,4 @@
-let mapleader =","
-
+" # --- Load plugins --- #
 if ! filereadable(system('echo -n "${XDG_CONFIG_HOME:-$HOME/.config}/nvim/autoload/plug.vim"'))
 	echo "Downloading junegunn/vim-plug to manage plugins..."
 	silent !mkdir -p ${XDG_CONFIG_HOME:-$HOME/.config}/nvim/autoload/
@@ -9,111 +8,168 @@ endif
 
 call plug#begin(system('echo -n "${XDG_CONFIG_HOME:-$HOME/.config}/nvim/plugged"'))
 Plug 'ap/vim-css-color'
-Plug 'bling/vim-airline'
 Plug 'jreybert/vimagit'
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+Plug 'junegunn/fzf.vim'
 Plug 'junegunn/goyo.vim'
+Plug 'mbbill/undotree'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'preservim/nerdtree'
+Plug 'sheerun/vim-polyglot'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-surround'
+Plug 'vim-utils/vim-man'
 Plug 'vimwiki/vimwiki'
 Plug 'z0mbix/vim-shfmt', { 'for': 'sh' }
+" Color schemes plugins
+Plug 'flazz/vim-colorschemes'
+Plug 'morhetz/gruvbox'
+Plug 'phanviet/vim-monokai-pro'
+Plug 'vim-airline/vim-airline'
 call plug#end()
 
-set bg=light
-set go=a
-set mouse=a
-set nohlsearch
+" # --- Basics --- #
+filetype plugin on
+let loaded_matchparen = 1
+let mapleader =","
+nnoremap c "_c
 set clipboard+=unnamedplus
+set clipboard+=unnamedplus
+set cmdheight=2
+set colorcolumn=80
+set encoding=utf-8
+set expandtab
+set go=a
+set go=a
+set guicursor=
+set hidden
+set incsearch
+set mouse=a
+set mouse=a
+set nobackup
+set nocompatible
+set noerrorbells
+set nohlsearch
+set nohlsearch
+set nohlsearch
+set noshowmatch
+set noswapfile
+set nowrap
+set nowritebackup
+set nu
+set relativenumber
+set scrolloff=8
+set shiftwidth=4
+set shortmess+=c
+set smartcase
+set smartindent
+set tabstop=4 softtabstop=4
+set termguicolors
+set undodir=~/.vim/undodir
+set undofile
+set updatetime=50
+syntax on
 
-" Some basics:
-	nnoremap c "_c
-	set nocompatible
-	filetype plugin on
-	syntax on
-	set encoding=utf-8
-	set number
+fun! TrimWhitespace()
+    let l:save = winsaveview()
+    keeppatterns %s/\s\+$//e
+    call winrestview(l:save)
+endfun
 
-" Enable autocompletion:
-	set wildmode=longest,list,full
-
-" Disables automatic commenting on newline:
-	autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
-
-" Goyo plugin makes text more readable when writing prose:
-	map <leader>f :Goyo \| set bg=light \| set linebreak<CR>
+autocmd BufWritePre * :call TrimWhitespace()
 
 " Spell-check set to <leader>o, 'o' for 'orthography':
-	map <leader>o :setlocal spell! spelllang=en_us<CR>
+map <leader>o :setlocal spell! spelllang=en_us<CR>
 
 " Splits open at the bottom and right, which is non-retarded, unlike vim defaults.
-	set splitbelow splitright
+set splitbelow splitright
 
-" Nerd tree
-	map <leader>n :NERDTreeToggle<CR>
-	autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
-	let NERDTreeShowHidden=1
-    if has('nvim')
-        let NERDTreeBookmarksFile = stdpath('data') . '/NERDTreeBookmarks'
-    else
-        let NERDTreeBookmarksFile = '~/.vim' . '/NERDTreeBookmarks'
-    endif
+" Enable autocompletion:
+set wildmode=longest,list,full
 
-" Shfmt
-" indent, indent switch cases, add space after redirect operators, simplify code
-let g:shfmt_extra_args = '-i 2 -ci -sr -s'
-let g:shfmt_fmt_on_save = 1
-
-" Vim Wiki
-  map <leader>v :VimwikiIndex
-  let g:vimwiki_list = [{'path':system('echo -n "${XDG_USER_LOCAL:-$HOME/.local}/src/vimwiki.git/"'),
-                       \ 'syntax': 'default', 'ext': '.md'}]
-  let wiki = {}
-  let wiki.path = system('echo -n "${XDG_USER_LOCAL:-$HOME/.local}/src/vimwiki.git/"')
-  let wiki.nested_syntaxes = {'python': 'python', 'bash': 'bash'}
-  let g:vimwiki_list = [wiki]
+" Disables automatic commenting on newline:
+autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
 
 " Shortcutting split navigation, saving a keypress:
-	map <C-h> <C-w>h
-	map <C-j> <C-w>j
-	map <C-k> <C-w>k
-	map <C-l> <C-w>l
+map <C-h> <C-w>h
+map <C-j> <C-w>j
+map <C-k> <C-w>k
+map <C-l> <C-w>l
 
 " Replace ex mode with gq
-	map Q gq
-
-" Check file in shellcheck:
-	map <leader>s :!clear && shellcheck %<CR>
+map Q gq
 
 " Replace all is aliased to S.
-	nnoremap S :%s//g<Left><Left>
+nnoremap S :%s//g<Left><Left>
 
 " Compile document, be it groff/LaTeX/markdown/etc.
-	map <leader>c :w! \| !compiler <c-r>%<CR>
+map <leader>c :w! \| !compiler <c-r>%<CR>
 
 " Compile dwm-blocks each time I exit config.h
-        autocmd BufWritePost ${XDG_USER_LOCAL:-$HOME/.local}/src/dwmblocks/config.h !cd ~${XDG_USER_LOCAL:-$HOME/.local}/src/dwmblocks/; sudo make install && { killall -q dwmblocks;setsid dwmblocks & }
-
-" Open corresponding .pdf/.html or preview
-	map <leader>p :!opout <c-r>%<CR><CR>
+autocmd BufWritePost ${XDG_USER_LOCAL:-$HOME/.local}/src/dwmblocks/config.h !cd ~${XDG_USER_LOCAL:-$HOME/.local}/src/dwmblocks/; sudo make install && { killall -q dwmblocks;setsid dwmblocks & }
 
 " Save file as sudo on files that require root permission
-	cnoremap w!! execute 'silent! write !sudo tee % >/dev/null' <bar> edit!
-
-" Automatically deletes all trailing whitespace and newlines at end of file on save.
-	autocmd BufWritePre * %s/\s\+$//e
-	autocmd BufWritepre * %s/\n\+\%$//e
+cnoremap w!! execute 'silent! write !sudo tee % >/dev/null' <bar> edit!
 
 " When shortcut files are updated, renew bash and ranger configs with new material:
-	autocmd BufWritePost files,directories !generate_shortcuts
+autocmd BufWritePost files,directories !generate_shortcuts
 
-" Code completion stuff
-set nobackup
-set nowritebackup
+" # --- Color scheme related --- #
+highlight ColorColumn ctermbg=0 guibg=lightgrey
+colorscheme gruvbox
+set background=dark
 
-" Use Microsoft python language server
-" python.jediEnabled": false
+" # --- Netrw --- #
+let g:netrw_browse_split = 2
+let g:vrfr_rg = 'true'
+let g:netrw_banner = 0
+let g:netrw_winsize = 25
 
+" # --- GoTo code navigation --- #
+nmap <leader>gd <Plug>(coc-definition)
+nmap <leader>gy <Plug>(coc-type-definition)
+nmap <leader>gi <Plug>(coc-implementation)
+nmap <leader>gr <Plug>(coc-references)
+nmap <leader>rr <Plug>(coc-rename)
+nmap <leader>g[ <Plug>(coc-diagnostic-prev)
+nmap <leader>g] <Plug>(coc-diagnostic-next)
+nmap <silent> <leader>gp <Plug>(coc-diagnostic-prev)
+nmap <silent> <leader>gn <Plug>(coc-diagnostic-next)
+nnoremap <leader>cr :CocRestart
+
+" # --- FuGITive --- #
+nmap <leader>gh :diffget //3<CR>
+nmap <leader>gu :diffget //2<CR>
+nmap <leader>gs :G<CR>
+
+" # --- Nerd tree --- #
+map <leader>n :NERDTreeToggle<CR>
+autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+let NERDTreeShowHidden=1
+let NERDTreeBookmarksFile = stdpath('data') . '/NERDTreeBookmarks'
+
+" # --- Vim Wiki --- #
+map <leader>v :VimwikiIndex
+let g:vimwiki_list = [{'path':system('echo -n "${XDG_USER_LOCAL:-$HOME/.local}/src/vimwiki.git/"'),
+                     \ 'syntax': 'default', 'ext': '.md'}]
+let wiki = {}
+let wiki.path = system('echo -n "${XDG_USER_LOCAL:-$HOME/.local}/src/vimwiki.git/"')
+let wiki.nested_syntaxes = {'python': 'python', 'bash': 'bash'}
+let g:vimwiki_list = [wiki]
+
+" # --- Code of Completion --- #
+" Add status line support, for integration with other plugin, checkout `:h coc-status`
+set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
+" Autocomplete with control space, similiar to Pycharm
+inoremap <silent><expr> <c-space> coc#refresh()
+" `:Format` to format current buffer
+command! -nargs=0 Format :call CocAction('format')
+" `:OR` for organize import of current buffer
+command! -nargs=0 OR   :call     CocAction('runCommand', 'editor.action.organizeImport')
+" Turns off highlighting on changed code, so line is highlighted but the actual text that has changed stands out on the line and is readable.
+if &diff
+    highlight! link DiffText MatchParen
+endif
 " Use tab for trigger completion with characters ahead and navigate.
 " Use command ':verbose imap <tab>' to make sure tab is not mapped by other plugin.
 inoremap <silent><expr> <TAB>
@@ -127,25 +183,16 @@ function! s:check_back_space() abort
   return !col || getline('.')[col - 1]  =~# '\s'
 endfunction
 
-" Add status line support, for integration with other plugin, checkout `:h coc-status`
-set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
+" # --- Language servers --- #
+" # --- Bash --- #
+" indent, indent switch cases, add space after redirect operators, simplify code
+let g:shfmt_extra_args = '-i 2 -ci -sr -s'
+let g:shfmt_fmt_on_save = 1
 
-" You will have bad experience for diagnostic messages when it's default 4000.
-set updatetime=300
+" Check file in shellcheck:
+map <leader>s :!clear && shellcheck %<CR>
 
-" Autocomplete with control space, similiar to Pycharm
-inoremap <silent><expr> <c-space> coc#refresh()
+" # --- JSON --- #
+autocmd FileType json syntax match Comment +\/\/.\+$+
 
-" Use `:Format` to format current buffer
-command! -nargs=0 Format :call CocAction('format')
-
-" Use `:Fold` to fold current buffer
-command! -nargs=? Fold :call     CocAction('fold', <f-args>)
-
-" use `:OR` for organize import of current buffer
-command! -nargs=0 OR   :call     CocAction('runCommand', 'editor.action.organizeImport')
-
-" Turns off highlighting on the bits of code that are changed, so the line that is changed is highlighted but the actual text that has changed stands out on the line and is readable.
-if &diff
-    highlight! link DiffText MatchParen
-endif
+" # --- Python --- #
