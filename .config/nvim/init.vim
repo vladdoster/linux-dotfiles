@@ -70,6 +70,7 @@ set undofile
 set updatetime=50
 syntax on
 
+" remove whitespace on save
 fun! TrimWhitespace()
     let l:save = winsaveview()
     keeppatterns %s/\s\+$//e
