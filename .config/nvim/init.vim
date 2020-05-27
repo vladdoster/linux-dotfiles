@@ -1,3 +1,4 @@
+syntax on
 "##--- Load/Install plugins ---##
 	if ! filereadable(system('echo -n "${XDG_CONFIG_HOME:-$HOME/.config}/nvim/autoload/plug.vim"'))
 		echo "Downloading junegunn/vim-plug to manage plugins..."
@@ -21,12 +22,13 @@
 	Plug 'vim-utils/vim-man'
 	Plug 'vimwiki/vimwiki'
 	Plug 'z0mbix/vim-shfmt', { 'for': 'sh' }
-	" Color schemes plugins
+"#- Color schemes plugins
 	Plug 'flazz/vim-colorschemes'
 	Plug 'morhetz/gruvbox'
 	Plug 'phanviet/vim-monokai-pro'
 	Plug 'vim-airline/vim-airline'
 	call plug#end()
+
 "##--- General ---##
 	filetype plugin on
 	let loaded_matchparen = 1
@@ -60,10 +62,9 @@
 	set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')%<%f\ %h%m%r%{fugitive#statusline()}%=%-14.(%l,%c%V%)\ %P}
 	set tabstop=4 softtabstop=4
 	set termguicolors
-	set undodir=system('echo ${XDG_CONFIG_HOME:-$HOME/.config}/nvim/undodir')
+	set undodir=~/.config/nvim/undodir
 	set undofile
 	set updatetime=50
-	syntax on
 "#- Remove whitespace on save -#
 	fun! TrimWhitespace()
 			let l:save = winsaveview()
@@ -95,19 +96,44 @@
                       \ !cd ~/.local/src/dwm-blocks/ &&
                       \ sudo make install &&
                       \ { killall -q dwmblocks;setsid dwmblocks & }
+"#- New python/sh files get headers
+    au BufNewFile *.py call ScriptHeader()
+    au BufNewFile *.sh call ScriptHeader()
+
+    function ScriptHeader()
+        if &filetype == 'python'
+            let header = "#!/usr/bin/env python"
+            let cfg = "# vim: ts=4 sw=4 sts=4 expandtab"
+        elseif &filetype == 'sh'
+            let header = "#!/bin/bash"
+        endif
+        let line = getline(1)
+        if line == header
+            return
+        endif
+        normal m'
+        call append(0,header)
+        if &filetype == 'python'
+            call append(2, cfg)
+        endif
+        normal ''
+    endfunction
 "#- Save file as sudo on files that require root permission -#
 	cnoremap w!! execute 'silent! write !sudo tee % >/dev/null' <bar> edit!
 "#- When shortcut files are updated, renew bash and ranger configs with new material -#
 	autocmd BufWritePost files,directories !generate_shortcuts
+
 "##--- Color scheme related ---##
 	highlight ColorColumn ctermbg=0 guibg=lightgrey
 	colorscheme gruvbox
 	set background=dark
+
 "##--- Netrw ---##
 	let g:netrw_browse_split = 2
 	let g:vrfr_rg = 'true'
 	let g:netrw_banner = 0
 	let g:netrw_winsize = 25
+
 "##--- GoTo code navigation ---##
 	nmap <leader>gd <Plug>(coc-definition)
 	nmap <leader>gy <Plug>(coc-type-definition)
@@ -140,7 +166,7 @@
 "##--- Vim Wiki ---##
   map <leader>v :VimwikiIndex
 	let g:vimwiki_list = [{'path':system('echo -n "${XDG_USER_LOCAL:-$HOME/.local}/src/vimwiki.git/"'),
-			     		 \ 'syntax': 'default', 
+			     		 \ 'syntax': 'default',
 						 \ 'ext': '.md'}]
 	let wiki = {}
 	let wiki.path = system('echo -n "${XDG_USER_LOCAL:-$HOME/.local}/src/vimwiki.git/"')
