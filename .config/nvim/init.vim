@@ -58,6 +58,7 @@ set shiftwidth=4
 set shortmess+=c
 set smartcase
 set smartindent
+set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')%<%f\ %h%m%r%{fugitive#statusline()}%=%-14.(%l,%c%V%)\ %P}
 set tabstop=4 softtabstop=4
 set termguicolors
 let undodir=system('echo ${XDG_CONFIG_HOME:-$HOME/.config}/nvim/undodir')
@@ -147,7 +148,10 @@ nmap <leader>pc :Git push<CR>
 nmap <leader>gv :Git pull<CR>
 
 " # --- Nerd tree --- #
+" Key to open
 map <leader>n :NERDTreeToggle<CR>
+
+" Misc. settings
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 let NERDTreeShowHidden=1
 let NERDTreeBookmarksFile = stdpath('data') . '/NERDTreeBookmarks'
@@ -164,20 +168,23 @@ let wiki.nested_syntaxes = { 'bash': 'bash',
 let g:vimwiki_list = [wiki]
 
 " # --- Code of Completion --- #
-" Add status line support, for integration with other plugin, checkout `:h coc-status`
-set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')%{FugitiveStatusline()}}
-" Autocomplete with control space, similiar to Pycharm
-inoremap <silent><expr> <c-space> coc#refresh()
 " `:Format` to format current buffer
+
 command! -nargs=0 Format :call CocAction('format')
+
 " `:OR` for organize import of current buffer
+
 command! -nargs=0 OR   :call     CocAction('runCommand', 'editor.action.organizeImport')
+
 " Turns off highlighting on changed code, so line is highlighted but the actual text that has changed stands out on the line and is readable.
+
 if &diff
     highlight! link DiffText MatchParen
 endif
+
 " Use tab for trigger completion with characters ahead and navigate.
 " Use command ':verbose imap <tab>' to make sure tab is not mapped by other plugin.
+
 inoremap <silent><expr> <TAB>
       \ pumvisible() ? "\<C-n>" :
       \ <SID>check_back_space() ? "\<TAB>" :
@@ -189,7 +196,7 @@ function! s:check_back_space() abort
   return !col || getline('.')[col - 1]  =~# '\s'
 endfunction
 
-" # --- Language servers --- #
+" # --- CoC Language servers --- #
 " # --- Bash --- #
 " indent, indent switch cases, add space after redirect operators, simplify code
 let g:shfmt_extra_args = '-i 2 -ci -sr -s'
