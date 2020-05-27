@@ -143,7 +143,7 @@ nmap <leader>gu :diffget //2<CR>
 nmap <leader>gs :G<CR>
 nmap <leader>ga :Git add -u<CR>
 nmap <leader>gc :Git commit<CR>
-nmap <leader>g^ :Git push<CR>
+nmap <leader>pc :Git push<CR>
 nmap <leader>gv :Git pull<CR>
 
 " # --- Nerd tree --- #
