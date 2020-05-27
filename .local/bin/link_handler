@@ -1,6 +1,6 @@
 #!/bin/sh
 
-# Feed url or file location.
+# Pass a url or file location
 # if image: view in sxiv
 # elif video || gif: view in mpv
 # elif music file || pdf: download file
