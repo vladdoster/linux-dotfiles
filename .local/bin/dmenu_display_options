@@ -1,9 +1,10 @@
 #!/bin/sh
 set -e
 
-# A UI for detecting and selecting all displays. Probes xrandr for connected
-# displays and lets user select one to use. User may also select "manual
-# selection" which opens arandr.
+# A UI for detecting and selecting all displays.
+# Probes xrandr for connected displays
+# - select single/dual/triple display(s)
+# - open arandr
 
 twoscreen() { # If multi-monitor is selected and there are two screens.
 
@@ -37,7 +38,7 @@ twoscreen() { # If multi-monitor is selected and there are two screens.
         direction=$(printf "left\\nright" | dmenu -i -p "What side of $primary should $secondary be on?")
         xrandr --output "$primary" --auto --scale 1.0x1.0 --output "$secondary" --"$direction"-of "$primary" --auto --scale 1.0x1.0
     fi
-    }
+}
 
 morescreen() { # If multi-monitor is selected and there are more than two screens.
 	primary=$(echo "$screens" | dmenu -i -p "Select primary display:")
@@ -45,43 +46,46 @@ morescreen() { # If multi-monitor is selected and there are more than two screen
 	direction=$(printf "left\\nright" | dmenu -i -p "What side of $primary should $secondary be on?")
 	tertiary=$(echo "$screens" | grep -v "$primary" | grep -v "$secondary" | dmenu -i -p "Select third display:")
 	xrandr --output "$primary" --auto --output "$secondary" --"$direction"-of "$primary" --auto --output "$tertiary" --"$(printf "left\\nright" | grep -v "$direction")"-of "$primary" --auto
-	}
+}
 
 multimon() { # Multi-monitor handler.
 	case "$(echo "$screens" | wc -l)" in
 		*) xrandr $(echo "$allposs" | grep -v "$screens" | awk '{print "--output", $1, "--off"}' | tr '\n' ' ') ;;
-	esac ;}
+	esac ;
+}
 
 load_screen_layout() { # ~/.screenlayout loader
     # Get all screen configurations in ~.screenlayout/
     if [[ $(echo $screen_layouts | wc -l) -eq 2 ]]; then
-    notify-send --urgency=critical "~/.screenlayout seems to be empty"
+    notify-send --urgency=critical "$HOME/.screenlayout seems to be empty"
     else
     layout_name=$(echo "$screen_layouts" | dmenu -i -p "Screen layouts:")
-    chosen_layout=$(find ~/.screenlayout -type f | grep $layout_name)
+    chosen_layout=$(find $HOME/.screenlayout -type f | grep $layout_name)
     echo "$chosen_layout"
     arandr $chosen_layout 2>/dev/null || notify-send --urgency=critical "Error loading screen layout: ~/.screenlayout/$layout_name"
     fi
-    }
+}
 
-# Get all possible displays
+#-- Get all possible displays
 allposs=$(xrandr -q | grep "connected")
 
-# Get all connected screens
+#-- Get all connected screens
 screens=$(echo "$allposs" | grep " connected" | awk '{print $1}')
 
-# Get all screen layouts
-screen_layouts=$(find ~/.screenlayout -type f -exec basename {} \;)
+#-- Get all screen layouts
+screen_layouts=$(find "$HOME/.screenlayout" -type f -exec basename {} \;)
 
-# Get user choice including multi-monitor and manual selection:
+#-- Execute user choice
 chosen=$(printf "%s\\nlayouts\\nmulti-monitor\\nmanual selection" "$screens" | dmenu -i -p "Select display arangement:") &&
 case "$chosen" in
 	"manual selection") arandr ; exit ;;
 	"multi-monitor") multimon ;;
-    "layouts") load_screen_layout;;
+        "layouts") load_screen_layout;;
 	*) xrandr --output "$chosen" --auto --scale 1.0x1.0 $(echo "$allposs" | grep -v "$chosen" | awk '{print "--output", $1, "--off"}' | tr '\n' ' ') ;;
 esac
 
-set_background		# Fix background if screen size/arangement has changed.
-login_key_remap		# Re-remap keys if keyboard added (for laptop bases)
-pgrep -x dunst >/dev/null && killall dunst && setsid dunst & # Restart dunst to ensure proper location on screen
+set_background	   # Fix background if screen size/arangement has changed
+login_key_remap    # Re-remap keys if keyboard added (for laptop bases)
+pgrep -x dunst >/dev/null \
+ && killall dunst \
+ && setsid dunst & # Restart dunst
