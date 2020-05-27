@@ -62,7 +62,12 @@ syntax on
 	set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')%<%f\ %h%m%r%{fugitive#statusline()}%=%-14.(%l,%c%V%)\ %P}
 	set tabstop=4 softtabstop=4
 	set termguicolors
-	set undodir=~/.config/nvim/undodir
+	set undodir=$XDG_DATA_HOME/nvim/undo
+        set directory=$XDG_DATA_HOME/nvim/swap
+        set backupdir=$XDG_DATA_HOME/nvim/backup
+        set viewdir=$XDG_DATA_HOME/nvim/view
+        set viminfo+='1000,n$XDG_DATA_HOME/nvim/viminfo
+	set runtimepath=$XDG_CONFIG_HOME/nvim
 	set undofile
 	set updatetime=50
 "#- Remove whitespace on save -#
