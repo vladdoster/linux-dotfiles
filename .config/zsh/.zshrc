@@ -1,20 +1,20 @@
 #--- Zoomer Shell ---#
 
-# Enable colors and change prompt:
+# Enable colors and change prompt
 autoload -U colors && colors
 PS1="%B%{$fg[red]%}[%{$fg[yellow]%}%n%{$fg[green]%}@%{$fg[blue]%}%M %{$fg[magenta]%}%~%{$fg[red]%}]%{$reset_color%}$%b "
 setopt autocd	# Automatically cd into typed directory.
 stty stop undef	# Disable ctrl-s to freeze terminal.
 
-# History in cache directory:
+# History in cache directory
 HISTSIZE=30000
 SAVEHIST=30000
-HISTFILE="${ZDOTDIR}/history"
+HISTFILE="${ZDOTDIR:-$HOME/.config/zsh}/history"
 
 # Load aliases and shortcuts
-[ -f "$XDG_CONFIG_HOME/user-dirs.dirs" ] && source "$XDG_CONFIG_HOME/user-dirs.dirs"
-[ -f "$XDG_CONFIG_HOME/shortcutrc" ] && source "$XDG_CONFIG_HOME/shortcutrc"
-[ -f "$XDG_CONFIG_HOME/aliasrc" ] && source "$XDG_CONFIG_HOME/aliasrc"
+[ -f "${XDG_CONFIG_HOME:-$HOME/.config}/user-dirs.dirs" ] && source "${XDG_CONFIG_HOME:-$HOME/.config}/user-dirs.dirs"
+[ -f "${XDG_CONFIG_HOME:-$HOME/.config}/shortcutrc" ] && source "${XDG_CONFIG_HOME:-$HOME/.config}/shortcutrc"
+[ -f "${XDG_CONFIG_HOME:-$HOME/.config}/aliasrc" ] && source "${XDG_CONFIG_HOME:-$HOME/.config}/aliasrc"
 
 # auto/tab complete
 autoload -U compinit
