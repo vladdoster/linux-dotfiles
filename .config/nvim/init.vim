@@ -154,15 +154,17 @@ let NERDTreeBookmarksFile = stdpath('data') . '/NERDTreeBookmarks'
 " # --- Vim Wiki --- #
 map <leader>v :VimwikiIndex
 let g:vimwiki_list = [{'path':system('echo -n "${XDG_USER_LOCAL:-$HOME/.local}/src/vimwiki.git/"'),
-                     \ 'syntax': 'default', 'ext': '.md'}]
+                     \ 'syntax': 'default',
+		     \ 'ext': '.md'}]
 let wiki = {}
 let wiki.path = system('echo -n "${XDG_USER_LOCAL:-$HOME/.local}/src/vimwiki.git/"')
-let wiki.nested_syntaxes = {'python': 'python', 'bash': 'bash'}
+let wiki.nested_syntaxes = { 'bash': 'bash',
+			   \ 'python': 'python }
 let g:vimwiki_list = [wiki]
 
 " # --- Code of Completion --- #
 " Add status line support, for integration with other plugin, checkout `:h coc-status`
-set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
+set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')%{FugitiveStatusline()}}
 " Autocomplete with control space, similiar to Pycharm
 inoremap <silent><expr> <c-space> coc#refresh()
 " `:Format` to format current buffer
