@@ -160,7 +160,7 @@ let g:vimwiki_list = [{'path':system('echo -n "${XDG_USER_LOCAL:-$HOME/.local}/s
 let wiki = {}
 let wiki.path = system('echo -n "${XDG_USER_LOCAL:-$HOME/.local}/src/vimwiki.git/"')
 let wiki.nested_syntaxes = { 'bash': 'bash',
-			   \ 'python': 'python }
+			   \ 'python': 'python' }
 let g:vimwiki_list = [wiki]
 
 " # --- Code of Completion --- #
