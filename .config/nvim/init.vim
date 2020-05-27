@@ -1,4 +1,4 @@
-" # --- Load plugins --- #
+" # --- Load/Install plugins --- #
 if ! filereadable(system('echo -n "${XDG_CONFIG_HOME:-$HOME/.config}/nvim/autoload/plug.vim"'))
 	echo "Downloading junegunn/vim-plug to manage plugins..."
 	silent !mkdir -p ${XDG_CONFIG_HOME:-$HOME/.config}/nvim/autoload/
@@ -34,23 +34,18 @@ let loaded_matchparen = 1
 let mapleader =" "
 nnoremap c "_c
 set clipboard+=unnamedplus
-set clipboard+=unnamedplus
 set cmdheight=2
 set colorcolumn=80
 set encoding=utf-8
 set expandtab
 set go=a
-set go=a
 set guicursor=
 set hidden
 set incsearch
 set mouse=a
-set mouse=a
 set nobackup
 set nocompatible
 set noerrorbells
-set nohlsearch
-set nohlsearch
 set nohlsearch
 set noshowmatch
 set noswapfile
@@ -65,7 +60,8 @@ set smartcase
 set smartindent
 set tabstop=4 softtabstop=4
 set termguicolors
-set undodir=~/.vim/undodir
+let undodir=system('echo ${XDG_CONFIG_HOME:-$HOME/.config}/nvim/undodir')
+set undodir=undodir
 set undofile
 set updatetime=50
 syntax on
@@ -106,8 +102,11 @@ nnoremap S :%s//g<Left><Left>
 " Compile document, be it groff/LaTeX/markdown/etc.
 map <leader>c :w! \| !compiler <c-r>%<CR>
 
-" Compile dwm-blocks each time I exit config.h
-autocmd BufWritePost ${XDG_USER_LOCAL:-$HOME/.local}/src/dwmblocks/config.h !cd ~${XDG_USER_LOCAL:-$HOME/.local}/src/dwmblocks/; sudo make install && { killall -q dwmblocks;setsid dwmblocks & }
+" Compile dwm-blocks when exiting config.h
+ autocmd BufWritePost ~/.local/src/dwm-blocks/config.h
+                      \ !cd ~/.local/src/dwm-blocks/ &&
+                      \ sudo make install &&
+                      \ { killall -q dwmblocks;setsid dwmblocks & }
 
 " Save file as sudo on files that require root permission
 cnoremap w!! execute 'silent! write !sudo tee % >/dev/null' <bar> edit!
@@ -144,6 +143,8 @@ nmap <leader>gu :diffget //2<CR>
 nmap <leader>gs :G<CR>
 nmap <leader>ga :Git add -u<CR>
 nmap <leader>gc :Git commit<CR>
+nmap <leader>g^ :Git push<CR>
+nmap <leader>gv :Git pull<CR>
 
 " # --- Nerd tree --- #
 map <leader>n :NERDTreeToggle<CR>
