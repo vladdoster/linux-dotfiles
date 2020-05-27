@@ -1,7 +1,7 @@
 #!/bin/sh
 
-# Clears build files of that LaTeX generates.
-# Vim runs this whenever I exit a .tex file.
+# Clears build files of that LaTeX generates
+# Vim runs this when exiting a .tex file
 
 case "$1" in
 	*.tex)
