@@ -8,8 +8,6 @@ syntax on
 	endif
 "##--- Plugins ---##
 	call plug#begin(system('echo -n "${XDG_CONFIG_HOME:-$HOME/.config}/nvim/plugged"'))
-	Plug 'ap/vim-css-color'
-	Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 	Plug 'junegunn/fzf.vim'
 	Plug 'tpope/vim-fugitive'
 	Plug 'junegunn/goyo.vim'
@@ -23,6 +21,7 @@ syntax on
 	Plug 'vimwiki/vimwiki'
 	Plug 'z0mbix/vim-shfmt', { 'for': 'sh' }
 "#- Color schemes plugins
+	Plug 'ap/vim-css-color'
 	Plug 'flazz/vim-colorschemes'
 	Plug 'morhetz/gruvbox'
 	Plug 'phanviet/vim-monokai-pro'
@@ -150,10 +149,6 @@ syntax on
 	nmap <leader>gh :diffget //3<CR>
 	nmap <leader>gu :diffget //2<CR>
 	nmap <leader>gs :G<CR>
-	nmap <leader>ga :Git add -u<CR>
-	nmap <leader>gc :Git commit<CR>
-	nmap <leader>pc :Git push<CR>
-	nmap <leader>gv :Git pull<CR>
 
 "##--- Nerd tree ---##
 "#- Key to open -#
@@ -205,4 +200,3 @@ syntax on
 	map <leader>s :!clear && shellcheck %<CR>
 "#- JSON -#
 	autocmd FileType json syntax match Comment +\/\/.\+$+
-"#- Python -#
