@@ -1,29 +1,31 @@
 #!/bin/sh
 
 # Use neovim for vim if present.
-command -v nvim >/dev/null && alias vim="nvim" vimdiff="nvim -d"
+command -v nvim > /dev/null && alias vim="nvim" vimdiff="nvim -d"
 # Verbosity and settings that you pretty much just always are going to want.
 alias \
-	cp="cp -iv" \
-	mv="mv -iv" \
-	rm="rm -vI" \
-	mkd="mkdir -pv" \
+  cp="cp -iv" \
+  mv="mv -iv" \
+  rm="rm -vI" \
+  mkd="mkdir -pv" \
+  ..="cd .. && ls" \
+  isx="chmod +x"
 # Colorize commands when possible.
 alias \
-	ls="ls --literal -l --human-readable --color=auto --group-directories-first" \
-	grep="grep -n --color=auto" \
-	diff="diff --color=auto" \
-	ccat="highlight --out-format=ansi"
+  ls="ls --literal -l --human-readable --color=auto --group-directories-first" \
+  grep="grep -n --color=auto" \
+  diff="diff --color=auto" \
+  ccat="highlight --out-format=ansi"
 # These commands are too long! Abbreviate them.
 alias \
-	ka="killall" \
-	g="git" \
-	f="$FILE" \
-	e="$EDITOR" \
-	v="$EDITOR" \
-	p="sudo pacman" \
-	z="zathura"
+  ka="killall" \
+  g="git" \
+  f="$FILE" \
+  e="$EDITOR" \
+  v="$EDITOR" \
+  p="sudo pacman" \
+  z="zathura"
 alias \
-	magit="nvim -c MagitOnly" \
-	refresh_aliases="generate_shortcuts; source ${XDG_CONFIG_HOME}/shortcutrc;" \
-	tmux="tmux -f ${XDG_CONFIG_HOME}/tmux/tmux.conf"
+  magit="nvim -c MagitOnly" \
+  refresh_aliases="generate_shortcuts; source ${XDG_CONFIG_HOME}/shortcutrc;" \
+  tmux="tmux -f ${XDG_CONFIG_HOME}/tmux/tmux.conf"
