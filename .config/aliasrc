@@ -27,5 +27,5 @@ alias \
   z="zathura"
 alias \
   magit="nvim -c MagitOnly" \
-  refresh_aliases="generate_shortcuts; source ${XDG_CONFIG_HOME}/shortcutrc;" \
-  tmux="tmux -f ${XDG_CONFIG_HOME}/tmux/tmux.conf"
+  refresh_aliases="generate_shortcuts; source ${XDG_CONFIG_HOME:-$HOME/.config}/shortcutrc;" \
+  tmux="tmux -f ${XDG_CONFIG_HOME:-$HOME/.config}/tmux/tmux.conf"

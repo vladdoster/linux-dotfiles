@@ -15,7 +15,7 @@
 # [Action]
 # Description = Updating statusbar...
 # When = PostTransaction
-# Exec = /usr/bin/pkill -RTMIN+8 dwmblocks # Or i3blocks if using i3.
+# Exec = /usr/bin/pkill -RTMIN+8 dwmblocks
 
 case $BLOCK_BUTTON in
   1) setsid "$TERMINAL" -e popupgrade & ;;

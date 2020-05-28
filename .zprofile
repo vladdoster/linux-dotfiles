@@ -63,7 +63,7 @@ export _JAVA_AWT_WM_NONREPARENTING=1	# Java doesn't understand tiling windows
 [ ! -f "${XDG_CONFIG_HOME:-$HOME/.config}/shortcutrc" ] && generate_shortcuts >/dev/null 2>&1 &
 
 # Start graphical server on tty1 if not already running.
-[ "$(tty)" = "/dev/tty1" ] && ! ps -e | grep -qw Xorg && exec startx "${XINITRC:-$HOME/.xinitrc}"
+[ "$(tty)" = "/dev/tty1" ] && ! ps -e | grep -qw Xorg && exec startx "${XINITRC:-$HOME/.config/X11/xinitrc}"
 
 # Switch escape and caps if tty and no passwd required:
 sudo -n loadkeys "${XDG_DATA_HOME:-$HOME/.local/share}"/dotfiles/ttymaps.kmap 2>/dev/null
