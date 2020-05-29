@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+
+# bash
+npm i -g bash-language-server
