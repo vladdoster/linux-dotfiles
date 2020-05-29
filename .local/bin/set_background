@@ -3,5 +3,5 @@
 system_wallpaper="${XDG_CONFIG_HOME:-$HOME/.config}/assets/wallpaper.png"
 
 [ ! -z "$1" ] && cp "$1" "$system_wallpaper" \
-              && notify-send -i "$system_wallpaper" "Wallpaper changed."
+              && notify-send -i "$system_wallpaper" "Wallpaper changed." \
               && xwallpaper --focus "$system_wallpaper"
