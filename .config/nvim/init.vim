@@ -208,11 +208,11 @@ let NERDTreeBookmarksFile = stdpath('data') . '/NERDTreeBookmarks'
 "#          Vim Wiki            #
 "# ---------------------------- #
 map <leader>v :VimwikiIndex
-let g:vimwiki_list = [{'path':~/.local/src/vimwiki.git/,
+let g:vimwiki_list = [{'path':'~/.local/src/vimwiki.git/',
                      \ 'syntax': 'default',
                      \ 'ext': '.md'}]
 let wiki = {}
-let wiki.path = ~/.local}/src/vimwiki.git/
+let wiki.path = '~/.local}/src/vimwiki.git/'
 let wiki.nested_syntaxes = { 'bash': 'bash', 'python': 'python' }
 let g:vimwiki_list = [wiki]
 "# ---------------------------- #
