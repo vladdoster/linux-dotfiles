@@ -2,3 +2,6 @@
 
 # bash
 npm i -g bash-language-server
+
+# efm (vim, dockerfile)
+go get github.com/mattn/efm-langserver
