@@ -1,7 +1,21 @@
 #!/usr/bin/env bash
 
 # bash
-npm i -g bash-language-server
+npm i -g bash-language-server || echo "error adding bash language server"
+
+function build_cquery() {
+  git clone --recursive https://github.com/cquery-project/cquery.git
+  cd cquery
+  git submodule update --init
+  mkdir build && cd build
+  cmake .. -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=release -DCMAKE_EXPORT_COMPILE_COMMANDS=YES
+  cmake --build .
+  cmake --build . --target install
+}
+
+# c, c++
+build_cquery || echo "error building cquery"
 
 # efm (vim, dockerfile)
-go get github.com/mattn/efm-langserver
+go get github.com/mattn/efm-langserver || echo "error building efm langserver"
+
