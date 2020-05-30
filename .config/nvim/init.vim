@@ -17,11 +17,12 @@ Plug 'tpope/vim-fugitive'   " git wrapper
 Plug 'tpope/vim-surround'   " quoting/parenthesizing made simple
 Plug 'vim-utils/vim-man'    " view and grep for man pages
 Plug 'vimwiki/vimwiki'      " personal wiki
-Plug 'neoclide/coc.nvim', {'branch': 'release'} " intellisense
 Plug 'junegunn/fzf.vim'     " fuzzy finder
 Plug 'ap/vim-css-color'     " color value viewer
 Plug 'morhetz/gruvbox'      " retro groove color scheme
 Plug 'vim-airline/vim-airline' " status/tabline
+Plug 'z0mbix/vim-shfmt', { 'for': 'sh' } " sh script formatter
+Plug 'neoclide/coc.nvim', {'branch': 'release'} " intellisense
 call plug#end()
 "# ---------------------------- #
 "#           General            #
@@ -163,6 +164,12 @@ command! -nargs=? Fold :call CocAction('fold', <f-args>)
 command! -nargs=0 OR   :call CocAction('runCommand', 'editor.action.organizeImport')
 "-- JSON -- "
 autocmd FileType json syntax match Comment +\/\/.\+$+
+"# ---------------------------- #
+"#            shfmt             #
+"# ---------------------------- #
+" indent, indent switch cases, add space after redirect operators, simplify code
+let g:shfmt_extra_args = '-i 2 -ci -sr -s'
+let g:shfmt_fmt_on_save = 1
 "# ---------------------------- #
 "#     Color scheme related     #
 "# ---------------------------- #
