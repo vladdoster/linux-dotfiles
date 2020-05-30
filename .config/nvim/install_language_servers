@@ -2,6 +2,7 @@
 
 # bash
 npm i -g bash-language-server || echo "error adding bash language server"
+sudo pacman --sync shfmt
 
 function build_cquery() {
   git clone --recursive https://github.com/cquery-project/cquery.git
