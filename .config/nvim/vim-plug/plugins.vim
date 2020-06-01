@@ -42,6 +42,8 @@ call plug#begin('~/.config/nvim/autoload/plugged')
   Plug 'liuchengxu/vim-which-key'
   " Self aware file system  
   Plug 'airblade/vim-rooter'
+  " Shell file formatting
+  Plug 'z0mbix/vim-shfmt', { 'for': 'sh' }
   " Start Screen  
   Plug 'mhinz/vim-startify'
   " Surround  
