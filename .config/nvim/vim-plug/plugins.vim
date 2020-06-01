@@ -7,74 +7,67 @@ if empty(glob('~/.config/nvim/autoload/plug.vim'))
 endif
 
 call plug#begin('~/.config/nvim/autoload/plugged')
-
-  " Change dates fast
-  Plug 'tpope/vim-speeddating'
-  " Convert binary, hex, etc..
-  Plug 'glts/vim-radical'
-  " Files
-  Plug 'tpope/vim-eunuch'
-  " Repeat stuff
-  Plug 'tpope/vim-repeat'
-  " Surround
-  Plug 'tpope/vim-surround'
-  " Better Comments
-  Plug 'tpope/vim-commentary'
-  " Plug 'preservim/nerdcommenter'
-  " Have the file system follow you around
-  Plug 'airblade/vim-rooter'
-  " auto set indent settings
+  " ================
+  " USEFUL 
+  " ================
+  " Auto indent settings  
   Plug 'tpope/vim-sleuth'
-  " Text Navigation
-  Plug 'justinmk/vim-sneak'
-  Plug 'unblevable/quick-scope'
-  " Plug 'easymotion/vim-easymotion'
-  " Better Syntax Support
-  Plug 'sheerun/vim-polyglot'
-  " Cool Icons
-  Plug 'ryanoasis/vim-devicons'
-  " Auto pairs for '(' '[' '{' 
+  " Auto pairs for '(' '[' '{'   
   Plug 'jiangmiao/auto-pairs'
-  " Closetags
+  " Better Comments  
+  Plug 'preservim/nerdcommenter'
+  " Closetags  
   Plug 'alvan/vim-closetag'
-  " Theme
-  Plug 'gruvbox-community/gruvbox'
-  Plug 'sainnhe/gruvbox-material'
-  Plug 'phanviet/vim-monokai-pro'
-  " Intellisense
+  " Code completion  
   Plug 'neoclide/coc.nvim', {'branch': 'release'}
-  " Status Line
-  Plug 'vim-airline/vim-airline'
-  Plug 'vim-airline/vim-airline-themes'
-  " Ranger
-  Plug 'kevinhwang91/rnvimr', {'do': 'make sync'}
-  " FZF
+  " Convert binary, hex, etc..  
+  Plug 'glts/vim-radical'
+  " Files  
+  Plug 'tpope/vim-eunuch'
+  " Fuzzy finder  
   Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
   Plug 'junegunn/fzf.vim'
-  " Git
+  " Git  
   Plug 'airblade/vim-gitgutter'
+  Plug 'junegunn/gv.vim'
   Plug 'tpope/vim-fugitive'
   Plug 'tpope/vim-rhubarb'
-  Plug 'junegunn/gv.vim'
-  " Terminal
-  Plug 'voldikss/vim-floaterm'
-  " Start Screen
-  Plug 'mhinz/vim-startify'
-  " Vista
-  Plug 'liuchengxu/vista.vim'
-  " See what keys do like in emacs
+  " Multi-language syntax support  
+  Plug 'sheerun/vim-polyglot'
+  " Ranger  
+  Plug 'kevinhwang91/rnvimr', {'do': 'make sync'}
+  " Repeat stuff  
+  Plug 'tpope/vim-repeat'
+  " See what keys do like in emacs  
   Plug 'liuchengxu/vim-which-key'
-  " Snippets
-  Plug 'honza/vim-snippets'
-  Plug 'mattn/emmet-vim'
-  " Better Comments
-  " Plug 'jbgutierrez/vim-better-comments'
-  " Interactive code
-  Plug 'ChristianChiarulli/codi.vim'
-  " Vim Wiki
+  " Self aware file system  
+  Plug 'airblade/vim-rooter'
+  " Start Screen  
+  Plug 'mhinz/vim-startify'
+  " Surround  
+  Plug 'tpope/vim-surround'
+  " Terminal  
+  Plug 'voldikss/vim-floaterm'
+  " Text Navigation  
+  Plug 'unblevable/quick-scope'
+  " Text Navigation 
+  Plug 'justinmk/vim-sneak'
+  " Vim Wiki  
   Plug 'https://github.com/vimwiki/vimwiki.git'
-  " Tmux, but in nvim
-  Plug 'Vigemus/nvimux' 
+  " Vista  
+  Plug 'liuchengxu/vista.vim'
+  " ================
+  " COSMETIC
+  " ================
+  " Cool Icons  
+  Plug 'ryanoasis/vim-devicons'
+  " Status Line  
+  Plug 'vim-airline/vim-airline'
+  Plug 'vim-airline/vim-airline-themes'
+  " Theme  
+  Plug 'gruvbox-community/gruvbox'
+  Plug 'phanviet/vim-monokai-pro'
+  Plug 'sainnhe/gruvbox-material'
 
 call plug#end()
 
