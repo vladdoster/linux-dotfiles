@@ -1,7 +1,5 @@
 #!/bin/sh
 
 system_wallpaper="${XDG_CONFIG_HOME:-$HOME/.config}/assets/wallpaper.png"
-
-[ ! -z "$1" ] && cp "$1" "$system_wallpaper" \
-              && notify-send -i "$system_wallpaper" "Wallpaper changed." \
-              && xwallpaper --focus "$system_wallpaper"
+           
+xwallpaper --focus "$system_wallpaper" || notify-send "Something is broken in set_background"
