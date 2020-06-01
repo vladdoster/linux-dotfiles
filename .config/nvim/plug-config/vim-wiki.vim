@@ -1,11 +1,12 @@
 " VimWiki
 
-" Filetypes enabled for
-let g:vimwiki_filetypes = ['wiki']
+let wiki = {}
+let wiki.ext = '.wiki'
+let wiki.path = '~/.local/src/vimwiki.git/'
+let wiki.syntax = 'default'
+let wiki.nested_syntaxes = { 'bash': 'bash', 'python': 'python' }
 
-let g:vimwiki_list = [{'path': '~/.local/src/vimwiki.git/',
-                      \ 'syntax': 'markdown', 'ext': '.md', 'exclude_files': ['**/README.md', '**/Readme.md'] }]
-
+let g:vimwiki_list = [wiki]
 let g:vimwiki_auto_header = 1
 let g:vimwiki_auto_chdir = 0
 
