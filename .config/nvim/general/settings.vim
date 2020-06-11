@@ -36,7 +36,7 @@ set noshowmode
 set nowrap                              " Display long lines as just one line
 set relativenumber                      
 set pumheight=10                        " Makes popup menu smaller
-set ruler              			            " Show the cursor position all the time
+set ruler                               " Show the cursor position all the time
 set shortmess+=c                        " Don't pass messages to |ins-completion-menu|.
 set signcolumn=yes                      " Always show the signcolumn, otherwise it would shift the text each time
 set timeoutlen=1000                     " By default timeoutlen is 1000 ms
