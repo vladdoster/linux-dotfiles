@@ -51,6 +51,8 @@ call plug#begin('~/.config/nvim/autoload/plugged')
   Plug 'unblevable/quick-scope'
   " Vim Wiki  
   Plug 'https://github.com/vimwiki/vimwiki.git'
+  " Vim Vinegar
+  Plug 'tpope/vim-vinegar'
   " ================
   " COSMETIC
   " ================
