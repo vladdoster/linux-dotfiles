@@ -1,4 +1,4 @@
-" g Leader key
+" space Leader key
 let mapleader=" "
 nnoremap <Space> <Nop>
 
