@@ -2,18 +2,16 @@
 if empty(glob('~/.config/nvim/autoload/plug.vim'))
   silent !curl -fLo ~/.config/nvim/autoload/plug.vim --create-dirs
     \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-  "autocmd VimEnter * PlugInstall
   autocmd VimEnter * PlugInstall | source $MYVIMRC
 endif
 
 call plug#begin('~/.config/nvim/autoload/plugged')
-  " ================
-  " USEFUL 
-  " ================
   " Auto indent settings  
   Plug 'tpope/vim-sleuth'
   " Auto pairs for '(' '[' '{'   
   Plug 'jiangmiao/auto-pairs'
+  " Autopep8
+  Plug 'tell-k/vim-autopep8'
   " Better Comments  
   Plug 'preservim/nerdcommenter'
   " Closetags  
@@ -22,6 +20,8 @@ call plug#begin('~/.config/nvim/autoload/plugged')
   Plug 'neoclide/coc.nvim', {'branch': 'release'}
   " Convert binary, hex, etc..  
   Plug 'glts/vim-radical'
+  " Docstring generator
+  Plug 'heavenshell/vim-pydocstring', { 'do': 'make install' }
   " Files  
   Plug 'tpope/vim-eunuch'
   " Fuzzy finder  
@@ -29,13 +29,10 @@ call plug#begin('~/.config/nvim/autoload/plugged')
   Plug 'junegunn/fzf.vim'
   " Git  
   Plug 'airblade/vim-gitgutter'
-  Plug 'junegunn/gv.vim'
   Plug 'tpope/vim-fugitive'
-  Plug 'tpope/vim-rhubarb'
   " Multi-language syntax support  
   Plug 'sheerun/vim-polyglot'
-  " Ranger  
-  Plug 'kevinhwang91/rnvimr', {'do': 'make sync'}
+  " Tmux and nvim have a child
   " Repeat stuff  
   Plug 'tpope/vim-repeat'
   " See what keys do like in emacs  
@@ -52,12 +49,8 @@ call plug#begin('~/.config/nvim/autoload/plugged')
   Plug 'voldikss/vim-floaterm'
   " Text Navigation  
   Plug 'unblevable/quick-scope'
-  " Text Navigation 
-  Plug 'justinmk/vim-sneak'
   " Vim Wiki  
   Plug 'https://github.com/vimwiki/vimwiki.git'
-  " Vista  
-  Plug 'liuchengxu/vista.vim'
   " ================
   " COSMETIC
   " ================

@@ -11,7 +11,7 @@
   "diagnostic.infoSign": "",
   "diagnostic.hintSign": " ",
   "diagnostic.virtualText": true,
-  // "diagnostic.displayByAle": true, 
+  // "diagnostic.displayByAle": true,
   // list
   "list.indicator": ">",
   "list.selectedSignText": " ",
@@ -27,14 +27,11 @@
   "python.linting.enabled": true,
   "python.linting.pylintEnabled": true,
   "python.formatting.provider": "black",
-  "python.formatting.blackPath": "~/.miniconda/envs/neovim/bin/black",
-  // "python.linting.pylintPath": "~/.miniconda/envs/neovim/bin/pylint",
-  "python.condaPath": "~/.miniconda/bin/conda",
-  "python.sortImports.path": "~/.miniconda/envs/neovim/bin/isort",
-  "python.jediPath": "~/.miniconda/envs/neovim/lib/python3.8/site-packages",
-  // snippets
-  "snippets.ultisnips.directories": ["UltiSnips", "~/.config/nvim/snips"],
-  "snippets.userSnippetsDirectory": "~/.config/nvim/snips",
+  "python.formatting.blackPath": "/usr/bin/black",
+  "python.linting.pylintPath": "/usr/bin/pylint",
+  "python.sortImports.path": "/usr/bin/isort",
+  "python.jediPath": "/home/vlad/.virtualenvs/o2-cluster-tools-venv/lib/python2.7/site-packages",
+  "python.venvFolders": [".virtualenvs"],
   // Explorer
   "explorer.width": 30,
   "explorer.icon.enableNerdfont": true,

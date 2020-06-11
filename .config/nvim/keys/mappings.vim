@@ -1,10 +1,5 @@
-imap <C-h> <C-w>h
-imap <C-j> <C-w>j
-imap <C-k> <C-w>k
-imap <C-l> <C-w>l
 " g Leader key
 let mapleader=" "
-" let localleader=" "
 nnoremap <Space> <Nop>
 
 " Better indenting
@@ -18,10 +13,6 @@ inoremap <expr> <c-k> ("\<C-p>")
 " Who likes escape? 
 inoremap jk <Esc>
 inoremap kj <Esc>
-
-" Easy CAPS
-" inoremap <c-u> <ESC>viwUi
-" nnoremap <c-u> viwU<Esc>
 
 " TAB in general mode will move to text buffer
 nnoremap <silent> <TAB> :bnext<CR>
@@ -38,6 +29,11 @@ nnoremap <silent> <C-c> <Esc>
 inoremap <silent> <expr><TAB> pumvisible() ? "\<C-n>" : "\<TAB>"
 
 " Better window navigation
+imap <C-h> <C-w>h
+imap <C-j> <C-w>j
+imap <C-k> <C-w>k
+imap <C-l> <C-w>l
+
 nnoremap <C-h> <C-w>h
 nnoremap <C-j> <C-w>j
 nnoremap <C-k> <C-w>k

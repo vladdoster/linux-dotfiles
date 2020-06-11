@@ -23,33 +23,25 @@ autocmd  FileType which_key set laststatus=0 noshowmode noruler
   \| autocmd BufLeave <buffer> set laststatus=2 noshowmode ruler
 
 " Single mappings
-let g:which_key_map['/'] = [ ':Commentary'  , 'comment' ]
+let g:which_key_map['/'] = [ ':Commentary'                , 'comment' ]
 let g:which_key_map['.'] = [ ':e $MYVIMRC'                , 'open init' ]
 let g:which_key_map[';'] = [ ':Commands'                  , 'commands' ]
 let g:which_key_map['='] = [ '<C-W>='                     , 'balance windows' ]
 let g:which_key_map[','] = [ 'Startify'                   , 'start screen' ]
-let g:which_key_map['c'] = [ ':Codi!!'                    , 'virtual repl']
 let g:which_key_map['d'] = [ ':bd'                        , 'delete buffer']
-let g:which_key_map['e'] = [ ':CocCommand explorer'       , 'explorer' ]
-let g:which_key_map['f'] = [ ':Files'                     , 'search files' ]
+let g:which_key_map['f'] = [ ':Files'                     , 'files' ]
 let g:which_key_map['h'] = [ '<C-W>s'                     , 'split below']
+let g:which_key_map['n'] = [ ':Ex'                        , 'netrw' ]
 let g:which_key_map['q'] = [ 'q'                          , 'quit' ]
-let g:which_key_map['r'] = [ ':RnvimrToggle'              , 'ranger' ]
-let g:which_key_map['S'] = [ ':SSave'                     , 'save session' ]
-let g:which_key_map['T'] = [ ':Rg'                        , 'search text' ]
 let g:which_key_map['v'] = [ '<C-W>v'                     , 'split right']
-let g:which_key_map['W'] = [ 'w'                          , 'write' ]
 
 " Group mappings
 " a is for actions
 let g:which_key_map.a = {
       \ 'name' : '+actions' ,
-      \ 'e' : [':CocCommand explorer'    , 'explorer'],
       \ 'n' : [':set nonumber!'          , 'line-numbers'],
       \ 'r' : [':set norelativenumber!'  , 'relative line nums'],
       \ 's' : [':let @/ = ""'            , 'remove search highlight'],
-      \ 't' : [':FloatermToggle'         , 'terminal'],
-      \ 'v' : [':Vista!!'                , 'tag viewer'],
       \ }
 
 " b is for buffer
@@ -57,13 +49,13 @@ let g:which_key_map.b = {
       \ 'name' : '+buffer' ,
       \ '1' : ['b1'        , 'buffer 1']        ,
       \ '2' : ['b2'        , 'buffer 2']        ,
+      \ '?' : ['Buffers'   , 'fzf-buffer']      ,
       \ 'd' : ['bd'        , 'delete-buffer']   ,
       \ 'f' : ['bfirst'    , 'first-buffer']    ,
       \ 'h' : ['Startify'  , 'home-buffer']     ,
       \ 'l' : ['blast'     , 'last-buffer']     ,
       \ 'n' : ['bnext'     , 'next-buffer']     ,
       \ 'p' : ['bprevious' , 'previous-buffer'] ,
-      \ '?' : ['Buffers'   , 'fzf-buffer']      ,
       \ }
 
 " s is for search
@@ -71,25 +63,18 @@ let g:which_key_map.s = {
       \ 'name' : '+search' ,
       \ '/' : [':History/'              , 'history'],
       \ ';' : [':Commands'              , 'commands'],
+      \ 'B' : [':Buffers'               , 'open buffers'],
+      \ 'C' : [':BCommits'              , 'buffer commits'],
+      \ 'G' : [':GFiles?'               , 'modified git files'],
+      \ 'H' : [':History:'              , 'command history'],
       \ 'a' : [':Ag'                    , 'text Ag'],
       \ 'b' : [':BLines'                , 'current buffer'],
-      \ 'B' : [':Buffers'               , 'open buffers'],
       \ 'c' : [':Commits'               , 'commits'],
-      \ 'C' : [':BCommits'              , 'buffer commits'],
       \ 'f' : [':Files'                 , 'files'],
       \ 'g' : [':GFiles'                , 'git files'],
-      \ 'G' : [':GFiles?'               , 'modified git files'],
       \ 'h' : [':History'               , 'file history'],
-      \ 'H' : [':History:'              , 'command history'],
       \ 'l' : [':Lines'                 , 'lines'] ,
       \ 'm' : [':Marks'                 , 'marks'] ,
-      \ 'M' : [':Maps'                  , 'normal maps'] ,
-      \ 'p' : [':Helptags'              , 'help tags'] ,
-      \ 'P' : [':Tags'                  , 'project tags'],
-      \ 's' : [':CocList snippets'      , 'snippets'],
-      \ 'S' : [':Colors'                , 'color schemes'],
-      \ 't' : [':Rg'                    , 'text Rg'],
-      \ 'T' : [':BTags'                 , 'buffer tags'],
       \ 'w' : [':Windows'               , 'search windows'],
       \ 'y' : [':Filetypes'             , 'file types'],
       \ 'z' : [':FZF'                   , 'FZF'],
@@ -158,45 +143,29 @@ let g:which_key_map.l = {
       \ 'u' : [':CocListResume'                      , 'resume list'],
       \ 'U' : [':CocUpdate'                          , 'update CoC'],
       \ 'v' : [':Vista!!'                            , 'tag viewer'],
-      \ 'z' : [':CocDisable'                         , 'disable CoC'],
-      \ 'Z' : [':CocEnable'                          , 'enable CoC'],
       \ }
 
 " t is for terminal
 let g:which_key_map.t = {
       \ 'name' : '+terminal' ,
       \ ';' : [':FloatermNew --wintype=popup --height=6'        , 'terminal'],
-      \ 'f' : [':FloatermNew fzf'                               , 'fzf'],
-      \ 'g' : [':FloatermNew lazygit'                           , 'git'],
       \ 'd' : [':FloatermNew lazydocker'                        , 'docker'],
-      \ 'n' : [':FloatermNew node'                              , 'node'],
-      \ 'N' : [':FloatermNew nnn'                               , 'nnn'],
+      \ 'g' : [':FloatermNew lazygit'                           , 'git'],
       \ 'p' : [':FloatermNew python'                            , 'python'],
-      \ 'r' : [':FloatermNew ranger'                            , 'ranger'],
+      \ 's' : [':FloatermNew ncdu'                              , 'ncdu'],
       \ 't' : [':FloatermToggle'                                , 'toggle'],
       \ 'y' : [':FloatermNew ytop'                              , 'ytop'],
-      \ 's' : [':FloatermNew ncdu'                              , 'ncdu'],
       \ }
 
 " w is for wiki
 let g:which_key_map.w = {
       \ 'name' : '+wiki' ,
-      \ 'w' : ['<Plug>VimwikiIndex'                             , 'ncdu'],
-      \ 'n' : ['<plug>(wiki-open)'                              , 'ncdu'],
-      \ 'j' : ['<plug>(wiki-journal)'                           , 'ncdu'],
-      \ 'R' : ['<plug>(wiki-reload)'                            , 'ncdu'],
-      \ 'c' : ['<plug>(wiki-code-run)'                          , 'ncdu'],
-      \ 'b' : ['<plug>(wiki-graph-find-backlinks)'              , 'ncdu'],
-      \ 'g' : ['<plug>(wiki-graph-in)'                          , 'ncdu'],
-      \ 'G' : ['<plug>(wiki-graph-out)'                         , 'ncdu'],
-      \ 'l' : ['<plug>(wiki-link-toggle)'                       , 'ncdu'],
       \ 'd' : ['<plug>(wiki-page-delete)'                       , 'ncdu'],
+      \ 'l' : ['<plug>(wiki-link-toggle)'                       , 'ncdu'],
+      \ 'n' : ['<plug>(wiki-open)'                              , 'ncdu'],
       \ 'r' : ['<plug>(wiki-page-rename)'                       , 'ncdu'],
-      \ 't' : ['<plug>(wiki-page-toc)'                          , 'ncdu'],
-      \ 'T' : ['<plug>(wiki-page-toc-local)'                    , 'ncdu'],
-      \ 'e' : ['<plug>(wiki-export)'                            , 'ncdu'],
       \ 'u' : ['<plug>(wiki-list-uniq)'                         , 'ncdu'],
-      \ 'U' : ['<plug>(wiki-list-uniq-local)'                   , 'ncdu'],
+      \ 'w' : ['<Plug>VimwikiIndex'                             , 'ncdu'],
       \ }
 
 " Register which key map

@@ -17,14 +17,12 @@ let g:fzf_buffers_jump = 1
 " nnoremap <leader>t :Tags<CR>
 " nnoremap <leader>m :Marks<CR>
 
-
 let g:fzf_tags_command = 'ctags -R'
 " Border color
 let g:fzf_layout = {'up':'~90%', 'window': { 'width': 0.8, 'height': 0.8,'yoffset':0.5,'xoffset': 0.5, 'highlight': 'Todo', 'border': 'sharp' } }
 
 let $FZF_DEFAULT_OPTS = '--layout=reverse --inline-info'
-let $FZF_DEFAULT_COMMAND="rg --files --hidden --glob '!.git/**'"
-"-g '!{node_modules,.git}'
+let $FZF_DEFAULT_COMMAND="rg --files --hidden --glob '!{node_modules,.git/**}'"
 
 " Customize fzf colors to match your color scheme
 let g:fzf_colors =

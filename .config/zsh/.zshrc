@@ -1,40 +1,38 @@
-#--- Zoomer Shell ---#
-
-# Enable colors and change prompt
+#-->Zoomer Shell<--#
+#->prompt color/text
 autoload -U colors && colors
 PS1="%B%{$fg[red]%}[%{$fg[yellow]%}%n%{$fg[green]%}@%{$fg[blue]%}%M %{$fg[magenta]%}%~%{$fg[red]%}]%{$reset_color%}$%b "
-setopt autocd	# Automatically cd into typed directory.
-stty stop undef	# Disable ctrl-s to freeze terminal.
-
-# History in cache directory
+setopt autocd	
+stty stop undef	
+#->history
 HISTSIZE=30000
 SAVEHIST=30000
 HISTFILE="${ZDOTDIR:-$HOME/.config/zsh}/history"
-
-# Load aliases and shortcuts
+#->aliases and shortcuts
 [ -f "${XDG_CONFIG_HOME:-$HOME/.config}/user-dirs.dirs" ] && source "${XDG_CONFIG_HOME:-$HOME/.config}/user-dirs.dirs"
 [ -f "${XDG_CONFIG_HOME:-$HOME/.config}/shortcutrc" ] && source "${XDG_CONFIG_HOME:-$HOME/.config}/shortcutrc"
 [ -f "${XDG_CONFIG_HOME:-$HOME/.config}/aliasrc" ] && source "${XDG_CONFIG_HOME:-$HOME/.config}/aliasrc"
-
-# auto/tab complete
+#->auto/tab complete
 autoload -U compinit
 zstyle ':completion:*' menu select
 zmodload zsh/complist
 compinit
-_comp_options+=(globdots) # Include hidden files.
-
-# vi mode
+_comp_options+=(globdots) #->Include hidden files.
+#->virtualenvwrapper
+export PROJECT_HOME=$HOME/github
+export VIRTUALENVWRAPPER_PYTHON=/usr/bin/python3
+export WORKON_HOME=$HOME/.virtualenvs
+source /usr/bin/virtualenvwrapper.sh 
+#->vi mode
 bindkey -v
 export KEYTIMEOUT=1
-
-# vim keys in tab complete menu
+#->vim bindings for tab complete menu
 bindkey -M menuselect 'h' vi-backward-char
 bindkey -M menuselect 'k' vi-up-line-or-history
 bindkey -M menuselect 'l' vi-forward-char
 bindkey -M menuselect 'j' vi-down-line-or-history
 bindkey -v '^?' backward-delete-char
-
-# cursor shape for different vi modes
+#->cursor shape for different vi modes
 function zle-keymap-select {
   if [[ ${KEYMAP} == vicmd ]] ||
      [[ $1 = 'block' ]]; then
@@ -49,26 +47,24 @@ function zle-keymap-select {
 
 zle -N zle-keymap-select
 zle-line-init() {
-    zle -K viins # initiate `vi insert` as keymap
+    zle -K viins #->initiate `vi insert` as keymap
     echo -ne "\e[5 q"
 }
 
 zle -N zle-line-init
-echo -ne '\e[5 q' # beam cursor on startup.
-preexec() { echo -ne '\e[5 q' ;} # beam cursor for each new prompt.
-
-# Beam cursor on startup
+echo -ne '\e[5 q' #->beam cursor on startup.
+preexec() { echo -ne '\e[5 q' ;} #->beam cursor for each new prompt.
+#->beam cursor on startup
 echo -ne '\e[5 q'
-# Beam cursor for each new prompt
+#->beam cursor for each new prompt
 preexec() { echo -ne '\e[5 q' ;}
-
 bindkey -s '^a' 'bc -l\n'
 bindkey -s '^f' 'cd "$(dirname "$(fzf)")"\n'
 bindkey '^[[P' delete-char
-
-# Edit line in vim with ctrl-e
+#->edit line in vim with ctrl-e
 autoload edit-command-line; zle -N edit-command-line
 bindkey '^e' edit-command-line
 
-# Load syntax highlighting
+source <(cod init $$ zsh)
 source /usr/share/zsh/plugins/fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh 2>/dev/null
+
