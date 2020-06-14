@@ -17,6 +17,7 @@ let g:startify_lists = [
 let g:startify_bookmarks = [
             \ { 'c': '~/.config' },
             \ { 'i': '~/.config/nvim/init.vim' },
+            \ { 'w': '~/.local/src/vimwiki.git/index.wiki' },
             \ { 'z': '~/.config/zsh/zshrc' },
             \ { 's': '~/.local/src/' },
             \ ]

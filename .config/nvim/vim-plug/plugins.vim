@@ -12,6 +12,8 @@ call plug#begin('~/.config/nvim/autoload/plugged')
   Plug 'jiangmiao/auto-pairs'
   " Autopep8
   Plug 'tell-k/vim-autopep8'
+  " Autoflake8
+  Plug 'tell-k/vim-autoflake'
   " Better Comments  
   Plug 'preservim/nerdcommenter'
   " Closetags  
