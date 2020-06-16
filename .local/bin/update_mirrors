@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+
+notify-send "Refreshing mirrorlist"
+reflector --latest 1000 --protocol http --protocol https --sort rate --save /etc/pacman.d/mirrorlist >/dev/null 2>&1
+notify-send "Refreshed mirrorlist"
