@@ -1,7 +1,9 @@
 " space Leader key
 let mapleader=" "
 nnoremap <Space> <Nop>
-
+nnoremap c "_c
+" Compile document, be it groff/LaTeX/markdown/etc.
+map <leader>c :w! \| !compiler <c-r>%<CR>
 " Better indenting
 vnoremap < <gv
 vnoremap > >gv

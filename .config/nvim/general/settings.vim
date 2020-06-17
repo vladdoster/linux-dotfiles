@@ -43,5 +43,8 @@ set timeoutlen=1000                     " By default timeoutlen is 1000 ms
 set updatetime=50                       " Faster completion
 set autochdir                           " Your working directory will always be the same as your working directory
 
+autocmd BufRead,BufNewFile *.ms,*.me,*.mom,*.man set filetype=groff
+autocmd BufRead,BufNewFile *.tex set filetype=tex
 autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
-
+" Update binds when sxhkdrc is updated.
+	autocmd BufWritePost *.groff compiler %

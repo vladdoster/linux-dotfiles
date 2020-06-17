@@ -20,6 +20,8 @@ call plug#begin('~/.config/nvim/autoload/plugged')
   Plug 'alvan/vim-closetag'
   " Code completion  
   Plug 'neoclide/coc.nvim', {'branch': 'release'}
+  " Colorize all text in the form #rgb, #rgba, #rrggbb, #rrgbbaa, rgb(...), rgba(...)
+  Plug 'lilydjwg/colorizer'
   " Convert binary, hex, etc..  
   Plug 'glts/vim-radical'
   " Docstring generator
