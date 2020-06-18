@@ -1,4 +1,3 @@
-" auto-install vim-plug
 if empty(glob('~/.config/nvim/autoload/plug.vim'))
   silent !curl -fLo ~/.config/nvim/autoload/plug.vim --create-dirs
     \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
@@ -6,73 +5,53 @@ if empty(glob('~/.config/nvim/autoload/plug.vim'))
 endif
 
 call plug#begin('~/.config/nvim/autoload/plugged')
-  " Auto indent settings  
-  Plug 'tpope/vim-sleuth'
-  " Auto pairs for '(' '[' '{'   
-  Plug 'jiangmiao/auto-pairs'
-  " Autopep8
-  Plug 'tell-k/vim-autopep8'
-  " Autoflake8
-  Plug 'tell-k/vim-autoflake'
-  " Better Comments  
-  Plug 'preservim/nerdcommenter'
-  " Closetags  
-  Plug 'alvan/vim-closetag'
-  " Code completion  
+  "==================
+  "=  Programming  ="
+  "==================
   Plug 'neoclide/coc.nvim', {'branch': 'release'}
-  " Colorize all text in the form #rgb, #rgba, #rrggbb, #rrgbbaa, rgb(...), rgba(...)
-  Plug 'lilydjwg/colorizer'
-  " Convert binary, hex, etc..  
-  Plug 'glts/vim-radical'
-  " Docstring generator
+  Plug 'preservim/nerdcommenter'
+  Plug 'sheerun/vim-polyglot'
+  
   Plug 'heavenshell/vim-pydocstring', { 'do': 'make install' }
-  " Files  
-  Plug 'tpope/vim-eunuch'
-  " Fuzzy finder  
+  Plug 'tell-k/vim-autopep8'
+  Plug 'tell-k/vim-autoflake'
+
+  Plug 'z0mbix/vim-shfmt', { 'for': 'sh' }
+  "================="
+  "=  Vim related  ="
+  "================="
+  Plug 'airblade/vim-gitgutter'
+  Plug 'airblade/vim-rooter'
+  Plug 'alvan/vim-closetag'
+  Plug 'glts/vim-radical'
+  Plug 'jiangmiao/auto-pairs'
   Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
   Plug 'junegunn/fzf.vim'
-  " Git  
-  Plug 'airblade/vim-gitgutter'
-  Plug 'tpope/vim-fugitive'
-  " Multi-language syntax support  
-  Plug 'sheerun/vim-polyglot'
-  " Tmux and nvim have a child
-  " Repeat stuff  
-  Plug 'tpope/vim-repeat'
-  " See what keys do like in emacs  
+  Plug 'lilydjwg/colorizer'
   Plug 'liuchengxu/vim-which-key'
-  " Self aware file system  
-  Plug 'airblade/vim-rooter'
-  " Shell file formatting
-  Plug 'z0mbix/vim-shfmt', { 'for': 'sh' }
-  " Start Screen  
   Plug 'mhinz/vim-startify'
-  " Surround  
+  Plug 'tpope/vim-eunuch'
+  Plug 'tpope/vim-fugitive'
+  Plug 'tpope/vim-repeat'
+  Plug 'tpope/vim-sleuth'
   Plug 'tpope/vim-surround'
-  " Terminal  
-  Plug 'voldikss/vim-floaterm'
-  " Text Navigation  
-  Plug 'unblevable/quick-scope'
-  " Vim Wiki  
-  Plug 'https://github.com/vimwiki/vimwiki.git'
-  " Vim Vinegar
   Plug 'tpope/vim-vinegar'
-  " ================
-  " COSMETIC
-  " ================
-  " Cool Icons  
-  Plug 'ryanoasis/vim-devicons'
-  " Status Line  
-  Plug 'vim-airline/vim-airline'
-  Plug 'vim-airline/vim-airline-themes'
-  " Theme  
+  Plug 'unblevable/quick-scope'
+  Plug 'vimwiki/vimwiki'
+  Plug 'voldikss/vim-floaterm'
+  "=============="
+  "=  Cosmetic  ="
+  "=============="
   Plug 'gruvbox-community/gruvbox'
   Plug 'phanviet/vim-monokai-pro'
+  Plug 'ryanoasis/vim-devicons'
   Plug 'sainnhe/gruvbox-material'
+  Plug 'vim-airline/vim-airline'
+  Plug 'vim-airline/vim-airline-themes'
 
 call plug#end()
 
-" Automatically install missing plugins on startup
+" Install missing plugins on startup
 autocmd VimEnter *
   \  if len(filter(values(g:plugs), '!isdirectory(v:val.dir)'))
   \|   PlugInstall --sync | q
