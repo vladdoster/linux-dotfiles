@@ -1,21 +1,17 @@
-source $HOME/.config/nvim/general/functions.vim
-source $HOME/.config/nvim/general/settings.vim
-
-source $HOME/.config/nvim/keys/mappings.vim
-source $HOME/.config/nvim/keys/which-key.vim
-
-source $HOME/.config/nvim/plug-config/airline.vim
-source $HOME/.config/nvim/plug-config/closetags.vim
-source $HOME/.config/nvim/plug-config/coc.vim
-source $HOME/.config/nvim/plug-config/file-header.vim
-source $HOME/.config/nvim/plug-config/floaterm.vim
-source $HOME/.config/nvim/plug-config/fzf.vim
-source $HOME/.config/nvim/plug-config/gitgutter.vim
-source $HOME/.config/nvim/plug-config/nerd-commenter.vim
-source $HOME/.config/nvim/plug-config/netrw.vim
-source $HOME/.config/nvim/plug-config/quickscope.vim
-source $HOME/.config/nvim/plug-config/start-screen.vim
-source $HOME/.config/nvim/plug-config/vim-rooter.vim
-source $HOME/.config/nvim/plug-config/vim-wiki.vim
-
-source $HOME/.config/nvim/vim-plug/plugins.vim
+source $HOME/.config/nvim/mappings.vim
+source $HOME/.config/nvim/plugins.vim
+source $HOME/.config/nvim/settings.vim
+source $HOME/.config/nvim/plug-configs/airline.vim
+source $HOME/.config/nvim/plug-configs/closetags.vim
+source $HOME/.config/nvim/plug-configs/coc.vim
+source $HOME/.config/nvim/plug-configs/file-header.vim
+source $HOME/.config/nvim/plug-configs/floaterm.vim
+source $HOME/.config/nvim/plug-configs/fzf.vim
+source $HOME/.config/nvim/plug-configs/gitgutter.vim
+source $HOME/.config/nvim/plug-configs/nerd-commenter.vim
+source $HOME/.config/nvim/plug-configs/netrw.vim
+source $HOME/.config/nvim/plug-configs/quickscope.vim
+source $HOME/.config/nvim/plug-configs/vim-rooter.vim
+source $HOME/.config/nvim/plug-configs/start-screen.vim
+source $HOME/.config/nvim/plug-configs/vim-wiki.vim
+source $HOME/.config/nvim/plug-configs/which-key.vim

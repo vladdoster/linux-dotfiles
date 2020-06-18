@@ -13,8 +13,8 @@ call plug#begin('~/.config/nvim/autoload/plugged')
   Plug 'sheerun/vim-polyglot'
   
   Plug 'heavenshell/vim-pydocstring', { 'do': 'make install' }
-  Plug 'tell-k/vim-autopep8'
   Plug 'tell-k/vim-autoflake'
+  Plug 'tell-k/vim-autopep8'
 
   Plug 'z0mbix/vim-shfmt', { 'for': 'sh' }
   "================="
@@ -39,6 +39,7 @@ call plug#begin('~/.config/nvim/autoload/plugged')
   Plug 'unblevable/quick-scope'
   Plug 'vimwiki/vimwiki'
   Plug 'voldikss/vim-floaterm'
+  Plug 'ahonn/vim-fileheader'
   "=============="
   "=  Cosmetic  ="
   "=============="
@@ -48,7 +49,6 @@ call plug#begin('~/.config/nvim/autoload/plugged')
   Plug 'sainnhe/gruvbox-material'
   Plug 'vim-airline/vim-airline'
   Plug 'vim-airline/vim-airline-themes'
-
 call plug#end()
 
 " Install missing plugins on startup

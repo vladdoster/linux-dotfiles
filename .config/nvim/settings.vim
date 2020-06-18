@@ -23,7 +23,6 @@ set showtabline=2
 set smarttab                           
 set tabstop=2                          
 " misc.
-set autochdir                          
 set clipboard=unnamedplus              
 set cmdheight=2                        
 set conceallevel=0                     
