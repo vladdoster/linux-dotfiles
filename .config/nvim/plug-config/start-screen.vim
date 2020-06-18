@@ -1,6 +1,12 @@
-let g:startify_custom_header = 'startify#pad(startify#fortune#boxed())'
 
-let g:startify_session_dir = '~/.config/nvim/session'
+let g:startify_change_to_vcs_root = 0
+let g:startify_custom_header = 'startify#pad(startify#fortune#boxed())'
+let g:startify_enable_special = 0
+let g:startify_fortune_use_unicode = 1
+
+let g:startify_session_autoload = 1
+let g:startify_session_delete_buffers = 1
+let g:startify_session_persistence = 1
 
 function! s:lsGithubDir()
     let files = systemlist('ls -d ~/github/* 2>/dev/null')
@@ -8,7 +14,8 @@ function! s:lsGithubDir()
 endfunction
 
 let g:startify_lists = [
-          \ { 'type': 'files',                    'header': ['Files']},
+          \ { 'type': 'files',                    'header': ['Recent files']},
+          \ { 'type': 'dir',                      'header': ['Current directory'. getcwd()] },
           \ { 'type': function('s:lsGithubDir'),  'header': ['Github projects']},
           \ { 'type': 'sessions',                 'header': ['Sessions']},
           \ { 'type': 'bookmarks',                'header': ['Bookmarks']},
@@ -22,9 +29,3 @@ let g:startify_bookmarks = [
             \ { 's': '~/.local/src/' },
             \ ]
 
-let g:startify_change_to_vcs_root = 1
-let g:startify_enable_special = 0
-let g:startify_fortune_use_unicode = 1
-let g:startify_session_autoload = 1
-let g:startify_session_delete_buffers = 1
-let g:startify_session_persistence = 1
