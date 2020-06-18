@@ -5,24 +5,25 @@ if empty(glob('~/.config/nvim/autoload/plug.vim'))
 endif
 
 call plug#begin('~/.config/nvim/autoload/plugged')
-  "==================
-  "=  Programming  ="
-  "==================
+  "=================
+  "=  Programming  =
+  "=================
   Plug 'neoclide/coc.nvim', {'branch': 'release'}
   Plug 'preservim/nerdcommenter'
   Plug 'sheerun/vim-polyglot'
-  
+  " python
   Plug 'heavenshell/vim-pydocstring', { 'do': 'make install' }
   Plug 'tell-k/vim-autoflake'
   Plug 'tell-k/vim-autopep8'
-
+  " sh
   Plug 'z0mbix/vim-shfmt', { 'for': 'sh' }
-  "================="
-  "=  Vim related  ="
-  "================="
+  "=================
+  "=  Vim related  =
+  "=================
   Plug 'airblade/vim-gitgutter'
   Plug 'airblade/vim-rooter'
   Plug 'alvan/vim-closetag'
+  Plug 'ahonn/vim-fileheader'
   Plug 'glts/vim-radical'
   Plug 'jiangmiao/auto-pairs'
   Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
@@ -39,10 +40,9 @@ call plug#begin('~/.config/nvim/autoload/plugged')
   Plug 'unblevable/quick-scope'
   Plug 'vimwiki/vimwiki'
   Plug 'voldikss/vim-floaterm'
-  Plug 'ahonn/vim-fileheader'
-  "=============="
-  "=  Cosmetic  ="
-  "=============="
+  "==============
+  "=  Cosmetic  =
+  "==============
   Plug 'gruvbox-community/gruvbox'
   Plug 'phanviet/vim-monokai-pro'
   Plug 'ryanoasis/vim-devicons'
