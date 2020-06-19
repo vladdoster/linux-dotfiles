@@ -26,11 +26,11 @@
   // Python config
   "python.linting.enabled": true,
   "python.linting.pylintEnabled": true,
-  "python.formatting.provider": "black",
-  "python.formatting.blackPath": "/usr/bin/black",
-  "python.linting.pylintPath": "/usr/bin/pylint",
-  "python.sortImports.path": "/usr/bin/isort",
-  "python.jediPath": "/home/vlad/.virtualenvs/o2-cluster-tools-venv/lib/python2.7/site-packages",
+  "python.formatting.provider": "yapf",
+  "python.formatting.blackPath": "/home/vlad/.virtualenvs/py38/lib/python3.8/site-packages/yapf",
+  "python.linting.pylintPath": "/home/vlad/.virtualenvs/py38/lib/python3.8/site-packages/pylint",
+  "python.sortImports.path": "/home/vlad/.virtualenvs/py38/lib/python3.8/site-packages/isort",
+  "python.jediPath": "/home/vlad/.virtualenvs/py38/lib/python3.8/site-packages",
   "python.venvFolders": [".virtualenvs"],
   // Explorer
   "explorer.width": 30,
