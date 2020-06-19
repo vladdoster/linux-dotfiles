@@ -20,7 +20,7 @@ compinit
 _comp_options+=(globdots) #->Include hidden files.
 #->virtualenvwrapper
 export PROJECT_HOME=$HOME/github
-export VIRTUALENVWRAPPER_PYTHON=/usr/bin/python3
+export VIRTUALENVWRAPPER_PYTHON=/usr/bin/python3.8
 export WORKON_HOME=$HOME/.virtualenvs
 source /usr/bin/virtualenvwrapper.sh 
 #->vi mode
