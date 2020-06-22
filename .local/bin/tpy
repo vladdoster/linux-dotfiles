@@ -3,7 +3,7 @@
 # @Author: Vlad Doster <mvdoster@gmail.com>
 # @Date: 2020-06-17 21:56:33
 # @Last Modified by: Vlad Doster <mvdoster@gmail.com>
-# @Last Modified time: 2020-06-17 21:56:48
+# @Last Modified time: 2020-06-22 11:27:55
 
 import argparse
 import os
@@ -38,6 +38,7 @@ parser.add_argument("file_names", nargs="*", help="File name(s) that should be c
 if len(sys.argv) == 1:
     parser.print_usage()
     sys.exit(0)
+
 args = parser.parse_args()
 path, shell = args.path, args.shell
 
