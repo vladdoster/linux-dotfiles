@@ -4,9 +4,10 @@ set nobackup
 set nowritebackup                      
 " color scheme
 colorscheme gruvbox                    
-set guifont=Source\ Code\ Pro
 set t_Co=256                           
 set background=dark                    
+" font
+let &guifont='Source Code Pro 12'
 " encoding
 set encoding=utf-8                     
 set fileencoding=utf-8                 
