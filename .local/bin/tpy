@@ -3,17 +3,21 @@
 # @Author: Vlad Doster <mvdoster@gmail.com>
 # @Date: 2020-06-17 21:56:33
 # @Last Modified by: Vlad Doster <mvdoster@gmail.com>
-# @Last Modified time: 2020-06-22 11:27:55
+# @Last Modified time: 2020-06-22 12:44:40
 
 import argparse
 import os
 import sys
 
 parser = argparse.ArgumentParser(
-    description="Create new shell script(s) with shebang and is executable", prog="tsh"
-)
+    description="Create new python file(s) with shebang and is executable",
+    prog="tpy")
 parser.add_argument(
-    "-e", "--extension", action="store_true", dest="add_ext", help="Add .sh extension to the file",
+    "-e",
+    "--extension",
+    action="store_false",
+    dest="add_ext",
+    help="Add .py extension to the file",
 )
 parser.add_argument(
     "-p",
@@ -22,31 +26,34 @@ parser.add_argument(
     dest="path",
     help="Path that scripts should be created at",
     metavar="PATH",
-    type=str,
     nargs=1,
+    type=str,
 )
 parser.add_argument(
-    "-s",
-    "--shell",
-    default="bash",
-    help="The name of the shell to be used in shebang (default: %(default)s)",
-    metavar="SHELL",
+    "-v",
+    "--version",
+    default="python3",
+    help="The version of python to be used in shebang (default: %(default)s)",
+    metavar="PY_VERSION",
     nargs=1,
     type=str,
 )
-parser.add_argument("file_names", nargs="*", help="File name(s) that should be created")
+parser.add_argument("file_names",
+                    nargs="*",
+                    help="File name(s) that should be created")
+
 if len(sys.argv) == 1:
     parser.print_usage()
     sys.exit(0)
 
 args = parser.parse_args()
-path, shell = args.path, args.shell
+path, shell = args.path, args.version
 
 for f_name in args.file_names:
     f_name = "%s/%s" % (path, f_name)
     if args.add_ext:
-        f_name = f_name + ".sh"
+        f_name = f_name + ".py"
     with open(f_name, mode="w") as new_file:
-        new_file.writelines("#!/usr/bin/env %s" % args.shell)
+        new_file.writelines("#!/usr/bin/env %s" % args.version)
     os.chmod(f_name, 0o755)
-print("Successfully made sh scripts")
+print("Successfully made python files")
