@@ -3,7 +3,7 @@
 # @Author: Vlad Doster <mvdoster@gmail.com>
 # @Date: 2020-06-23 03:25:02
 # @Last Modified by: Vlad Doster <mvdoster@gmail.com>
-# @Last Modified time: 2020-06-23 03:39:43
+# @Last Modified time: 2020-06-23 11:30:06
 
 #->prompt color/text
 autoload -U colors && colors
@@ -73,7 +73,6 @@ source <(cod init $$ zsh)
 source /usr/share/zsh/plugins/fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh 2>/dev/null
 #-> pyenv
 if command -v pyenv 1>/dev/null 2>&1; then
-  eval "$(pyenv virtualenv-init -)"
   eval "$(pyenv init -)"
 fi
 source $ZDOTDIR/pyenv.zsh

@@ -1,7 +1,7 @@
 " @Author: Vlad Doster <mvdoster@gmail.com>
 " @Date: 2020-06-23 08:17:13
 " @Last Modified by: Vlad Doster <mvdoster@gmail.com>
-" @Last Modified time: 2020-06-23 09:51:43
+" @Last Modified time: 2020-06-23 11:54:43
 
 syntax enable                          
 " backup
@@ -46,12 +46,6 @@ set shortmess+=c
 set signcolumn=yes                     
 set timeoutlen=1000                   
 set updatetime=50                      
-
-" Set python locations
-let g:python_host_prog = '/home/vlad/.pyenv/versions/py2nvim/bin/python'
-" Disable python3
-let g:loaded_python3_provider = 0
-" let g:python3_host_prog = '/home/vlad/.pyenv/versions/py3nvim/bin/python'
 
 autocmd BufRead,BufNewFile *.ms,*.me,*.mom,*.man set filetype=groff
 autocmd BufRead,BufNewFile *.tex set filetype=tex
