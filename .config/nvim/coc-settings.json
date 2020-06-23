@@ -6,16 +6,18 @@
     "function": ""
   },
   // diagnostics
+  "suggest.noselect": false,
+  "suggest.echodocSupport": true,
+  "codeLens.enable": true,
+  "signature.enable": true,
+  "suggest.preferCompleteThanJumpPlaceholder": true,
   "diagnostic.errorSign": " ",
   "diagnostic.warningSign": " ",
   "diagnostic.infoSign": "",
   "diagnostic.hintSign": " ",
   "diagnostic.virtualText": true,
-  // "diagnostic.displayByAle": true,
-  // list
   "list.indicator": ">",
   "list.selectedSignText": " ",
-  // autoformat
   "coc.preferences.formatOnSaveFiletypes": [
     "markdown",
     "yaml",
@@ -23,24 +25,16 @@
     "python"
   ],
   "coc.preferences.hoverTarget": "float",
-  // Python config
+  "python.formatting.blackPath": "~/.local/bin/black",
+  "python.formatting.provider": "yapf",
+  "python.jediEnabled": false,
   "python.linting.enabled": true,
   "python.linting.pylintEnabled": true,
-  "python.formatting.provider": "yapf",
-  "python.formatting.blackPath": "/home/vlad/.virtualenvs/py38/bin/yapf",
-  "python.linting.pylintPath": "/home/vlad/.virtualenvs/py38/bin/pylint",
-  "python.sortImports.path": "/home/vlad/.virtualenvs/py38/bin/isort",
-  "python.jediPath": "/home/vlad/.virtualenvs/py38/bin/jedi",
-  "python.venvFolders": [".virtualenvs"],
-  // Explorer
-  "explorer.width": 30,
+  "python.linting.pylintPath": "~/.local/bin/pylint",
+  "python.sortImports.path": "~/.local/bin/isort",
+  "python.venvFolders": [".pyenv", ".virtualenvs"],
+  "python.workspaceSymbols.exclusionPatterns": [],
   "explorer.icon.enableNerdfont": true,
-  "explorer.previewAction.onHover": false,
-  "explorer.icon.enableVimDevicons": false,
-  "explorer.keyMappings": {
-    "<cr>": ["expandable?", "expand", "open"],
-    "v": "open:vsplit"
-  },
   "languageserver": {
     "bash": {
       "command": "bash-language-server",

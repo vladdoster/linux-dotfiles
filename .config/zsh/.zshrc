@@ -1,4 +1,10 @@
-#-->Zoomer Shell<--#
+#!/usr/bin/env zsh
+ 
+# @Author: Vlad Doster <mvdoster@gmail.com>
+# @Date: 2020-06-23 03:25:02
+# @Last Modified by: Vlad Doster <mvdoster@gmail.com>
+# @Last Modified time: 2020-06-23 03:25:14
+
 #->prompt color/text
 autoload -U colors && colors
 PS1="%B%{$fg[red]%}[%{$fg[yellow]%}%n%{$fg[green]%}@%{$fg[blue]%}%M %{$fg[magenta]%}%~%{$fg[red]%}]%{$reset_color%}$%b "
@@ -19,10 +25,11 @@ zmodload zsh/complist
 compinit
 _comp_options+=(globdots) #->Include hidden files.
 #->virtualenvwrapper
-export PROJECT_HOME=$HOME/github
-export VIRTUALENVWRAPPER_PYTHON=/usr/bin/python3.8
-export WORKON_HOME=$HOME/.virtualenvs
-source /usr/bin/virtualenvwrapper.sh 
+export PYENV_ROOT="$HOME/.pyenv"
+export PATH="$PYENV_ROOT/bin:$PATH"
+if command -v pyenv 1>/dev/null 2>&1; then
+  eval "$(pyenv init -)"
+fi
 #->vi mode
 bindkey -v
 export KEYTIMEOUT=1
@@ -67,4 +74,4 @@ bindkey '^e' edit-command-line
 
 source <(cod init $$ zsh)
 source /usr/share/zsh/plugins/fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh 2>/dev/null
-
+source $PYENV_ROOT/completions/pyenv.zsh
