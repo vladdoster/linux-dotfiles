@@ -1,0 +1,23 @@
+#!/usr/bin/env bash
+
+battery=/sys/class/power_supply/BAT0
+cache=${XDG_CACHE_HOME:-$HOME/.cache}/${0##*/}
+notify-send "Started charging notify $cache"
+
+while true; do
+        [ -f "$cache" ] && read -r charging < "$cache" || charging="false"
+	status=$(cat "$battery"/status)
+        capacity=$(cat "$battery"/capacity)
+        if [[ $status == "Discharging" ]] && [[ $charging == "true" ]]; then
+                charging="false"
+                notify-send "Charger unplugged"
+        elif [[ $status == "Charging" ]] && [[ $charging == "false" ]]; then
+                charging="true"
+                notify-send "Charging ⚡ $capacity%"
+        elif [[ $status == "Full" ]] && [[ $charging == "true" ]]; then
+                charging="false"
+                notify-send "Fully charged" 
+        fi
+        echo $charging > "$cache"
+        sleep 10
+done
