@@ -1,3 +1,12 @@
+" @Author: Vlad Doster <mvdoster@gmail.com>
+" @Date: 2020-06-23 03:58:32
+" @Last Modified by: Vlad Doster <mvdoster@gmail.com>
+" @Last Modified time: 2020-06-23 04:02:10
+
+
+let g:python_host_prog = '/home/vlad/.pyenv/versions/py2nvim/bin/python'
+let g:python3_host_prog = '/home/vlad/.pyenv/versions/py3nvim/bin/python'
+
   let g:coc_global_extensions = [
     \ 'coc-snippets',
     \ 'coc-actions',
@@ -112,30 +121,6 @@ set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
 " nnoremap <silent> <space>k  :<C-u>CocPrev<CR>
 " " Resume latest coc list.
 " nnoremap <silent> <space>p  :<C-u>CocListResume<CR>
-
-" Explorer
-let g:coc_explorer_global_presets = {
-\   'floating': {
-\      'position': 'floating',
-\   },
-\   'floatingLeftside': {
-\      'position': 'floating',
-\      'floating-position': 'left-center',
-\      'floating-width': 30,
-\   },
-\   'floatingRightside': {
-\      'position': 'floating',
-\      'floating-position': 'right-center',
-\      'floating-width': 30,
-\   },
-\   'simplify': {
-\     'file.child.template': '[selection | clip | 1] [indent][icon | 1] [filename omitCenter 1]'
-\   }
-\ }
-"nmap <silent> <space>e :CocCommand explorer<CR>
-" nnoremap <silent> <leader>e :CocCommand explorer<CR>
-" nmap <space>f :CocCommand explorer --preset floatingRightside<CR>
-autocmd BufEnter * if (winnr("$") == 1 && &filetype == 'coc-explorer') | q | endif
 
 " Snippets
 " Use <C-l> for trigger snippet expand.

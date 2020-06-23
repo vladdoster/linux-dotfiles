@@ -23,7 +23,6 @@ alias \
   g="git" \
   ka="killall" \
   p="sudo pacman" \
-  python="python3.8" \
   rm="rm -r" \
   v="$EDITOR" \
   z="zathura"
