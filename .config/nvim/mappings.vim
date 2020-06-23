@@ -1,3 +1,8 @@
+" @Author: Vlad Doster <mvdoster@gmail.com>
+" @Date: 2020-06-23 08:19:18
+" @Last Modified by: Vlad Doster <mvdoster@gmail.com>
+" @Last Modified time: 2020-06-23 08:19:21
+
 " leader key
   let mapleader=" "
   nnoremap <Space> <Nop>
