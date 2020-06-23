@@ -25,16 +25,15 @@
     "python"
   ],
   "coc.preferences.hoverTarget": "float",
-  "python.pythonPath": "/home/vlad/.pyenv/versions/py2nvim/bin/python",
-  "python.formatting.blackPath": "~/.local/bin/black",
-  "python.formatting.provider": "yapf",
+  "python.pythonPath": "/home/vlad/.pyenv/versions/py2nvim/bin/python2",
   "python.jediEnabled": false,
+  "python.formatting.provider": "black",
+  "python.formatting.blackPath": "/usr/bin/black",
   "python.linting.enabled": true,
   "python.linting.pylintEnabled": true,
-  "python.linting.pylintPath": "~/.local/bin/pylint",
-  "python.sortImports.path": "~/.local/bin/isort",
+  "python.linting.pylintPath": "/home/vlad/.pyenv/versions/py2nvim/bin/pylint",
+  "python.sortImports.path": "/home/vlad/.pyenv/versions/py2nvim/bin/isort",
   "python.venvFolders": ["envs", ".pyenv", ".direnv"],
-  "python.workspaceSymbols.exclusionPatterns": [],
   "explorer.icon.enableNerdfont": true,
   "languageserver": {
     "bash": {
