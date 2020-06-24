@@ -14,7 +14,7 @@ precmd() { vcs_info }
 zstyle ':vcs_info:git:*' formats '%b'
  
 setopt PROMPT_SUBST
-PROMPT='${vcs_info_msg_0_} %B%{$fg[red]%}[%{$fg[yellow]%}%n%{$fg[green]%}@%{$fg[blue]%}%M %{$fg[magenta]%}%~%{$fg[red]%}]%{$reset_color%}$%b'
+PROMPT='%B%{$fg[red]%}[%{$fg[yellow]%}%n%{$fg[green]%}on%{$fg[blue]%}%${vcs_info_msg_0_}%{$fg[magenta]%}%~%{$fg[red]%}]%{$reset_color%}$%b'
 
 setopt autocd	
 stty stop undef	
