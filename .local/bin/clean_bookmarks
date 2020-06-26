@@ -1,0 +1,88 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+
+# @Author: Vlad Doster <mvdoster@gmail.com>
+# @Date: 2020-06-25 17:45:00
+# @Last Modified by: Vlad Doster <mvdoster@gmail.com>
+# @Last Modified time: 2020-06-25 23:11:54
+import collections
+import logging
+import os
+import sys
+from pathlib import Path
+
+from bs4 import BeautifulSoup
+
+logging.basicConfig(level=logging.INFO, format="[%(levelname)s] %(message)s")
+logger = logging.getLogger()
+
+
+def error_exit(msg):
+    print("\n")
+    sys.exit(logger.error("{0} Exiting...".format(msg)))
+
+
+def file_verification(file):
+    if file.suffix != ".html":
+        error_exit("Expected HTML file. Received {}".format(file.suffix))
+    elif file.is_dir():
+        error_exit("Expected a file. Received a directory path.")
+    elif not file.exists():
+        error_exit("File does not exist.")
+
+
+def confirm(prompt):
+    try:
+        ans = str.lower(input(prompt.format("[Y/N] ")))
+        if ans in ["y", "yes"]:
+            return True
+        elif ans in ["n", "no"]:
+            return False
+        else:
+            logger.warning("{} is not a valid option. Please try again.".format(ans))
+            confirm(prompt)
+    except KeyboardInterrupt:
+        error_exit("Received program exit command.")
+
+
+def remove_duplicate_bookmarks(file):
+    soup = BeautifulSoup(file.read_text(), "html.parser")
+    bookmarks = soup.find_all("a", href=True)
+    all_bm, duplicate_bm = (
+        bookmarks,
+        [item for item, count in collections.Counter(bookmarks).items() if count > 1],
+    )
+    num_bm, num_unique_bm = len(all_bm), len(duplicate_bm)
+    logger.info(
+        "Found {0} unique bookmarks out of {1} total bookmarks".format(
+            num_unique_bm, num_bm
+        )
+    )
+    if duplicate_bm:
+        if confirm("Display duplicates?{}"):
+            logger.info("Duplicate bookmarks:")
+            for i, bm in enumerate(duplicate_bm, 1):
+                print("{0}. {1}\n   Link: {2}\n".format(i, bm.string, bm["href"]))
+            if confirm("Remove all duplicates?{}"):
+                for bm in duplicate_bm:
+                    logger.info("Removing {}..".format(bm.string))
+                    elem = soup.find("a", {"href": bm["href"]})
+                    elem.find_parent("dt").decompose()
+                    logger.info(
+                        "New number of bookmarks: {}".format(
+                            len(soup.find_all("a", href=True))
+                        )
+                    )
+            with open("cleaned_bookmarks.html", "w") as fh:
+                fh.write(soup.prettify(formatter="html"))
+            logger.info("Successfully removed duplicate bookmarks")
+    else:
+        logger.info("Good news, no duplicate bookmarks found!")
+
+
+if __name__ == "__main__":
+    sys.argv = [Path(x) for x in sys.argv]
+    if len(sys.argv) != 2:
+        sys.exit(logger.info("Usage: {0} <bookmarks html>".format(sys.argv[0].name)))
+    file_verification(sys.argv[1])
+    remove_duplicate_bookmarks(sys.argv[1])
