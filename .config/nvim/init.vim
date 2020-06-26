@@ -1,3 +1,8 @@
+" Author: Vlad Doster <mvdoster@gmail.com>
+" Date: 2020-06-26 09:33:55
+" Last Modified by: Vlad Doster <mvdoster@gmail.com>
+" Last Modified time: 2020-06-26 09:33:57
+
 " Python locations
 let g:python_host_prog="/home/vlad/.pyenv/versions/2.7.5/bin/python"
 " Disable python3

@@ -1,7 +1,7 @@
-" @Author: Vlad Doster <mvdoster@gmail.com>
-" @Date: 2020-06-23 08:16:59
-" @Last Modified by: Vlad Doster <mvdoster@gmail.com>
-" @Last Modified time: 2020-06-23 08:17:00
+" Author: Vlad Doster <mvdoster@gmail.com>
+" Date: 2020-06-26 09:33:39
+" Last Modified by: Vlad Doster <mvdoster@gmail.com>
+" Last Modified time: 2020-06-26 09:33:44
 
 if empty(glob('~/.config/nvim/autoload/plug.vim'))
   silent !curl -fLo ~/.config/nvim/autoload/plug.vim --create-dirs
@@ -25,7 +25,7 @@ call plug#begin('~/.config/nvim/autoload/plugged')
   "=================
   "=  Vim related  =
   "=================
-  Plug 'ahonn/vim-fileheader'
+  Plug 'vladdoster/vim-fileheader'
   Plug 'airblade/vim-gitgutter'
   Plug 'airblade/vim-rooter'
   Plug 'alvan/vim-closetag'

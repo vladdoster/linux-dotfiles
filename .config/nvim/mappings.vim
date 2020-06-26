@@ -1,7 +1,7 @@
-" @Author: Vlad Doster <mvdoster@gmail.com>
-" @Date: 2020-06-23 08:19:18
-" @Last Modified by: Vlad Doster <mvdoster@gmail.com>
-" @Last Modified time: 2020-06-23 08:19:21
+" Author: Vlad Doster <mvdoster@gmail.com>
+" Date: 2020-06-26 09:34:08
+" Last Modified by: Vlad Doster <mvdoster@gmail.com>
+" Last Modified time: 2020-06-26 09:34:14
 
 " leader key
   let mapleader=" "

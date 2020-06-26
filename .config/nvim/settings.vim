@@ -1,7 +1,7 @@
 " @Author: Vlad Doster <mvdoster@gmail.com>
 " @Date: 2020-06-23 08:17:13
 " @Last Modified by: Vlad Doster <mvdoster@gmail.com>
-" @Last Modified time: 2020-06-23 11:54:43
+" @Last Modified time: 2020-06-26 09:02:28
 
 syntax enable                          
 " backup
@@ -47,6 +47,7 @@ set signcolumn=yes
 set timeoutlen=1000                   
 set updatetime=50                      
 
+autocmd BufRead,BufNewFile *.md,*.markdown set filetype=markdown
 autocmd BufRead,BufNewFile *.ms,*.me,*.mom,*.man set filetype=groff
 autocmd BufRead,BufNewFile *.tex set filetype=tex
 autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
