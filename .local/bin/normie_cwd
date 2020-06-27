@@ -1,0 +1,96 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+
+# Author: Vlad Doster <mvdoster@gmail.com>
+# Date: 2020-06-26 12:25:19
+# Last Modified by: Vlad Doster <mvdoster@gmail.com>
+# Last Modified time: 2020-06-26 14:16:15
+
+import argparse
+import glob
+import logging
+import os
+import sys
+
+logging.basicConfig(level=logging.INFO, format="[%(levelname)s] %(message)s")
+logger = logging.getLogger()
+
+
+def error_exit(msg):
+    sys.exit(logger.error("{0} Exiting...".format(msg)))
+
+
+if sys.version_info[0] < 3:
+    error_exit("{0} requires => python3 to run.".format(sys.argv[0]))
+from pathlib import Path
+
+try:
+    from cleantext import clean
+except ImportError as e:
+    error_exit(
+        "Need {0!r} to run {1}.\n$ python3 -m pip install clean-text[gpl]".format(
+            "clean-text", sys.argv[0].name
+        )
+    )
+
+
+clean_opts = {
+    "fix_unicode": True,
+    "to_ascii": True,
+    "lower": True,
+    "no_line_breaks": True,
+    "no_urls": True,
+    "no_emails": True,
+    "no_phone_numbers": True,
+    "no_numbers": False,
+    "no_currency_symbols": True,
+    "no_punct": False,
+    "lang": "en",
+}
+
+
+def clean_cwd(ls_glob):
+
+    num_in_cwd = len(glob.glob(ls_glob))
+    logger.info("Normalizing {0} items...".format(num_in_cwd))
+    no_norm, normalized = 0, 0
+    for child in glob.glob(ls_glob):
+        child = Path(child)
+        logger.info(child.name)
+        new, old = (
+            child.rename(clean(child.name.replace("-", "_"), **clean_opts)),
+            child,
+        )
+        if new != old:
+            logger.info("Renamed {0} to {1}".format(old, new))
+            normalized += 1
+        else:
+            no_norm += 1
+    logger.info(
+        "Normalized {0}/{1} items in current working directory!".format(
+            normalized, num_in_cwd
+        )
+    )
+
+
+def cli():
+    parser = argparse.ArgumentParser(
+        prog="normalize_dir",
+        description="Use to make everything in current working directory have same styling. Helps reduce mental strain.",
+        add_help=True,
+    )
+    parser.add_argument(
+        "-a",
+        "--all",
+        action="store_const",
+        const=".**",
+        default="*",
+        help="Include hidden dot files/directories when normalizing",
+    )
+    return parser
+
+
+if __name__ == "__main__":
+    parser = cli()
+    args = parser.parse_args()
+    clean_cwd(args.all)
