@@ -1,13 +1,14 @@
 " Author: Vlad Doster <mvdoster@gmail.com>
 " Date: 2020-06-26 09:34:08
 " Last Modified by: Vlad Doster <mvdoster@gmail.com>
-" Last Modified time: 2020-06-26 09:34:14
+" Last Modified time: 2020-07-01 18:13:22
 
 " leader key
   let mapleader=" "
   nnoremap <Space> <Nop>
   nnoremap c "_c
-" compile document (groff/LaTeX/markdown/etc)
+" Align GitHub-flavored Markdown tables
+  au FileType markdown vmap <Leader><Bslash> :EasyAlign*<Bar><Enter>" compile document (groff/LaTeX/markdown/etc)
   map <leader>c :w! \| !compiler <c-r>%<CR>
 " spell-check 'o' is for 'orthography'
   map <leader>o :setlocal spell! spelllang=en_us<CR>

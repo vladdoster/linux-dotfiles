@@ -1,6 +1,7 @@
 cac    ${XDG_CACHE_HOME:-$HOME/.cache}
 cf     ${XDG_CONFIG_HOME:-$HOME/.config}
 cfn    ${XDG_CONFIG_HOME:-$HOME/.config}/nvim
+cfnp   ${XDG_CONFIG_HOME:-$HOME/.config}/nvim/plug-configs
 d      ${XDG_DOWNLOAD_DIR:-$HOME/downloads}
 gh     ${HOME}/github
 h      ${HOME}

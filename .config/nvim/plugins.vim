@@ -1,7 +1,7 @@
 " Author: Vlad Doster <mvdoster@gmail.com>
 " Date: 2020-06-26 09:33:39
 " Last Modified by: Vlad Doster <mvdoster@gmail.com>
-" Last Modified time: 2020-06-26 09:33:44
+" Last Modified time: 2020-07-01 18:10:43
 
 if empty(glob('~/.config/nvim/autoload/plug.vim'))
   silent !curl -fLo ~/.config/nvim/autoload/plug.vim --create-dirs
@@ -31,6 +31,7 @@ call plug#begin('~/.config/nvim/autoload/plugged')
   Plug 'alvan/vim-closetag'
   Plug 'glts/vim-radical'
   Plug 'jiangmiao/auto-pairs'
+  Plug 'junegunn/vim-easy-align'
   Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
   Plug 'junegunn/fzf.vim'
   Plug 'lilydjwg/colorizer'
