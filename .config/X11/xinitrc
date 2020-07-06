@@ -1,5 +1,5 @@
 #!/bin/sh
 
-. "$HOME/.xprofile"
+. "${XDG_CONFIG_HOME:-$HOME/.config}/X11/xprofile"
 
 exec dwm

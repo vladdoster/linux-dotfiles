@@ -33,7 +33,7 @@
   "python.linting.pylintEnabled": true,
   //"python.linting.pylintPath": "/home/vlad/.pyenv/versions/py2nvim/bin/pylint",
   "python.linting.pylintPath": "/home/vlad/.pyenv/versions/py3nvim/bin/pylint",
-  "python.sortImports.path": "/home/vlad/.pyenv/versions/py2nvim/bin/isort",
+  "python.sortImports.path": "/home/vlad/.pyenv/versions/py3nvim/bin/isort",
   "python.venvFolders": ["envs", ".pyenv", ".direnv"],
   "explorer.icon.enableNerdfont": true,
   "languageserver": {
