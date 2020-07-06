@@ -10,6 +10,7 @@ alias \
   mkd="mkdir -pv" \
   mv="mv -iv" \
   rm="rm -vI" \
+  rmr="rm -r" \
 # Colorize commands when possible.
 alias \
   ccat="highlight --out-format=ansi"

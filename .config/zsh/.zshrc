@@ -3,7 +3,7 @@
 # @Author: Vlad Doster <mvdoster@gmail.com>
 # @Date: 2020-06-23 03:25:02
 # @Last Modified by: Vlad Doster <mvdoster@gmail.com>
-# @Last Modified time: 2020-07-01 17:02:50
+# @Last Modified time: 2020-07-06 12:15:32
 
 #-> prompt color/text
 autoload -U colors && colors

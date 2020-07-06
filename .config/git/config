@@ -16,16 +16,17 @@
 [alias]
   a  = add
   au = add -u
+  br = branch
+  cm = commit -m
+  co = checkout
+  diff = diff --ignore-space-change
+  dst = diff --staged
+  ff = merge origin
+  ignore = update-index --assume-unchanged
   p  = push
   pu = pull
   st = status -uno
   stu = status
-  co = checkout
-  cm = commit -m
-  br = branch
-  ff = merge origin
-  diff = diff --ignore-space-change
-  dst = diff --staged
 [apply]
   whitespace = strip
   whitespace = nowarn
@@ -34,4 +35,4 @@
 [credential]
   helper = cache --timeout=28800
 [pull]
-	rebase = false
+  rebase = false
