@@ -3,7 +3,7 @@
 # Author: Vlad Doster <mvdoster@gmail.com>
 # Date: 2020-07-06 14:20:50
 # Last Modified by: Vlad Doster <mvdoster@gmail.com>
-# Last Modified time: 2020-07-06 19:49:43
+# Last Modified time: 2020-07-06 20:38:24
 
 # --- Default programs --- #
 export EDITOR="nvim"
