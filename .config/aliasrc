@@ -6,17 +6,17 @@ command -v nvim > /dev/null && alias vim="nvim" vimdiff="nvim -d"
 alias \
   ..="cd .. && ls" \
   cp="cp -iv" \
-  isx="chmod +x"
+  isx="chmod +x" \
   mkd="mkdir -pv" \
   mv="mv -iv" \
   rm="rm -vI" \
-  rmr="rm -r" \
+  rmr="rm -r"
 # Colorize commands when possible.
 alias \
-  ccat="highlight --out-format=ansi"
+  ccat="highlight --out-format=ansi" \
   diff="diff --color=auto" \
   grep="grep -n --color=auto" \
-  ls="ls --literal -l --human-readable --color=auto --group-directories-first" \
+  ls="ls --literal -l --human-readable --color=auto --group-directories-first"
 # These commands are too long! Abbreviate them.
 alias \
   e="$EDITOR" \
@@ -24,7 +24,6 @@ alias \
   g="git" \
   ka="killall" \
   p="sudo pacman" \
-  rm="rm -r" \
   v="$EDITOR" \
   z="zathura"
 alias \
