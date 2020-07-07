@@ -4,4 +4,4 @@ cfa     ${XDG_CONFIG_HOME:-$HOME/.config}/aliasrc
 cfd     ${XDG_USER_LOCAL:-$HOME/.local}/src/dwm.git/config.h
 cft     ${XDG_CONFIG_HOME:-$HOME/.config}/tmux/.tmux.conf
 cfv     ${XDG_CONFIG_HOME:-$HOME/.config}/nvim/init.vim
-cfz     $ZDOTDIR/.zshrc
+cfz     ${ZDOTDIR}/.zshrc
