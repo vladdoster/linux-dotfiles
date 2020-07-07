@@ -3,7 +3,7 @@
 # Author: Vlad Doster <mvdoster@gmail.com>
 # Date: 2020-07-06 14:20:50
 # Last Modified by: Vlad Doster <mvdoster@gmail.com>
-# Last Modified time: 2020-07-06 19:45:56
+# Last Modified time: 2020-07-06 19:49:43
 
 # --- Default programs --- #
 export EDITOR="nvim"
@@ -34,6 +34,7 @@ export PYTHON_EGG_CACHE="${XDG_CACHE_HOME}/python-eggs"
 export AWS_CONFIG_FILE="${XDG_CONFIG_HOME}/aws/config"
 export AWS_SHARED_CREDENTIALS_FILE="${XDG_CONFIG_HOME}/aws/credentials"
 export DOCKER_CONFIG="${XDG_CONFIG_HOME}/docker"
+export GTK_RC_FILES="${XDG_CONFIG_HOME}/gtk-1.0/gtkrc"
 export GTK2_RC_FILES="${XDG_CONFIG_HOME}/gtk-2.0/gtkrc"
 export INPUTRC="${XDG_CONFIG_HOME}/inputrc"
 export IPYTHONDIR="${XDG_CONFIG_HOME}/jupyter"
@@ -73,7 +74,7 @@ export _JAVA_AWT_WM_NONREPARENTING=1	# Java doesn't understand tiling windows
 [ ! -f "${XDG_CONFIG_HOME}/shortcutrc" ] && generate_shortcuts >/dev/null 2>&1 &
 
 # --- Start graphical server on tty1 if not already running --- #
-[ "$(tty)" = "/dev/tty1" ] && ! ps -e | grep -qw Xorg && exec startx "${XINITRC:-$HOME/.config/X11/xinitrc}"
+[ "$(tty)" = "/dev/tty1" ] && ! ps -e | grep -qw Xorg && exec startx "${XINITRC}"
 
 # --- Switch escape and caps if tty and no password required --- #
 sudo -n loadkeys "${XDG_DATA_HOME}/dotfiles/ttymaps.kmap" 2>/dev/null
