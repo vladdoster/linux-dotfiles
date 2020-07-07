@@ -3,7 +3,7 @@
 # Author: Vlad Doster <mvdoster@gmail.com>
 # Date: 2020-07-06 14:20:50
 # Last Modified by: Vlad Doster <mvdoster@gmail.com>
-# Last Modified time: 2020-07-06 14:43:05
+# Last Modified time: 2020-07-06 19:45:56
 
 # --- Default programs --- #
 export EDITOR="nvim"
@@ -19,11 +19,11 @@ export XDG_DATA_HOME="${XDG_USER_LOCAL:-$HOME/.local}/share"
 export XDG_USER_BINARIES="${XDG_USER_LOCAL:-$HOME/.local}/bin"
 
 # -- Add `~/.local/bin` to $PATH -- #
-export PATH="$PATH:$(du "${XDG_USER_BINARIES:-$HOME/.local/bin}" | cut -f2 | paste -sd ':')"
+export PATH="$PATH:$(du "${XDG_USER_BINARIES}" | cut -f2 | paste -sd ':')"
 
 # --- X11 --- #
 export XAUTHORITY="${XDG_RUNTIME_DIR}/Xauthority"
-export XINITRC="${XDG_CONFIG_HOME:-$HOME/.config}/X11/xinitrc"
+export XINITRC="${XDG_CONFIG_HOME}/X11/xinitrc"
 
 # ---  $HOME Clean-up --- #
 # Cache
@@ -31,23 +31,25 @@ export CUDA_CACHE_PATH="${XDG_CACHE_HOME}/nv"
 export PYLINTHOME="${XDG_CACHE_HOME}/pylint"
 export PYTHON_EGG_CACHE="${XDG_CACHE_HOME}/python-eggs"
 # Configs
-export DOCKER_CONFIG="${XDG_CONFIG_HOME:-$HOME/.config}/docker"
-export GTK2_RC_FILES="${XDG_CONFIG_HOME:-$HOME/.config}/gtk-2.0/gtkrc-2.0"
-export INPUTRC="${XDG_CONFIG_HOME:-$HOME/.config}/inputrc"
-export IPYTHONDIR="${XDG_CONFIG_HOME:-$HOME/.config}/jupyter"
-export JUPYTER_CONFIG_DIR="${XDG_CONFIG_HOME:-$HOME/.config}/jupyter"
-export NOTMUCH_CONFIG="${XDG_CONFIG_HOME:-$HOME/.config}/notmuch-config"
-export NPM_CONFIG_USERCONFIG="${XDG_CONFIG_HOME:-$HOME/.config}/npm/npmrc"
-export PYTHONSTARTUP="${XDG_CONFIG_HOME:-$HOME/.config}/python/startup"
-export WGETRC="${XDG_CONFIG_HOME:-$HOME/.config}/wget/wgetrc"
-export ZDOTDIR="${XDG_CONFIG_HOME:-$HOME/.config}/zsh"
+export AWS_CONFIG_FILE="${XDG_CONFIG_HOME}/aws/config"
+export AWS_SHARED_CREDENTIALS_FILE="${XDG_CONFIG_HOME}/aws/credentials"
+export DOCKER_CONFIG="${XDG_CONFIG_HOME}/docker"
+export GTK2_RC_FILES="${XDG_CONFIG_HOME}/gtk-2.0/gtkrc"
+export INPUTRC="${XDG_CONFIG_HOME}/inputrc"
+export IPYTHONDIR="${XDG_CONFIG_HOME}/jupyter"
+export JUPYTER_CONFIG_DIR="${XDG_CONFIG_HOME}/jupyter"
+export NOTMUCH_CONFIG="${XDG_CONFIG_HOME}/notmuch-config"
+export NPM_CONFIG_USERCONFIG="${XDG_CONFIG_HOME}/npm/npmrc"
+export PYTHONSTARTUP="${XDG_CONFIG_HOME}/python/startup"
+export WGETRC="${XDG_CONFIG_HOME}/wget/wgetrc"
+export ZDOTDIR="${XDG_CONFIG_HOME}/zsh"
 # Data
-export CARGO_HOME="${XDG_DATA_HOME:-$HOME/.local/share}/cargo"
-export GNUPGHOME="${XDG_DATA_HOME:-$HOME/.local/share}/gnupg"
-export GOPATH="${XDG_DATA_HOME:-$HOME/.local/share}/go"
-export MACHINE_STORAGE_PATH="${XDG_DATA_HOME:-$HOME/.local/share}/docker-machine"
-export NVM_DIR="${XDG_DATA_HOME:-$HOME/.local/share}/nvm"
-export PASSWORD_STORE_DIR="${XDG_DATA_HOME:-$HOME/.local/share}/password-store"
+export CARGO_HOME="${XDG_DATA_HOME}/cargo"
+export GNUPGHOME="${XDG_DATA_HOME}/gnupg"
+export GOPATH="${XDG_DATA_HOME}/go"
+export MACHINE_STORAGE_PATH="${XDG_DATA_HOME}/docker-machine"
+export NVM_DIR="${XDG_DATA_HOME}/nvm"
+export PASSWORD_STORE_DIR="${XDG_DATA_HOME}/password-store"
 # Runtime
 export TMUX_TMPDIR="${XDG_RUNTIME_DIR}"
 
@@ -64,14 +66,14 @@ export LESS_TERMCAP_se="$(printf '%b' '[0m')"
 export LESS_TERMCAP_us="$(printf '%b' '[1;32m')"
 export LESS_TERMCAP_ue="$(printf '%b' '[0m')"
 export QT_QPA_PLATFORMTHEME="gtk2"	  # QT should use gtk2 theme
-export SUDO_ASKPASS="${XDG_USER_LOCAL:-$HOME/.local}/bin/dmenu_pass"
+export SUDO_ASKPASS="${XDG_USER_LOCAL}/bin/dmenu_pass"
 export _JAVA_AWT_WM_NONREPARENTING=1	# Java doesn't understand tiling windows
 
 # --- Generate shortcuts --- #
-[ ! -f "${XDG_CONFIG_HOME:-$HOME/.config}/shortcutrc" ] && generate_shortcuts >/dev/null 2>&1 &
+[ ! -f "${XDG_CONFIG_HOME}/shortcutrc" ] && generate_shortcuts >/dev/null 2>&1 &
 
 # --- Start graphical server on tty1 if not already running --- #
 [ "$(tty)" = "/dev/tty1" ] && ! ps -e | grep -qw Xorg && exec startx "${XINITRC:-$HOME/.config/X11/xinitrc}"
 
 # --- Switch escape and caps if tty and no password required --- #
-sudo -n loadkeys "${XDG_DATA_HOME:-$HOME/.local/share}/dotfiles/ttymaps.kmap" 2>/dev/null
+sudo -n loadkeys "${XDG_DATA_HOME}/dotfiles/ttymaps.kmap" 2>/dev/null
