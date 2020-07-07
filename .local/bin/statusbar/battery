@@ -1,30 +1,53 @@
-#!/bin/sh
+#!/bin/python3
+# -*- coding: utf-8 -*-
 
-# Prints all batteries, their percentage remaining and an emoji corresponding
-# to charge status (🔌 for plugged up, 🔋 for discharging on battery, etc.).
+# Author: Vlad Doster <mvdoster@gmail.com>
+# Date: 2020-07-06 23:10:31
+# Last Modified by: Vlad Doster <mvdoster@gmail.com>
+# Last Modified time: 2020-07-07 00:04:37
 
-case $BLOCK_BUTTON in
-  3) notify-send "🔋 Battery module" "🔋: discharging
-🛑: not charging
-♻: stagnant charge
-🔌: charging
-⚡: charged
-❗: battery very low!" ;;
-  6) "$TERMINAL" -e "$EDITOR" "$0" ;;
-esac
+# Updates 'battery' block and alerts user to low battery
 
-# acpi alternative
-# acpi | sed "s/Battery [0-9]: //;s/[Dd]ischarging, /🔋/;s/[Nn]ot charging, /🛑/;s/[Cc]harging, /🔌/;s/[Uu]nknown, /♻️/;s/[Ff]ull, /⚡/;s/ \(remaining\|until charged\)//"; exit
+import os
+import subprocess
+import sys
 
-# Loop through all attached batteries.
-for battery in /sys/class/power_supply/BAT?; do
-  # Get its remaining capacity and charge status.
-  capacity=$(cat "$battery"/capacity) || break
-  status=$(sed "s/[Dd]ischarging/🔋/;s/[Nn]ot charging/🛑/;s/[Cc]harging/🔌/;s/[Uu]nknown/♻️/;s/[Ff]ull/⚡/" "$battery"/status)
+import psutil
 
-  # If it is discharging and 25% or less, we will add a ❗ as a warning.
-  [ "$capacity" -le 25 ] && [ "$status" = "🔋" ] && warn="❗"
+block_btn = int(os.environ.get("BLOCK_BUTTON", 0))
+if block_btn == 3:
+    # send notification about battery module
+    pass
+elif block_btn == 6:
+    # open editor to battery module
+    pass
 
-  printf " %s%s %s%%\n" "$status" "$warn" "$capacity"
-  unset warn
-done | sed 's/ *$//'
+
+battery = psutil.sensors_battery()  # (percent, secs_left, power_plugged)
+batt_options = {"low_batt": "❗", "discharging": "🔋", "charging": "🔌", "charged": "⚡"}
+batt_percentage = int(battery[0])
+
+if not battery[2]:
+    batt_emoji = "🔋"
+    if 5 < battery[0] <= 25:
+        batt_emoji += batt_options.get("low_batt")
+    elif battery[0] <= 5:
+        # play low battery sound
+        if int(os.environ.get("LOW_BATTERY_WARNINGS", 0)) <= 3:
+            os.environ["LOW_BATTERY_WARNINGS"] = str(
+                int(os.environ.get("LOW_BATTERY_WARNINGS", 0) + 1)
+            )
+            subprocess.run(
+                [
+                    "paplay",
+                    "${XDG_CONFIG_DIR:-$HOME/.config/assets/sounds/suspend-error.oga}",
+                ]
+            )
+        batt_emoji += batt_options.get("low_batt")
+else:
+    if battery[0] >= 95:
+        batt_emoji = batt_options.get("charged")
+    else:
+        batt_emoji = batt_options.get("charging")
+
+print("{emoji} {percentage}%".format(emoji=batt_emoji, percentage=batt_percentage))
