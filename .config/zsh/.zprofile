@@ -74,10 +74,10 @@ export _JAVA_AWT_WM_NONREPARENTING=1	# Java doesn't understand tiling windows
 [ ! -f "${XDG_CONFIG_HOME}/shortcutrc" ] && generate_shortcuts >/dev/null 2>&1 &
 
 # --- Make shortcuts available in `get_bindings` program --- #
-ln -s "${XDG_CONFIG_HOME:-$HOME/.config}/{directories, files}" "${XDG_DATA_HOME:-$HOME/.local/share/dotfiles/get_bindings}/{directories,files}"
+ln -s "${XDG_CONFIG_HOME:-$HOME/.config}/{directories, files}" "${XDG_DATA_HOME:-$HOME/.local/share/dotfiles/program_bindings_help}/{directories,files}"
 
 # --- Start graphical server on tty1 if not already running --- #
 [ "$(tty)" = "/dev/tty1" ] && ! ps -e | grep -qw Xorg && exec startx "${XINITRC}"
 
-# --- Switch escape and caps if tty and no password required --- #
-sudo -n loadkeys "${XDG_DATA_HOME}/dotfiles/ttymaps.kmap" 2>/dev/null
+# --- Remap keys in ttys --- #
+sudo -n loadkeys "${XDG_DATA_HOME}/dotfiles/tty_remaps.kmap" 2>/dev/null
