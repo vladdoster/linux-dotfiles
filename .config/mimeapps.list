@@ -1,20 +1,17 @@
 [Default Applications]
+
+# Zathura
 application/pdf=pdf.desktop;
 application/postscript=pdf.desktop;
-application/rss+xml=rss.desktop
-application/x-bittorrent=torrent.desktop;
+
+# Sxiv
 image/gif=img.desktop;
 image/jpeg=img.desktop;
 image/png=img.desktop;
+
+# Ranger
 inode/directory=file.desktop
+
+# Neovim
 text/plain=text.desktop;
 text/x-shellscript=text.desktop;
-video/x-matroska=video.desktop
-x-scheme-handler/lbry=lbry.desktop
-x-scheme-handler/magnet=torrent.desktop;
-x-scheme-handler/mailto=mail.desktop;
-
-[Added Associations]
-application/octet-stream=nvim.desktop;
-application/x-shellscript=nvim.desktop;
-text/plain=nvim.desktop;
