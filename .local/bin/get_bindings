@@ -1,0 +1,5 @@
+#!/bin/sh
+
+cat ${XDG_DATA_HOME:-$HOME/.local/share}/dotfiles/program_bindings_help/"$1" 2>/dev/null && exit
+echo "Run command with one of the following arguments for its bindings:"
+ls ${XDG_DATA_HOME:-$HOME/.local/share}/dotfiles/program_bindings_help
