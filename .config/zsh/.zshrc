@@ -3,7 +3,7 @@
 # @Author: Vlad Doster <mvdoster@gmail.com>
 # @Date: 2020-06-23 03:25:02
 # @Last Modified by: Vlad Doster <mvdoster@gmail.com>
-# @Last Modified time: 2020-07-10 11:11:24
+# @Last Modified time: 2020-07-10 12:33:12
 
 # -- Aliases & Shortcuts -- #
 [ -f "${XDG_CONFIG_HOME:-$HOME/.config}/user-dirs.dirs" ] && source "${XDG_CONFIG_HOME:-$HOME/.config}/user-dirs.dirs"
@@ -28,7 +28,6 @@ PROMPT='%B%{$fg[red]%}[%{$fg[yellow]%}%n%{$fg[green]%}@%{$fg[cyan]%}%~%{$fg[blue
 # -- ZSH related -- #
 export LANG=en_US.UTF-8                 # set language locale
 setopt AUTOCD	                          # if directory, change to it automatically
-setopt CORRECT                          # suggest command if one entered isnt valid
 stty start undef                        # unbind un-freeze keymap
 stty stop undef                         # unbind freeze keymap
 
@@ -91,5 +90,5 @@ if command -v pyenv 1>/dev/null 2>&1; then
   eval "$(pyenv init -)"
 fi
 
-source $ZDOTDIR/pyenv.zsh
+source "${ZDOTDIR:-$HOME/.config/zsh}/pyenv.zsh"
 

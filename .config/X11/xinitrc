@@ -2,4 +2,4 @@
 
 . "${XDG_CONFIG_HOME:-$HOME/.config}/X11/xprofile"
 
-ssh-agent dwm
+exec dwm
