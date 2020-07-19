@@ -3,12 +3,12 @@
 
 ### Utilizes following repositories:
 
-|       use      |                 link                     |
-| -------------- | ---------------------------------------- |
-| window manager | https://github.com/vladdoster/dwm        |
-|   status bar   | https://github.com/vladdoster/dwm-blocks |
-|  dynamic menu  | https://github.com/vladdoster/dmenu      |
-|    terminal    | https://github.com/vladdoster/st         |
+|       use      |                 link                                              |
+| -------------- | ----------------------------------------------------------------- |
+| window manager | [vladdoster/dwm](https://github.com/vladdoster/dwm)               |
+|   status bar   | [vladdoster/dwm-blocks](https://github.com/vladdoster/dwm-blocks) |
+|  dynamic menu  | [vladdoster/dmenu](https://github.com/vladdoster/dmenu)           |
+|    terminal    | [vladdoster/st](https://github.com/vladdoster/st)                 |
 
 ---
 
