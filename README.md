@@ -1,5 +1,6 @@
 # dotfiles
-### personal dotfiles for Unix systems
+
+#### Unix system dotfiles
 
 ---
 
