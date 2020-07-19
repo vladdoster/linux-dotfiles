@@ -3,7 +3,7 @@
 
 ### Utilizes following repositories:
 
-|                |                 link                                              |
+|                |                                                                   |
 | -------------- | ----------------------------------------------------------------- |
 | window manager | [vladdoster/dwm](https://github.com/vladdoster/dwm)               |
 |   status bar   | [vladdoster/dwm-blocks](https://github.com/vladdoster/dwm-blocks) |
