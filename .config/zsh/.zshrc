@@ -5,7 +5,7 @@
 # @Last Modified by: Vlad Doster <mvdoster@gmail.com>
 # @Last Modified time: 2020-07-10 12:33:12
 
-# -- Aliases & Shortcuts -- #
+# -- aliases & shortcuts -- #
 [ -f "${XDG_CONFIG_HOME:-$HOME/.config}/user-dirs.dirs" ] && source "${XDG_CONFIG_HOME:-$HOME/.config}/user-dirs.dirs"
 [ -f "${XDG_CONFIG_HOME:-$HOME/.config}/shortcutrc" ] && source "${XDG_CONFIG_HOME:-$HOME/.config}/shortcutrc"
 [ -f "${XDG_CONFIG_HOME:-$HOME/.config}/aliasrc" ] && source "${XDG_CONFIG_HOME:-$HOME/.config}/aliasrc"
@@ -17,7 +17,7 @@ HISTSIZE=30000            # max num lines
 SAVEHIST=30000            # num save 30,000 commands
 HISTFILE="${ZDOTDIR:-$HOME/.config/zsh}/.history" # history file location
 
-# -- Prompt -- #
+# -- zsh prompt -- #
 autoload -U colors && colors  # enable colors
 setopt PROMPT_SUBST    # enable custom prompt
 autoload -Uz vcs_info  # load vcs_info function
@@ -25,13 +25,13 @@ precmd() { vcs_info }  # call vcs info
 zstyle ':vcs_info:git:*' formats '(%b)'  # only want current branch
 PROMPT='%B%{$fg[red]%}[%{$fg[yellow]%}%n%{$fg[green]%}@%{$fg[cyan]%}%~%{$fg[blue]%}${vcs_info_msg_0_}%{$fg[red]%}]%{$reset_color%}$ %b'
 
-# -- ZSH related -- #
+# -- zshell related -- #
 export LANG=en_US.UTF-8                 # set language locale
 setopt AUTOCD	                          # if directory, change to it automatically
 stty start undef                        # unbind un-freeze keymap
 stty stop undef                         # unbind freeze keymap
 
-# -- Completion system -- #
+# -- completion system -- #
 autoload -U compinit                    # auto-load completion system
 zstyle ':completion:*' menu select      # style of results
 zmodload zsh/complist                   # how to list possible completions
@@ -45,7 +45,7 @@ bindkey -M menuselect 'l' vi-forward-char
 bindkey -M menuselect 'j' vi-down-line-or-history
 bindkey -v '^?' backward-delete-char
 
-# -- Vim mode -- #
+# -- vim mode -- #
 bindkey -v
 export KEYTIMEOUT=1
 
@@ -69,7 +69,7 @@ zle-line-init() {                  # enter `vi insert` via keymap -- #
 }
 zle -N zle-line-init
 
-# --- Misc. bindings --- #
+# --- misc. bindings --- #
 bindkey -s '^a' 'bc -l\n'                    # open calculator
 bindkey -s '^f' 'cd "$(dirname "$(fzf)")"\n' # fuzzy search a directory
 bindkey '^[[P' delete-char
@@ -81,15 +81,3 @@ bindkey '^e' edit-command-line
 
 # - syntax highlighting - #
 source /usr/share/zsh/plugins/fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh 2>/dev/null
-
-# -- Pyenv -- #
-export PYENV_ROOT="$HOME/.pyenv"
-export PATH="$PYENV_ROOT/bin:$PATH"
-
-if command -v pyenv 1>/dev/null 2>&1; then
-  eval "$(pyenv init -)"
-  eval "$(pyenv virtualenv-init -)"
-fi
-
-source "${ZDOTDIR:-$HOME/.config/zsh}/pyenv.zsh"
-
