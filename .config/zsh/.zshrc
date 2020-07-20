@@ -3,7 +3,7 @@
 # @Author: Vlad Doster <mvdoster@gmail.com>
 # @Date: 2020-06-23 03:25:02
 # @Last Modified by: Vlad Doster <mvdoster@gmail.com>
-# @Last Modified time: 2020-07-10 12:33:12
+# @Last Modified time: 2020-07-20 18:33:28
 
 # -- aliases & shortcuts -- #
 [ -f "${XDG_CONFIG_HOME:-$HOME/.config}/user-dirs.dirs" ] && source "${XDG_CONFIG_HOME:-$HOME/.config}/user-dirs.dirs"
@@ -86,6 +86,7 @@ bindkey '^e' edit-command-line
 # -- pyenv -- #
 export PYENV_ROOT="$HOME/.pyenv"
 export PATH="$PYENV_ROOT/bin:$PATH"
+export PYENV_VIRTUALENV_DISABLE_PROMPT=1 # venv prompt
 
 if command -v pyenv 1>/dev/null 2>&1; then
   eval "$(pyenv init -)"
