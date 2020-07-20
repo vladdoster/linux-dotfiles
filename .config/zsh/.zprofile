@@ -73,16 +73,6 @@ export _JAVA_AWT_WM_NONREPARENTING=1	# Java doesn't understand tiling windows
 # --- generate shortcuts --- #
 [ ! -f "${XDG_CONFIG_HOME}/shortcutrc" ] && generate_shortcuts >/dev/null 2>&1 &
 
-# -- pyenv -- #
-export PYENV_ROOT="$HOME/.pyenv"
-export PATH="$PYENV_ROOT/bin:$PATH"
-
-if command -v pyenv 1>/dev/null 2>&1; then
-  eval "$(pyenv init -)"
-  eval "$(pyenv virtualenv-init -)"
-fi
-source "${ZDOTDIR:-$HOME/.config/zsh}/pyenv.zsh"
-
 # --- make shortcuts available in `get_bindings` program --- #
 ln -s "${XDG_CONFIG_HOME:-$HOME/.config}/{directories, files}" "${XDG_DATA_HOME:-$HOME/.local/share/dotfiles/program_bindings_help}/{directories,files}"
 
