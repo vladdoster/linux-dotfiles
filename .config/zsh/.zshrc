@@ -10,7 +10,7 @@
 [ -f "${XDG_CONFIG_HOME:-$HOME/.config}/shortcutrc" ] && source "${XDG_CONFIG_HOME:-$HOME/.config}/shortcutrc"
 [ -f "${XDG_CONFIG_HOME:-$HOME/.config}/aliasrc" ] && source "${XDG_CONFIG_HOME:-$HOME/.config}/aliasrc"
 
-# -- History -- #
+# -- zsh history -- #
 setopt HIST_IGNORE_DUPS   # don't add cmd to history if it's the same as the previous cmd
 setopt INC_APPEND_HISTORY # each line is added to the history in this way as it is executed
 HISTSIZE=30000            # max num lines
@@ -31,14 +31,22 @@ setopt AUTOCD	                          # if directory, change to it automatical
 stty start undef                        # unbind un-freeze keymap
 stty stop undef                         # unbind freeze keymap
 
-# -- completion system -- #
+# --- zsh key bindings --- #
+bindkey -s '^a' 'bc -l\n'                    # open calculator
+bindkey -s '^f' 'cd "$(dirname "$(fzf)")"\n' # fuzzy search a directory
+bindkey '^[[P' delete-char
+
+# - zsh syntax highlighting - #
+source /usr/share/zsh/plugins/fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh 2>/dev/null
+
+# -- zsh commands completion -- #
 autoload -U compinit                    # auto-load completion system
 zstyle ':completion:*' menu select      # style of results
 zmodload zsh/complist                   # how to list possible completions
 compinit                                # initialize completion for the current session
 _comp_options+=(globdots)               # include hidden files
 
-# - vim navigation keys for completion menu - #
+# --- zsh completion vim bindings --- #
 bindkey -M menuselect 'h' vi-backward-char
 bindkey -M menuselect 'k' vi-up-line-or-history
 bindkey -M menuselect 'l' vi-forward-char
@@ -49,7 +57,7 @@ bindkey -v '^?' backward-delete-char
 bindkey -v
 export KEYTIMEOUT=1
 
-function zle-keymap-select {        # cursor shape for vi modes
+function zle-keymap-select {       # cursor shape for vi modes
   if [[ ${KEYMAP} == vicmd ]] ||
      [[ $1 = 'block' ]]; then
     echo -ne '\e[1 q'
@@ -60,24 +68,27 @@ function zle-keymap-select {        # cursor shape for vi modes
     echo -ne '\e[5 q'
   fi
 }
+
 echo -ne '\e[5 q'                  # beam cursor on startup
 preexec() { echo -ne '\e[5 q' ;}   # beam cursor for each new prompt
 zle -N zle-keymap-select
-zle-line-init() {                  # enter `vi insert` via keymap -- #
+zle-line-init() {                  # key binding to enter insert mode 
     zle -K viins
     echo -ne "\e[5 q"
 }
 zle -N zle-line-init
-
-# --- misc. bindings --- #
-bindkey -s '^a' 'bc -l\n'                    # open calculator
-bindkey -s '^f' 'cd "$(dirname "$(fzf)")"\n' # fuzzy search a directory
-bindkey '^[[P' delete-char
 
 # - edit line in vim with ctrl-e - #
 autoload edit-command-line 
 zle -N edit-command-line
 bindkey '^e' edit-command-line
 
-# - syntax highlighting - #
-source /usr/share/zsh/plugins/fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh 2>/dev/null
+# -- pyenv -- #
+export PYENV_ROOT="$HOME/.pyenv"
+export PATH="$PYENV_ROOT/bin:$PATH"
+
+if command -v pyenv 1>/dev/null 2>&1; then
+  eval "$(pyenv init -)"
+  eval "$(pyenv virtualenv-init -)"
+fi
+source "${ZDOTDIR:-$HOME/.config/zsh}/pyenv.zsh"
