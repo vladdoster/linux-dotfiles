@@ -5,27 +5,27 @@
 # Last Modified by: Vlad Doster <mvdoster@gmail.com>
 # Last Modified time: 2020-07-10 11:04:21
 
-# --- Default programs --- #
+# --- default programs --- #
 export EDITOR="nvim"
 export TERMINAL="st"
 export BROWSER="firefox"
 export READER="zathura"
 
-# --- System variables --- #
+# --- system variables --- #
 export XDG_CACHE_HOME="${HOME}/.cache"
 export XDG_CONFIG_HOME="${HOME}/.config"
 export XDG_USER_LOCAL="${HOME}/.local"
 export XDG_DATA_HOME="${XDG_USER_LOCAL:-$HOME/.local}/share"
 export XDG_USER_BINARIES="${XDG_USER_LOCAL:-$HOME/.local}/bin"
 
-# -- Add `~/.local/bin` to $PATH -- #
+# -- add `~/.local/bin` to $PATH -- #
 export PATH="$PATH:$(du "${XDG_USER_BINARIES}" | cut -f2 | paste -sd ':')"
 
 # --- X11 --- #
 export XAUTHORITY="${XDG_RUNTIME_DIR}/Xauthority"
 export XINITRC="${XDG_CONFIG_HOME}/X11/xinitrc"
 
-# ---  $HOME Clean-up --- #
+# ---  $HOME clean-up --- #
 # Cache
 export CUDA_CACHE_PATH="${XDG_CACHE_HOME}/nv"
 export PYLINTHOME="${XDG_CACHE_HOME}/pylint"
@@ -54,7 +54,7 @@ export PASSWORD_STORE_DIR="${XDG_DATA_HOME}/password-store"
 # Runtime
 export TMUX_TMPDIR="${XDG_RUNTIME_DIR}"
 
-# --- Misc. program settings --- #
+# --- misc. program settings --- #
 export FZF_DEFAULT_OPTS="--layout=reverse --height 40%"
 export LESS=-R
 export LESSHISTFILE="-"
@@ -70,14 +70,24 @@ export QT_QPA_PLATFORMTHEME="gtk2"	  # QT should use gtk2 theme
 export SUDO_ASKPASS="${XDG_USER_LOCAL}/bin/dmenu_pass"
 export _JAVA_AWT_WM_NONREPARENTING=1	# Java doesn't understand tiling windows
 
-# --- Generate shortcuts --- #
+# --- generate shortcuts --- #
 [ ! -f "${XDG_CONFIG_HOME}/shortcutrc" ] && generate_shortcuts >/dev/null 2>&1 &
 
-# --- Make shortcuts available in `get_bindings` program --- #
+# -- pyenv -- #
+export PYENV_ROOT="$HOME/.pyenv"
+export PATH="$PYENV_ROOT/bin:$PATH"
+
+if command -v pyenv 1>/dev/null 2>&1; then
+  eval "$(pyenv init -)"
+  eval "$(pyenv virtualenv-init -)"
+fi
+source "${ZDOTDIR:-$HOME/.config/zsh}/pyenv.zsh"
+
+# --- make shortcuts available in `get_bindings` program --- #
 ln -s "${XDG_CONFIG_HOME:-$HOME/.config}/{directories, files}" "${XDG_DATA_HOME:-$HOME/.local/share/dotfiles/program_bindings_help}/{directories,files}"
 
-# --- Start graphical server on tty1 if not already running --- #
+# --- start graphical server on tty1 if not already running --- #
 [ "$(tty)" = "/dev/tty1" ] && ! ps -e | grep -qw Xorg && exec startx "${XINITRC}"
 
-# --- Remap keys in ttys --- #
+# --- remap keys in ttys --- #
 sudo -n loadkeys "${XDG_DATA_HOME}/dotfiles/tty_remaps.kmap" 2>/dev/null
