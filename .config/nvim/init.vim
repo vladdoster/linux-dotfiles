@@ -3,10 +3,12 @@
 " Last Modified by: Vlad Doster <mvdoster@gmail.com>
 " Last Modified time: 2020-06-26 09:33:57
 
-" Python locations
-let g:python_host_prog="/home/vlad/.pyenv/versions/2.7.5/bin/python"
-" Disable python3
+" --- python 2 & 3 locations --- "
+let g:python_host_prog="/home/vlad/.pyenv/versions/2.7.13/bin/python"
+" python3 location
 let g:python3_host_prog="/home/vlad/.pyenv/versions/3.8.0/bin/python3"
+
+" --- source configs --- "
 source $HOME/.config/nvim/mappings.vim
 source $HOME/.config/nvim/plugins.vim
 source $HOME/.config/nvim/settings.vim
