@@ -3,7 +3,7 @@
 # Author: Vlad Doster <mvdoster@gmail.com>
 # Date: 2020-07-06 14:20:50
 # Last Modified by: Vlad Doster <mvdoster@gmail.com>
-# Last Modified time: 2020-07-10 11:04:21
+# Last Modified time: 2020-07-21 03:00:52
 
 # --- default programs --- #
 export EDITOR="nvim"
@@ -71,10 +71,11 @@ export SUDO_ASKPASS="${XDG_USER_LOCAL}/bin/dmenu_pass"
 export _JAVA_AWT_WM_NONREPARENTING=1	# Java doesn't understand tiling windows
 
 # --- generate shortcuts --- #
-[ ! -f "${XDG_CONFIG_HOME}/shortcutrc" ] && generate_shortcuts >/dev/null 2>&1 &
+[ ! -f "${XDG_CONFIG_HOME}/shortcutrc" ] && generate_shortcutrc >/dev/null 2>&1 &
 
 # --- make shortcuts available in `get_bindings` program --- #
-ln -s "${XDG_CONFIG_HOME:-$HOME/.config}/{directories, files}" "${XDG_DATA_HOME:-$HOME/.local/share/dotfiles/program_bindings_help}/{directories,files}"
+ln -s "${XDG_CONFIG_HOME:-$HOME/.config}/directories" "${XDG_DATA_HOME:-$HOME/.local/share/dotfiles/program_bindings_help}/directories"
+ln -s "${XDG_CONFIG_HOME:-$HOME/.config}/files" "${XDG_DATA_HOME:-$HOME/.local/share/dotfiles/program_bindings_help}/files"
 
 # --- start graphical server on tty1 if not already running --- #
 [ "$(tty)" = "/dev/tty1" ] && ! ps -e | grep -qw Xorg && exec startx "${XINITRC}"

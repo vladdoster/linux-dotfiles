@@ -5,5 +5,5 @@ cfd     ${XDG_USER_LOCAL:-$HOME/.local}/src/dwm.git/config.h
 cft     ${XDG_CONFIG_HOME:-$HOME/.config}/tmux/.tmux.conf
 cfv     ${XDG_CONFIG_HOME:-$HOME/.config}/nvim/init.vim
 cfxp    ${XDG_CONFIG_HOME:-$HOME/.config}/X11/xprofile
-cfzp    ${ZDOTDIR}/.zshrc
+cfzp    ${ZDOTDIR}/.zprofile
 cfz     ${ZDOTDIR}/.zshrc
