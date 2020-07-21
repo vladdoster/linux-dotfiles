@@ -21,14 +21,14 @@
   "coc.preferences.formatOnSaveFiletypes": [
     "markdown",
     "yaml",
-    "json",
-    "python"
+    "json"
+    //"python"
   ],
   "coc.preferences.hoverTarget": "float",
   "python.jediEnabled": false,
   "python.pythonPath": "/usr/bin/python",
-  "python.formatting.provider": "black",
-  "python.formatting.blackPath": "/usr/bin/black",
+  //"python.formatting.provider": "black",
+  //"python.formatting.blackPath": "/usr/bin/black",
   "python.linting.enabled": true,
   "python.linting.pylintEnabled": true,
   //"python.linting.pylintPath": "/home/vlad/.pyenv/versions/py2nvim/bin/pylint",
