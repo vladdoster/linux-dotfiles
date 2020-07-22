@@ -3,7 +3,7 @@
 # @Author: Vlad Doster <mvdoster@gmail.com>
 # @Date: 2020-06-23 03:25:02
 # @Last Modified by: Vlad Doster <mvdoster@gmail.com>
-# @Last Modified time: 2020-07-20 19:51:43
+# @Last Modified time: 2020-07-21 03:09:16
 
 # -- aliases & shortcuts -- #
 [ -f "${XDG_CONFIG_HOME:-$HOME/.config}/user-dirs.dirs" ] && source "${XDG_CONFIG_HOME:-$HOME/.config}/user-dirs.dirs"
@@ -86,7 +86,7 @@ bindkey '^e' edit-command-line
 # -- pyenv -- #
 export PYENV_ROOT="$HOME/.pyenv"
 export PATH="$PYENV_ROOT/bin:$PATH"
-export PYENV_VIRTUALENV_DISABLE_PROMPT=1 # venv prompt
+# export PYENV_VIRTUALENV_DISABLE_PROMPT=0 # venv prompt
 
 if command -v pyenv 1>/dev/null 2>&1; then
   eval "$(pyenv init -)"
@@ -94,7 +94,3 @@ if command -v pyenv 1>/dev/null 2>&1; then
 fi
 source "${ZDOTDIR:-$HOME/.config/zsh}/pyenv.zsh"
 
-# https://vi.stackexchange.com/questions/7644/use-vim-with-virtualenv/7654#7654
-# if [[ -n $VIRTUAL_ENV && -e "${VIRTUAL_ENV}/bin/activate" ]]; then
-#   source "${VIRTUAL_ENV}/bin/activate"
-# fi
