@@ -32,8 +32,8 @@ stty start undef         # unbind un-freeze keymap
 stty stop undef          # unbind freeze keymap
 
 # --- zsh key bindings --- #
-bindkey -s '^a' 'bc -l\n'                    # open calculator
-bindkey -s '^f' 'cd "$(dirname "$(fzf)")"\n' # fuzzy search a directory
+bindkey -s '^a' 'bc -l\n'                     # open calculator
+bindkey -s '^f' 'cd "$(dirname "$(fzf)")"\n'  # fuzzy search a directory
 bindkey '^[[P' delete-char
 
 # - zsh syntax highlighting - #
