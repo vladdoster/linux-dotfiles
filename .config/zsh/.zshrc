@@ -6,7 +6,7 @@
 # @Last Modified time: 2020-07-21 03:09:16
 
 # -- aliases & shortcuts -- #
-[ -f "${XDG_CONFIG_HOME:-$HOME/.config}/user-dirs.dirs" ] && source "${XDG_CONFIG_HOME:-$HOME/.config}/user-dirs.dirs"
+[ -f "${XDG_CONFIG_HOME:-$HOME/.config}/user-dirs.dirs" ] && source "${XDG_CONFIG_HOME:-$HOME/.config}/user-dirs.dirs" # Linux
 [ -f "${XDG_CONFIG_HOME:-$HOME/.config}/shortcutrc" ] && source "${XDG_CONFIG_HOME:-$HOME/.config}/shortcutrc"
 [ -f "${XDG_CONFIG_HOME:-$HOME/.config}/aliasrc" ] && source "${XDG_CONFIG_HOME:-$HOME/.config}/aliasrc"
 
@@ -84,13 +84,13 @@ zle -N edit-command-line
 bindkey '^e' edit-command-line
 
 # -- pyenv -- #
-export PYENV_ROOT="$HOME/.pyenv"
-export PATH="$PYENV_ROOT/bin:$PATH"
+export PYENV_ROOT="$HOME/.pyenv" # Linux
+export PATH="$PYENV_ROOT/bin:$PATH" # Linux
 # export PYENV_VIRTUALENV_DISABLE_PROMPT=0 # venv prompt
 
-if command -v pyenv 1>/dev/null 2>&1; then
-  eval "$(pyenv init -)"
-  eval "$(pyenv virtualenv-init -)"
-fi
-source "${ZDOTDIR:-$HOME/.config/zsh}/pyenv.zsh"
+if command -v pyenv 1>/dev/null 2>&1; then       # Linux
+  eval "$(pyenv init -)"                         # Linux
+  eval "$(pyenv virtualenv-init -)"              # Linux
+fi                                               # Linux
+source "${ZDOTDIR:-$HOME/.config/zsh}/pyenv.zsh" # Linux
 
