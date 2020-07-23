@@ -26,10 +26,10 @@ zstyle ':vcs_info:git:*' formats '(%b)'  # only want current branch
 PROMPT='%B%{$fg[red]%}[%{$fg[yellow]%}%n%{$fg[green]%}@%{$fg[cyan]%}%~%{$fg[blue]%}${vcs_info_msg_0_}%{$fg[red]%}]%{$reset_color%}$ %b'
 
 # -- zshell related -- #
-export LANG=en_US.UTF-8                 # set language locale
-setopt AUTOCD	                          # if directory, change to it automatically
-stty start undef                        # unbind un-freeze keymap
-stty stop undef                         # unbind freeze keymap
+export LANG=en_US.UTF-8  # set language locale
+setopt AUTOCD            # if directory, change to it automatically
+stty start undef         # unbind un-freeze keymap
+stty stop undef          # unbind freeze keymap
 
 # --- zsh key bindings --- #
 bindkey -s '^a' 'bc -l\n'                    # open calculator
@@ -40,11 +40,11 @@ bindkey '^[[P' delete-char
 source /usr/share/zsh/plugins/fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh 2>/dev/null
 
 # -- zsh commands completion -- #
-autoload -U compinit                    # auto-load completion system
-zstyle ':completion:*' menu select      # style of results
-zmodload zsh/complist                   # how to list possible completions
-compinit                                # initialize completion for the current session
-_comp_options+=(globdots)               # include hidden files
+autoload -U compinit                # auto-load completion system
+zstyle ':completion:*' menu select  # style of results
+zmodload zsh/complist               # how to list possible completions
+compinit                            # initialize completion for the current session
+_comp_options+=(globdots)           # include hidden files
 
 # --- zsh completion vim bindings --- #
 bindkey -M menuselect 'h' vi-backward-char
@@ -69,10 +69,10 @@ function zle-keymap-select {       # cursor shape for vi modes
   fi
 }
 
-echo -ne '\e[5 q'                  # beam cursor on startup
-preexec() { echo -ne '\e[5 q' ;}   # beam cursor for each new prompt
+echo -ne '\e[5 q'                 # beam cursor on startup
+preexec() { echo -ne '\e[5 q' ;}. # beam cursor for each new prompt
 zle -N zle-keymap-select
-zle-line-init() {                  # key binding to enter insert mode 
+zle-line-init() {                 # key binding to enter insert mode 
     zle -K viins
     echo -ne "\e[5 q"
 }
@@ -88,9 +88,9 @@ export PYENV_ROOT="$HOME/.pyenv" # Linux
 export PATH="$PYENV_ROOT/bin:$PATH" # Linux
 # export PYENV_VIRTUALENV_DISABLE_PROMPT=0 # venv prompt
 
-if command -v pyenv 1>/dev/null 2>&1; then       # Linux
-  eval "$(pyenv init -)"                         # Linux
-  eval "$(pyenv virtualenv-init -)"              # Linux
-fi                                               # Linux
-source "${ZDOTDIR:-$HOME/.config/zsh}/pyenv.zsh" # Linux
+if command -v pyenv 1>/dev/null 2>&1; then        # Linux
+  eval "$(pyenv init -)"                          # Linux
+  eval "$(pyenv virtualenv-init -)"               # Linux
+fi                                                # Linux
+source "${ZDOTDIR:-$HOME/.config/zsh}/pyenv.zsh"  # Linux
 
