@@ -70,7 +70,7 @@ function zle-keymap-select {       # cursor shape for vi modes
 }
 
 echo -ne '\e[5 q'                 # beam cursor on startup
-preexec() { echo -ne '\e[5 q' ;}. # beam cursor for each new prompt
+preexec() { echo -ne '\e[5 q' ;}  # beam cursor for each new prompt
 zle -N zle-keymap-select
 zle-line-init() {                 # key binding to enter insert mode 
     zle -K viins
