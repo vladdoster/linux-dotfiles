@@ -1,5 +1,7 @@
 # GNU/Linux system dotfiles
 
+These dotfiles also work on MacOS via [vladdoster/mac_os-dotfiles](https://github.com/vladdoster/mac_os-dotfiles).
+
 ### Utilizes the following repositories:
 
 |                |                                                                   |
