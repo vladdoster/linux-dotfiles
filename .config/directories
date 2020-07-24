@@ -1,3 +1,4 @@
+c      ${HOME}/code_repositories
 cac    ${XDG_CACHE_HOME:-$HOME/.cache}
 cf     ${XDG_CONFIG_HOME:-$HOME/.config}
 cfn    ${XDG_CONFIG_HOME:-$HOME/.config}/nvim
@@ -7,7 +8,6 @@ cfx    ${XDG_CONFIG_HOME:-$HOME/.config}/X11
 cz     ${XDG_CONFIG_HOME:-$HOME/.config}/zsh
 D      ${XDG_DOCUMENTS_DIR:-$HOME/documents}
 d      ${XDG_DOWNLOAD_DIR:-$HOME/downloads}
-gh     ${HOME}/github
 h      ${HOME}
 lb     ${XDG_USER_LOCAL:-$HOME/.local}/bin
 lsd    ${XDG_USER_LOCAL:-$HOME/.local}/src/dwm.git
