@@ -1,6 +1,6 @@
 # Unix system dotfiles
 
-### Utilizes following repositories:
+### Utilizes the following repositories:
 
 |                |                                                                   |
 | -------------- | ----------------------------------------------------------------- |
