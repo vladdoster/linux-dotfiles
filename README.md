@@ -1,4 +1,4 @@
-# Unix system dotfiles
+# GNU/Linux system dotfiles
 
 ### Utilizes the following repositories:
 
