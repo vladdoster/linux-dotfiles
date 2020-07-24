@@ -1,9 +1,9 @@
 #!/usr/bin/env zsh
- 
+
 # Author: Vlad Doster <mvdoster@gmail.com>
 # Date: 2020-07-06 14:20:50
 # Last Modified by: Vlad Doster <mvdoster@gmail.com>
-# Last Modified time: 2020-07-21 03:00:52
+# Last Modified time: 2020-07-24 12:28:37
 
 # --- default programs --- #
 export EDITOR="nvim"
