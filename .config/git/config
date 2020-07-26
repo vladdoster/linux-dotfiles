@@ -256,6 +256,10 @@
   # Search commits
     searchcommits = !"f() { query=\"$1\"; shift; git log -S\"$query\" \"$@\"; }; f \"$@\""
 
+##-- Editing and adding conflicted files: when we get many merge conflicts --##
+  edit-unmerged = !"f() { git ls-files --unmerged | cut -f2 | sort -u ; }; `git var GIT_EDITOR` `f`"
+  add-unmerged  = !"f() { git ls-files --unmerged | cut -f2 | sort -u ; }; git add `f`"
+
 ##-- Misc. --##
     aliases = !git config -l | grep alias | cut -c 7-
     bump = !sh -c 'git commit -am \"Version bump v$1\" && git psuoc && git release $1' -
@@ -283,14 +287,48 @@
   # How many commits ahead/behind
     behind = !git rev-list --left-only --count $(git bu)...HEAD
     ahead = !git rev-list --right-only --count $(git bu)...HEAD
-
-  # Show the number of log items by email
-    log-of-email-and-count         = "!f() { git log-of-format-and-count \"%aE\" $@; }; f"
-    log-of-count-and-email         = "!f() { git log-of-count-and-format \"%aE\" $@; }; f"
+    
+  # add all new and modified files to the index
+    wip = !"git add --all; git ls-files --deleted -z | xargs -0 git rm; git commit --message=wip"
+  # restore the deleted files to the working tree
+    unwip = !"git log -n 1 | grep -q -c wip && git reset HEAD~1"
 
   # Show log of files that have many changes
     churn = !"f() { git log --all --find-copies --find-renames --name-only --format='format:' \"$@\" | awk 'NF{a[$0]++}END{for(i in a){print a[i], i}}' | sort -rn;};f"
   
+  # Show a specific format string and its number of log entries
+    log-of-format-and-count = "!f() { format=\"$1\"; shift; git log $@ --format=oneline --format="$format" | awk '{a[$0]++}END{for(i in a){print i, a[i], int((a[i]/NR)*100) \"%\"}}' | sort; }; f"
+    log-of-count-and-format = "!f() { format=\"$1\"; shift; git log $@ --format=oneline --format="$format" | awk '{a[$0]++}END{for(i in a){print a[i], int((a[i]/NR)*100) \"%\", i}}' | sort -nr; }; f"
+  # Show the number of log entries by a specific format string and date format string
+    log-of-format-and-count-with-date = "!f() { format=\"$1\"; shift; date_format=\"$1\"; shift; git log $@ --format=oneline --format=\"$format\" --date=format:\"$date_format\" | awk '{a[$0]++}END{for(i in a){print i, a[i], int((a[i]/NR)*100) \"%\"}}' | sort -r; }; f"
+    log-of-count-and-format-with-date = "!f() { format=\"$1\"; shift; date_format=\"$1\"; shift; git log $@ --format=oneline --format=\"$format\" --date=format:\"$date_format\" | awk '{a[$0]++}END{for(i in a){print a[i], int((a[i]/NR)*100) \"%\", i}}' | sort -nr; }; f"
+  # Show the number of log items by email
+    log-of-email-and-count         = "!f() { git log-of-format-and-count \"%aE\" $@; }; f"
+    log-of-count-and-email         = "!f() { git log-of-count-and-format \"%aE\" $@; }; f"
+  # Show the number of log items by hour
+    log-of-hour-and-count          = "!f() { git log-of-format-and-count-with-date \"%ad\" \"%Y-%m-%dT%H\" $@ ; }; f"
+    log-of-count-and-hour          = "!f() { git log-of-count-and-format-with-date \"%ad\" \"%Y-%m-%dT%H\" $@ ; }; f"
+  # Show the number of log items by day
+    log-of-day-and-count           = "!f() { git log-of-format-and-count-with-date \"%ad\" \"%Y-%m-%d\" $@ ; }; f"
+    log-of-count-and-day           = "!f() { git log-of-count-and-format-with-date \"%ad\" \"%Y-%m-%d\" $@ ; }; f"
+  # Show the number of log items by week
+    log-of-week-and-count          = "!f() { git log-of-format-and-count-with-date \"%ad\" \"%Y#%V\" $@; }; f"
+    log-of-count-and-week          = "!f() { git log-of-count-and-format-with-date \"%ad\" \"%Y#%V\" $@; }; f"
+  # Show the number of log items by month
+    log-of-month-and-count         = "!f() { git log-of-format-and-count-with-date \"%ad\" \"%Y-%m\" $@ ; }; f"
+    log-of-count-and-month         = "!f() { git log-of-count-and-format-with-date \"%ad\" \"%Y-%m\" $@ ; }; f"
+  # Show the number of log items by year
+    log-of-year-and-count          = "!f() { git log-of-format-and-count-with-date \"%ad\" \"%Y\" $@ ; }; f"
+    log-of-count-and-year          = "!f() { git log-of-count-and-format-with-date \"%ad\" \"%Y\" $@ ; }; f"
+  # Show the number of log items by hour of day
+    log-of-hour-of-day-and-count   = "!f() { git log-of-format-and-count-with-date \"%ad\" \"%H\" $@; }; f"
+    log-of-count-and-hour-of-day   = "!f() { git log-of-count-and-format-with-date \"%ad\" \"%H\" $@; }; f"
+  # Show the number of log items by day of week
+    log-of-day-of-week-and-count   = "!f() { git log-of-format-and-count-with-date \"%ad\" \"%u\" $@; }; f"
+    log-of-count-and-day-of-week   = "!f() { git log-of-count-and-format-with-date \"%ad\" \"%u\" $@; }; f"
+  # Show the number of log items by week of year
+    log-of-week-of-year-and-count  = "!f() { git log-of-format-and-count-with-date \"%ad\" \"%V\" $@; }; f"
+    log-of-count-and-week-of-year  = "!f() { git log-of-count-and-format-with-date \"%ad\" \"%V\" $@; }; f"
   # Print a helpful summary of some typical metrics
     summary = "!f() { \
     printf \"Summary of this branch...\n\"; \
@@ -313,3 +351,14 @@
     printf \"\nMost-active dates, with commit count and %%...\n\"; git log-of-count-and-day | head -7; \
     printf \"\nMost-active files, with churn count\n\"; git churn | head -7; \
     }; f"
+    
+##-- SHELL SCRIPTING ALIASES --##
+  # Get the top level directory name
+    top-name = rev-parse --show-toplevel
+  # Get the current branch name
+    branch-name = rev-parse --abbrev-ref HEAD
+  # Get the upstream branch name
+    upstream-name = !git for-each-ref --format='%(upstream:short)' $(git symbolic-ref -q HEAD)
+  # Execute shell scripts. Git always runs scripts in the top directory.
+  # For example "git exec pwd" will always show you the top directory.
+    exec = ! exec
