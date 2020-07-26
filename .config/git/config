@@ -35,7 +35,7 @@
 [pull]
     rebase = false
 [alias]
-##-- Add file contents to the index --##
+##-- Add -- #
     a = add
     au = add -u
     aa = add --all
@@ -60,6 +60,50 @@
     cd = commit --amend
     cad = commit -a --amend
     ced = commit --allow-empty --amend
+
+##-- Checkout -- #
+    co = checkout
+    com = checkout master
+    cob = checkout -b
+    copr = !sh -c 'git fo pull/$1/head:pr-$1 && git o pr-$1'
+
+##-- Push -- #
+    ps = push
+    psf = push -f
+    psu = push -u
+    
+    pst = push --tags
+    pso = push origin
+    psao = push --all origin
+    psfo = push -f origin
+    psuo = push -u origin
+    
+    psom = push origin master
+    psaom = push --all origin master
+    psfom = push -f origin master
+    psuom = push -u origin master
+    psoc = !git push origin $(git bc)
+    psaoc = !git push --all origin $(git bc)
+    psfoc = !git push -f origin $(git bc)
+    psuoc = !git push -u origin $(git bc)
+    psdc = !git push origin :$(git bc)
+
+##-- Pull -- #
+    pu = pull
+    pur = pull --rebase
+
+    plo = pull origin
+    pbo = pull --rebase origin
+    plom = pull origin master
+    ploc = !git pull origin $(git bc)
+    pbom = pull --rebase origin master
+    pboc = !git pull --rebase origin $(git bc)
+
+    plu = pull upstream
+    plum = pull upstream master
+    pluc = !git pull upstream $(git bc)
+    pbum = pull --rebase upstream master
+    pbuc = !git pull --rebase upstream $(git bc)
 
 ##-- Clone -- #
     cl = clone
@@ -126,54 +170,6 @@
     mc = merge --continue
     ms = merge --skip
 
-##-- Checkout -- #
-    co = checkout
-    com = checkout master
-    cob = checkout -b
-    copr = !sh -c 'git fo pull/$1/head:pr-$1 && git o pr-$1'
-
-##-- Pruning -- #
-    pr = prune -v
-    prune-all = !git remote | xargs -n 1 git remote prune
-
-##-- Push -- #
-    ps = push
-    psf = push -f
-    psu = push -u
-    
-    pst = push --tags
-    pso = push origin
-    psao = push --all origin
-    psfo = push -f origin
-    psuo = push -u origin
-    
-    psom = push origin master
-    psaom = push --all origin master
-    psfom = push -f origin master
-    psuom = push -u origin master
-    psoc = !git push origin $(git bc)
-    psaoc = !git push --all origin $(git bc)
-    psfoc = !git push -f origin $(git bc)
-    psuoc = !git push -u origin $(git bc)
-    psdc = !git push origin :$(git bc)
-
-##-- Pull -- #
-    pu = pull
-    pur = pull --rebase
-
-    plo = pull origin
-    pbo = pull --rebase origin
-    plom = pull origin master
-    ploc = !git pull origin $(git bc)
-    pbom = pull --rebase origin master
-    pboc = !git pull --rebase origin $(git bc)
-
-    plu = pull upstream
-    plum = pull upstream master
-    pluc = !git pull upstream $(git bc)
-    pbum = pull --rebase upstream master
-    pbuc = !git pull --rebase upstream $(git bc)
-
 ##-- Reapply commits on top of another base tip -- #
     rb = rebase
     rba = rebase --abort
@@ -225,6 +221,10 @@
 ##-- Create or  delete a tag object
     t = tag
     td = tag -d
+
+##-- Pruning -- #
+    pr = prune -v
+    prune-all = !git remote | xargs -n 1 git remote prune
 
 ##-- Show various types of objects -- #
     w = show
