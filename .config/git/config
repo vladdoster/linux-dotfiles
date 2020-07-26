@@ -14,19 +14,27 @@
   diff = auto
   branch = auto
 [alias]
+  amend = !git add -A && git commit --amend --no-edit
   a  = add
   au = add -u
-  br = branch
-  cm = commit -m
-  co = checkout
+  b = branch
+  c = checkout
+  p = !git push origin $(git rev-parse --abbrev-ref HEAD)
+  c = "!git add -A && git commit -m "
+  cc = "!git commit --amend -m "
+  co = !git checkout
+  cb = checkout -b
+  cm = !git add -A && git commit -m
+  default = !git symbolic-ref refs/remotes/origin/HEAD | sed 's@^refs/remotes/origin/@@'
   diff = diff --ignore-space-change
   dst = diff --staged
   ff = merge origin
-  ignore = update-index --assume-unchanged
+  i = update-index --assume-unchanged
   p  = push
   pu = pull
+  save = !git add -A && git commit -m 'SAVEPOINT'
   st = status -uno
-  stu = status
+  wip = commit -am "WIP"
 [apply]
   whitespace = strip
   whitespace = nowarn
