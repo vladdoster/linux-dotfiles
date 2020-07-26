@@ -68,6 +68,7 @@
     copr = !sh -c 'git fo pull/$1/head:pr-$1 && git o pr-$1'
 
 ##-- Push -- #
+    p = push
     ps = push
     psf = push -f
     psu = push -u
