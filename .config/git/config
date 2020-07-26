@@ -129,29 +129,27 @@
     ls = ls-files
     lsf = !git ls-files | grep -i
 
-##-- Join two or more development histories togethe -- #
+##-- Join two or more development histories together -- #
     m = merge
     ma = merge --abort
     mc = merge --continue
     ms = merge --skip
 
-##--   -- #
-    o = checkout
-    om = checkout master
-    ob = checkout -b
-    opr = !sh -c 'git fo pull/$1/head:pr-$1 && git o pr-$1'
+##--  -- #
+    co = checkout
+    com = checkout master
+    cob = checkout -b
+    copr = !sh -c 'git fo pull/$1/head:pr-$1 && git o pr-$1'
 
 ##-- Pruning -- #
     pr = prune -v
     prune-all = !git remote | xargs -n 1 git remote prune
 
-##--   -- #
+##-- Push -- #
     ps = push
     psf = push -f
     psu = push -u
     pst = push --tags
-
-##--   -- #
     pso = push origin
     psao = push --all origin
     psfo = push -f origin
@@ -168,11 +166,10 @@
     psuoc = !git push -u origin $(git bc)
     psdc = !git push origin :$(git bc)
 
-##--   -- #
-    pl = pull
-    pb = pull --rebase
+##-- Pull -- #
+    pu = pull
+    pur = pull --rebase
 
-##--   -- #
     plo = pull origin
     pbo = pull --rebase origin
     plom = pull origin master
@@ -180,7 +177,6 @@
     pbom = pull --rebase origin master
     pboc = !git pull --rebase origin $(git bc)
 
-##--  -- #
     plu = pull upstream
     plum = pull upstream master
     pluc = !git pull upstream $(git bc)
