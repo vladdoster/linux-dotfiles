@@ -4,43 +4,44 @@
   bare = false
   logallrefupdates = true
   editor = vim
-  excludesfile = ${XDG_CONFIG_HOME:-$HOME/.config}/git/ignore
+[include]
+  path = gitalias.txt
 [user]
   name = Vlad Doster
   email = mvdoster@gmail.com
+[credential]
+  helper = cache --timeout=28800
 [color]
   status = auto
   commit = auto
   diff = auto
   branch = auto
+[apply]
+  whitespace = strip
+  whitespace = nowarn
+[push]
+  default = simple
+[pull]
+  rebase = false
 [alias]
-  amend = !git add -A && git commit --amend --no-edit
   a  = add
+  amend = !git add -A && git commit --amend --no-edit
   au = add -u
   b = branch
-  c = checkout
-  p = !git push origin $(git rev-parse --abbrev-ref HEAD)
   c = "!git add -A && git commit -m "
-  cc = "!git commit --amend -m "
-  co = !git checkout
+  c = checkout
   cb = checkout -b
+  cc = "!git commit --amend -m "
   cm = !git add -A && git commit -m
+  co = !git checkout
   default = !git symbolic-ref refs/remotes/origin/HEAD | sed 's@^refs/remotes/origin/@@'
   diff = diff --ignore-space-change
   dst = diff --staged
   ff = merge origin
   i = update-index --assume-unchanged
   p  = push
+  p = !git push origin $(git rev-parse --abbrev-ref HEAD)
   pu = pull
   save = !git add -A && git commit -m 'SAVEPOINT'
   st = status -uno
   wip = commit -am "WIP"
-[apply]
-  whitespace = strip
-  whitespace = nowarn
-[push]
-  default = simple
-[credential]
-  helper = cache --timeout=28800
-[pull]
-  rebase = false
