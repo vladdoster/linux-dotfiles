@@ -4,44 +4,320 @@
   bare = false
   logallrefupdates = true
   editor = vim
-[include]
-  path = gitalias.txt
+[core]
+	editor = vim
+	whitespace = fix,-indent-with-non-tab,trailing-space,cr-at-eol
 [user]
   name = Vlad Doster
   email = mvdoster@gmail.com
+  username = vladdoster
 [credential]
   helper = cache --timeout=28800
 [color]
-  status = auto
-  commit = auto
-  diff = auto
-  branch = auto
+	ui = auto
+[color "branch"]
+	current = yellow bold
+	local = green bold
+	remote = cyan bold
+[color "diff"]
+	meta = yellow bold
+	frag = magenta bold
+	old = red bold
+	new = green bold
+	whitespace = red reverse
+[color "status"]
+	added = green bold
+	changed = yellow bold
+	untracked = red bold
+  
+  
 [apply]
   whitespace = strip
   whitespace = nowarn
+[include]
+  path = gitalias.txt
 [push]
   default = simple
 [pull]
   rebase = false
 [alias]
-  a  = add
-  amend = !git add -A && git commit --amend --no-edit
-  au = add -u
+##-- Add file contents to the index --##
+  a = add --all
+  ai = add -i
+
+##-- Apply a patch to files and/or to the index -- #
+  ap = apply
+  as = apply --stat
+  ac = apply --check
+
+##-- Applying patch -- #
+  ama = am --abort
+  amr = am --resolved
+  ams = am --skip
+
+##--   -- #
   b = branch
-  c = "!git add -A && git commit -m "
-  c = checkout
-  cb = checkout -b
-  cc = "!git commit --amend -m "
-  cm = !git add -A && git commit -m
-  co = !git checkout
-  default = !git symbolic-ref refs/remotes/origin/HEAD | sed 's@^refs/remotes/origin/@@'
-  diff = diff --ignore-space-change
-  dst = diff --staged
-  ff = merge origin
-  i = update-index --assume-unchanged
-  p  = push
-  p = !git push origin $(git rev-parse --abbrev-ref HEAD)
-  pu = pull
-  save = !git add -A && git commit -m 'SAVEPOINT'
-  st = status -uno
-  wip = commit -am "WIP"
+  ba = branch -a
+  bd = branch -d
+  bdd = branch -D
+  br = branch -r
+  bc = rev-parse --abbrev-ref HEAD
+  bu = !git rev-parse --abbrev-ref --symbolic-full-name "@{u}"
+  bs = !git-branch-status
+
+##-- Commiting -- #
+  c = commit
+  ca = commit -a
+  cm = commit -m
+  cam = commit -am
+  cem = commit --allow-empty -m
+  cd = commit --amend
+  cad = commit -a --amend
+  ced = commit --allow-empty --amend
+  ##-- Cloning -- #
+  cl = clone
+  cld = clone --depth 1
+  clg = !sh -c 'git clone git://github.com/$1 $(basename $1)' -
+  clgp = !sh -c 'git clone git@github.com:$1 $(basename $1)' -
+  clgu = !sh -c 'git clone git@github.com:$(git config --get user.username)/$1 $1' -
+
+##-- Cherry pick code from branches -- #
+  cp = cherry-pick
+  cpa = cherry-pick --abort
+  cpc = cherry-pick --continue
+
+##-- Show changes between commits, commit and working tree, etc -- #
+  dc = diff --cached
+  ds = diff --staged
+  dw = diff --word-diff
+  dd = diff --check --dirstat --find-copies --find-renames --histogram --color
+  diff-all = !"for name in $(git diff --name-only $1); do git difftool $1 $name & done"
+  diff-changes = diff --name-status -r
+  diff-stat = diff --stat --ignore-space-change -r
+  diff-staged = diff --cached
+##-- Download objects and refs from another repository -- #
+  f = fetch
+  fo = fetch origin
+  fu = fetch upstream
+
+##-- Prepare patches for e-mail submission -- #
+  fp = format-patch
+
+##-- File system consistency check -- #
+  fk = fsck
+
+##-- Print lines matching a pattern -- #
+  g = grep -n -p
+# Find text in any commit ever.
+  grep-all = !"f() { git rev-list --all | xargs git grep \"$@\"; }; f"
+# Find text and group the output lines. A.k.a. `gg`.
+  grep-group = grep --break --heading --line-number --color
+# grep with ack-like formatting
+  grep-ack = \
+    -c color.grep.linenumber=\"bold yellow\" \
+    -c color.grep.filename=\"bold green\" \
+    -c color.grep.match=\"reverse yellow\" \
+    grep --break --heading --line-number
+
+##-- Show commit logs -- #
+# log with items appearing in topological order, i.e. descendant commits are shown before their parents.
+  lt = log --topo-order
+  ll = log --graph --topo-order --date=short --abbrev-commit --decorate --all --boundary --pretty=format:'%Cgreen%ad %Cred%h%Creset -%C(yellow)%d%Creset %s %Cblue[%cn]%Creset %Cblue%G?%Creset'
+  lll = log --graph --topo-order --date=iso8601-strict --no-abbrev-commit --abbrev=40 --decorate --all --boundary --pretty=format:'%Cgreen%ad %Cred%h%Creset -%C(yellow)%d%Creset %s %Cblue[%cn <%ce>]%Creset %Cblue%G?%Creset'
+
+##-- Show information about files in the index and the working tree -- #
+  ls = ls-files
+  lsf = !git ls-files | grep -i
+
+##-- Join two or more development histories togethe -- #
+  m = merge
+  ma = merge --abort
+  mc = merge --continue
+  ms = merge --skip
+
+##--   -- #
+  o = checkout
+  om = checkout master
+  ob = checkout -b
+  opr = !sh -c 'git fo pull/$1/head:pr-$1 && git o pr-$1'
+
+##-- Pruning -- #
+  pr = prune -v
+  prune-all = !git remote | xargs -n 1 git remote prune
+
+##--   -- #
+  ps = push
+  psf = push -f
+  psu = push -u
+  pst = push --tags
+
+##--   -- #
+  pso = push origin
+  psao = push --all origin
+  psfo = push -f origin
+  psuo = push -u origin
+
+##--   -- #
+  psom = push origin master
+  psaom = push --all origin master
+  psfom = push -f origin master
+  psuom = push -u origin master
+  psoc = !git push origin $(git bc)
+  psaoc = !git push --all origin $(git bc)
+  psfoc = !git push -f origin $(git bc)
+  psuoc = !git push -u origin $(git bc)
+  psdc = !git push origin :$(git bc)
+
+##--   -- #
+  pl = pull
+  pb = pull --rebase
+
+##--   -- #
+  plo = pull origin
+  pbo = pull --rebase origin
+  plom = pull origin master
+  ploc = !git pull origin $(git bc)
+  pbom = pull --rebase origin master
+  pboc = !git pull --rebase origin $(git bc)
+
+##--  -- #
+  plu = pull upstream
+  plum = pull upstream master
+  pluc = !git pull upstream $(git bc)
+  pbum = pull --rebase upstream master
+  pbuc = !git pull --rebase upstream $(git bc)
+
+##-- Reapply commits on top of another base tip -- #
+  rb = rebase
+  rba = rebase --abort
+  rbc = rebase --continue
+  rbi = rebase --interactive
+  rbs = rebase --skip
+
+##-- Reset current HEAD to the specified state -- #
+  re = reset
+  rh = reset HEAD
+  reh = reset --hard
+  rem = reset --mixed
+  res = reset --soft
+  rehh = reset --hard HEAD
+  remh = reset --mixed HEAD
+  resh = reset --soft HEAD
+  rehom = reset --hard origin/master
+
+##-- Manage set of tracked repositories --##
+  rr = remote
+  rrs = remote show
+  rru = remote update
+  rrp = remote prune
+  incoming = !git remote update --prune; git log ..@{upstream}
+  outgoing = log @{upstream}..
+  push-to-all-remotes = !git remote | xargs -I% -n1 git push %
+
+##-- Reflog --#
+  rl = reflog
+
+##-- Remove files from the working tree and from the index -- #
+  rmf = rm -f
+  rmrf = rm -r -f
+
+##-- Show the working tree status -- #
+  s = status
+  sb = status -s -b
+
+##-- Stash the changes in a dirty working directory away -- #
+  sa = stash apply
+  sc = stash clear
+  sd = stash drop
+  sl = stash list
+  sp = stash pop
+  ss = stash save
+  ssk = stash save -k
+  sw = stash show
+  st = !git stash list | wc -l 2>/dev/null | grep -oEi '[0-9][0-9]*'
+
+##-- Create or  delete a tag object
+  t = tag
+  td = tag -d
+
+##-- Show various types of objects -- #
+  w = show
+  wp = show -p
+  wr = show -p --no-color
+
+##-- Initialize, update or inspect submodules -- #
+  subadd = !sh -c 'git submodule add git://github.com/$1 $2/$(basename $1)' -
+  subrm = !sh -c 'git submodule deinit -f -- $1 && rm -rf .git/modules/$1 && git rm -f $1' -
+  subup = submodule update --init --recursive
+  subpull = !git submodule foreach git pull --tags origin master
+
+##-- Register file contents in the working tree to the index -- #
+  assume = update-index --assume-unchanged
+  unassume = update-index --no-assume-unchanged
+  assumed = !git ls -v | grep ^h | cut -c 3-
+  unassumeall = !git assumed | xargs git unassume
+  assumeall = !git status -s | awk {'print $2'} | xargs git assume
+
+##-- Misc. -- #
+  aliases = !git config -l | grep alias | cut -c 7-
+  bump = !sh -c 'git commit -am \"Version bump v$1\" && git psuoc && git release $1' -
+  release = !sh -c 'git tag v$1 && git pst' -
+  unrelease = !sh -c 'git tag -d v$1 && git pso :v$1' -
+  merged = !sh -c 'git o master && git plom && git bd $1 && git rpo' -
+  snap = !git stash save 'snapshot: $(date)' && git stash apply 'stash@{0}'
+  bare = !sh -c 'git symbolic-ref HEAD refs/heads/$1 && git rm --cached -r . && git clean -xfd' -
+  whois = !sh -c 'git log -i -1 --author=\"$1\" --pretty=\"format:%an <%ae>\"' -
+  serve = daemon --reuseaddr --verbose --base-path=. --export-all ./.git
+  ours = "!f() { git checkout --ours $@ && git add $@; }; f"
+  theirs = "!f() { git checkout --theirs $@ && git add $@; }; f"
+  subrepo = !sh -c 'git filter-branch --prune-empty --subdirectory-filter $1 master' -
+  human = name-rev --name-only --refs=refs/heads/*
+
+##-- Initalize a repo and immediate add an empty commit, which makes rebase easier --#
+  init-empty = !"f() { git init && git commit --allow-empty --allow-empty-message --message ''; }; f"
+
+##-- Rename an alias --##
+  rename-alias = "!f() { [ $# = 3 ] && [ $2 != $3 ] && [ ! -z \"$(git config $1 --get alias.$2)\" ] && [ -z \"$(git config $1 --get alias.$3)\" ] && git config $1 alias.$3 \"$(git config $1 --get alias.$2)\" && git config $1 --unset alias.$2 && return 0 || echo \"Usage: git rename-(local|global)-alias <alias existing name> <new alias name>\nThe alias you are going to rename must exist and new name must not exist.\" >&2 && return 1; };f"
+  rename-global-alias = "!git rename-alias --global"
+  rename-local-alias = "!git rename-alias --local"
+
+##-- How many commits ahead/behind -- #
+  behind = !git rev-list --left-only --count $(git bu)...HEAD
+  ahead = !git rev-list --right-only --count $(git bu)...HEAD
+
+# summary: print a helpful summary of some typical metrics
+  summary = "!f() { \
+    printf \"Summary of this branch...\n\"; \
+    printf \"%s\n\" $(git rev-parse --abbrev-ref HEAD); \
+    printf \"%s first commit timestamp\n\" $(git log --date-order --format=%cI | tail -1); \
+    printf \"%s latest commit timestamp\n\" $(git log -1 --date-order --format=%cI); \
+    printf \"%d commit count\n\" $(git rev-list --count HEAD); \
+    printf \"%d date count\n\" $(git log --format=oneline --format=\"%ad\" --date=format:\"%Y-%m-%d\" | awk '{a[$0]=1}END{for(i in a){n++;} print n}'); \
+    printf \"%d tag count\n\" $(git tag | wc -l); \
+    printf \"%d author count\n\" $(git log --format=oneline --format=\"%aE\" | awk '{a[$0]=1}END{for(i in a){n++;} print n}'); \
+    printf \"%d committer count\n\" $(git log --format=oneline --format=\"%cE\" | awk '{a[$0]=1}END{for(i in a){n++;} print n}'); \
+    printf \"%d local branch count\n\" $(git branch | grep -v \" -> \" | wc -l); \
+    printf \"%d remote branch count\n\" $(git branch -r | grep -v \" -> \" | wc -l); \
+    printf \"\nSummary of this directory...\n\"; \
+    printf \"%s\n\" $(pwd); \
+    printf \"%d file count via git ls-files\n\" $(git ls-files | wc -l); \
+    printf \"%d file count via find command\n\" $(find . | wc -l); \
+    printf \"%d disk usage\n\" $(du -s | awk '{print $1}'); \
+    printf \"\nMost-active authors, with commit count and %%...\n\"; git log-of-count-and-email | head -7; \
+    printf \"\nMost-active dates, with commit count and %%...\n\"; git log-of-count-and-day | head -7; \
+    printf \"\nMost-active files, with churn count\n\"; git churn | head -7; \
+  }; f"
+
+##-- Lookups --##
+# whois: given a string for an author, try to figure out full name and email:
+  whois = "!sh -c 'git log --regexp-ignore-case -1 --pretty=\"format:%an <%ae>\n\" --author=\"$1\"' -"
+# Given any git object, try to show it briefly
+  whatis = show --no-patch --pretty='tformat:%h (%s, %ad)' --date=short
+# Show who contributed with summarized changes
+  who = shortlog --summary --
+# Show who contributed, in descending order by number of commits
+  whorank = shortlog --summary --numbered --no-merges
+
+##-- Search commits --##
+    searchcommits = !"f() { query=\"$1\"; shift; git log -S\"$query\" \"$@\"; }; f \"$@\""
+    diff-func = !sh -c "git show \"\$1:\$3\" | sed -n \"/^[^ \t].*\$4(/,/^}/p\" > .tmp1 && git show \"\$2:\$3\" | sed -n \"/^[^ \t].*\$4(/,/^}/p\" > .tmp2 && git diff --no-index .tmp1 .tmp2" -
