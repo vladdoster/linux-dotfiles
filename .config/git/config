@@ -34,13 +34,13 @@
 [pull]
     rebase = false
 [alias]
-##-- Add --##
+##-- ADD --##
     a = add
     au = add -u
     aa = add --all
     ai = add -i
 
-##-- Branch --##
+##-- BRANCH --##
     b = branch
     ba = branch -a
     bd = branch -d
@@ -50,7 +50,7 @@
     bu = !git rev-parse --abbrev-ref --symbolic-full-name "@{u}"
     bs = !git-branch-status
 
-##-- Commit --##
+##-- COMMIT --##
     c = commit
     cma = commit -a
     cm = commit -m
@@ -60,13 +60,13 @@
     cad = commit -a --amend
     ced = commit --allow-empty --amend
 
-##-- Checkout --##
+##-- CHECKOUT --##
     co = checkout
     com = checkout master
     cob = checkout -b
     copr = !sh -c 'git fo pull/$1/head:pr-$1 && git o pr-$1'
 
-##-- Push --##
+##-- PUSH --##
     p = push
     ps = push
     psf = push -f
