@@ -40,16 +40,6 @@
     A = add --all
     ai = add -i
 
-##-- Apply a patch to files and/or to the index -- #
-    ap = apply
-    as = apply --stat
-    ac = apply --check
-
-##-- Merge -- #
-    ama = am --abort
-    amr = am --resolved
-    ams = am --skip
-
 ##-- Branch  -- #
     b = branch
     ba = branch -a
@@ -62,7 +52,7 @@
 
 ##-- Commit -- #
     c = commit
-    ca = commit -a
+    cma = commit -a
     cm = commit -m
     cam = commit -am
     cem = commit --allow-empty -m
@@ -135,7 +125,7 @@
     mc = merge --continue
     ms = merge --skip
 
-##--  -- #
+##-- Checkout -- #
     co = checkout
     com = checkout master
     cob = checkout -b
@@ -149,13 +139,13 @@
     ps = push
     psf = push -f
     psu = push -u
+    
     pst = push --tags
     pso = push origin
     psao = push --all origin
     psfo = push -f origin
     psuo = push -u origin
-
-##--   -- #
+    
     psom = push origin master
     psaom = push --all origin master
     psfom = push -f origin master
