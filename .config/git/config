@@ -26,9 +26,9 @@
 	new = green bold
 	whitespace = red reverse
 [color "status"]
-	added = green bold
-	changed = yellow bold
-	untracked = red bold
+added = green bold
+changed = yellow bold
+  untracked = red bold
   
   
 [apply]
