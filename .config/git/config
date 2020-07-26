@@ -36,8 +36,9 @@
     rebase = false
 [alias]
 ##-- Add file contents to the index --##
-    a = add -u
-    A = add --all
+    a = add
+    au = add -u
+    aa = add --all
     ai = add -i
 
 ##-- Branch  -- #
