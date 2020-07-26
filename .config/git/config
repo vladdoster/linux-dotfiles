@@ -352,7 +352,7 @@
     printf \"\nMost-active files, with churn count\n\"; git churn | head -7; \
     }; f"
 
-##-- SHELL SCRIPTING ALIASES --##
+##-- SHELL SCRIPTING --##
   # Get the top level directory name
     top-name = rev-parse --show-toplevel
   # Get the current branch name
