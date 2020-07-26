@@ -1,6 +1,5 @@
 [core]
     bare = false
-    editor = vim
     filemode = true
     logallrefupdates = true
     repositoryformatversion = 0
@@ -72,13 +71,13 @@
     ps = push
     psf = push -f
     psu = push -u
-    
+
     pst = push --tags
     pso = push origin
     psao = push --all origin
     psfo = push -f origin
     psuo = push -u origin
-    
+
     psom = push origin master
     psaom = push --all origin master
     psfom = push -f origin master

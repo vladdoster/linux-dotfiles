@@ -1,6 +1,7 @@
 c      ${HOME}/code_repositories
 cac    ${XDG_CACHE_HOME:-$HOME/.cache}
 cf     ${XDG_CONFIG_HOME:-$HOME/.config}
+cfg    ${XDG_CONFIG_HOME:-$HOME/.config}/git
 cfn    ${XDG_CONFIG_HOME:-$HOME/.config}/nvim
 cfnp   ${XDG_CONFIG_HOME:-$HOME/.config}/nvim/plug-configs
 cft    ${XDG_CONFIG_HOME:-$HOME/.config}/tmux
