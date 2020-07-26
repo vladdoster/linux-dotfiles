@@ -88,7 +88,7 @@
     psuoc = !git push -u origin $(git bc)
     psdc = !git push origin :$(git bc)
 
-##-- Pull --##
+##-- PULL --##
     pu = pull
     pur = pull --rebase
 
@@ -105,19 +105,19 @@
     pbum = pull --rebase upstream master
     pbuc = !git pull --rebase upstream $(git bc)
 
-##-- Clone --##
+##-- CLONE --##
     cl = clone
     cld = clone --depth 1
     clg = !sh -c 'git clone git://github.com/$1 $(basename $1)' -
     clgp = !sh -c 'git clone git@github.com:$1 $(basename $1)' -
     clgu = !sh -c 'git clone git@github.com:$(git config --get user.username)/$1 $1' -
 
-##-- Cherry pick code from branches --##
+##-- CHERRY PICK --##
     cp = cherry-pick
     cpa = cherry-pick --abort
     cpc = cherry-pick --continue
 
-##-- Show changes between commits, commit and working tree, etc. --##
+##-- DIFF --##
     df-cache = diff --cached
     df-stage = diff --staged
     df-word = diff --word-diff
@@ -127,7 +127,7 @@
     df-stat = diff --stat --ignore-space-change -r
     df-staged = diff --cached
 
-##-- Download objects and refs from another repository --##
+##-- FETCH --##
     f = fetch
     fo = fetch origin
     fu = fetch upstream
@@ -135,10 +135,10 @@
 ##-- Prepare patches for e-mail submission --##
     fp = format-patch
 
-##-- File system consistency check --##
+##-- FILE SYSTEM CONSISTENCY CHECK --##
     fk = fsck
 
-##-- Grep -- #
+##-- GREP -- #
     grep = grep -Ii
     gr = grep -Ii
   # Grep from repository root
@@ -154,7 +154,7 @@
     -c color.grep.match=\"reverse yellow\" \
     grep --break --heading --line-number
 
-##-- Show commit logs --##
+##-- LOG --##
   # log with items appearing in topological order, i.e. descendant commits are shown before their parents.
     lt = log --topo-order
     ll = log --graph --topo-order --date=short --abbrev-commit --decorate --all --boundary --pretty=format:'%Cgreen%ad %Cred%h%Creset -%C(yellow)%d%Creset %s %Cblue[%cn]%Creset %Cblue%G?%Creset'
@@ -164,20 +164,20 @@
     ls = ls-files
     lsf = !git ls-files | grep -i
 
-##-- Join two or more development histories together --##
+##-- MERGE --##
     m = merge
     ma = merge --abort
     mc = merge --continue
     ms = merge --skip
 
-##-- Reapply commits on top of another base tip --##
+##-- REBASE --##
     rb = rebase
     rba = rebase --abort
     rbc = rebase --continue
     rbi = rebase --interactive
     rbs = rebase --skip
 
-##-- Reset current HEAD to the specified state --##
+##-- RESET --##
     re = reset
     rh = reset HEAD
     reh = reset --hard
@@ -188,7 +188,7 @@
     resh = reset --soft HEAD
     rehom = reset --hard origin/master
 
-##-- Manage set of tracked repositories --##
+##-- REMOTE --##
     rr = remote
     rrs = remote show
     rru = remote update
@@ -197,18 +197,18 @@
     outgoing = log @{upstream}..
     push-to-all-remotes = !git remote | xargs -I% -n1 git push %
 
-##-- Reflog --##
+##-- REFLOG --##
     rl = reflog
 
-##-- Remove files from the working tree and from the index --##
+##-- RM --##
     rmf = rm -f
     rmrf = rm -r -f
 
-##-- Show the working tree status --##
+##-- STATUS --##
     s = status -uno
     sb = status -s -b
 
-##-- Stash the changes in a dirty working directory away --##
+##-- STASH THE CHANGES IN A DIRTY WORKING DIRECTORY AWAY --##
     sa = stash apply
     sc = stash clear
     sd = stash drop
@@ -218,15 +218,15 @@
     ssk = stash save -k
     sw = stash show
 
-##-- Create or  delete a tag object --##
+##-- CREATE/DELETE A TAG OBJECT --##
     t = tag
     td = tag -d
 
-##-- Pruning --##
+##-- PRUNING --##
     pr = prune -v
     prune-all = !git remote | xargs -n 1 git remote prune
 
-##-- Show various types of objects --##
+##-- SHOW VARIOUS TYPES OF OBJECTS --##
     w = show
     wp = show -p
     wr = show -p --no-color
@@ -237,14 +237,14 @@
     subup = submodule update --init --recursive
     subpull = !git submodule foreach git pull --tags origin master
 
-##-- Register file contents in the working tree to the index --##
+##-- REGISTER FILE CONTENTS IN THE WORKING TREE TO THE INDEX --##
     assume = update-index --assume-unchanged
     unassume = update-index --no-assume-unchanged
     assumed = !git ls -v | grep ^h | cut -c 3-
     unassumeall = !git assumed | xargs git unassume
     assumeall = !git status -s | awk {'print $2'} | xargs git assume
 
-##-- Lookups --##
+##-- LOOKUPS --##
   # Given a string for an author, try to figure out full name and email:
     whois = "!sh -c 'git log --regexp-ignore-case -1 --pretty=\"format:%an <%ae>\n\" --author=\"$1\"' -"
   # Given any git object, try to show it briefly
@@ -256,11 +256,11 @@
   # Search commits
     searchcommits = !"f() { query=\"$1\"; shift; git log -S\"$query\" \"$@\"; }; f \"$@\""
 
-##-- Editing and adding conflicted files: when we get many merge conflicts --##
+##-- EDITING AND ADDING CONFLICTED FILES --##
   edit-unmerged = !"f() { git ls-files --unmerged | cut -f2 | sort -u ; }; `git var GIT_EDITOR` `f`"
   add-unmerged  = !"f() { git ls-files --unmerged | cut -f2 | sort -u ; }; git add `f`"
 
-##-- Misc. --##
+##-- MISC. --##
     aliases = !git config -l | grep alias | cut -c 7-
     bump = !sh -c 'git commit -am \"Version bump v$1\" && git psuoc && git release $1' -
     release = !sh -c 'git tag v$1 && git pst' -
@@ -287,15 +287,15 @@
   # How many commits ahead/behind
     behind = !git rev-list --left-only --count $(git bu)...HEAD
     ahead = !git rev-list --right-only --count $(git bu)...HEAD
-    
-  # add all new and modified files to the index
+
+  # Add all new and modified files to the index
     wip = !"git add --all; git ls-files --deleted -z | xargs -0 git rm; git commit --message=wip"
-  # restore the deleted files to the working tree
+  # Restore the deleted files to the working tree
     unwip = !"git log -n 1 | grep -q -c wip && git reset HEAD~1"
 
   # Show log of files that have many changes
     churn = !"f() { git log --all --find-copies --find-renames --name-only --format='format:' \"$@\" | awk 'NF{a[$0]++}END{for(i in a){print a[i], i}}' | sort -rn;};f"
-  
+
   # Show a specific format string and its number of log entries
     log-of-format-and-count = "!f() { format=\"$1\"; shift; git log $@ --format=oneline --format="$format" | awk '{a[$0]++}END{for(i in a){print i, a[i], int((a[i]/NR)*100) \"%\"}}' | sort; }; f"
     log-of-count-and-format = "!f() { format=\"$1\"; shift; git log $@ --format=oneline --format="$format" | awk '{a[$0]++}END{for(i in a){print a[i], int((a[i]/NR)*100) \"%\", i}}' | sort -nr; }; f"
@@ -351,7 +351,7 @@
     printf \"\nMost-active dates, with commit count and %%...\n\"; git log-of-count-and-day | head -7; \
     printf \"\nMost-active files, with churn count\n\"; git churn | head -7; \
     }; f"
-    
+
 ##-- SHELL SCRIPTING ALIASES --##
   # Get the top level directory name
     top-name = rev-parse --show-toplevel
