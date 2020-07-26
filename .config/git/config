@@ -34,13 +34,13 @@
 [pull]
     rebase = false
 [alias]
-##-- Add -- #
+##-- Add --##
     a = add
     au = add -u
     aa = add --all
     ai = add -i
 
-##-- Branch  -- #
+##-- Branch --##
     b = branch
     ba = branch -a
     bd = branch -d
@@ -50,7 +50,7 @@
     bu = !git rev-parse --abbrev-ref --symbolic-full-name "@{u}"
     bs = !git-branch-status
 
-##-- Commit -- #
+##-- Commit --##
     c = commit
     cma = commit -a
     cm = commit -m
@@ -60,13 +60,13 @@
     cad = commit -a --amend
     ced = commit --allow-empty --amend
 
-##-- Checkout -- #
+##-- Checkout --##
     co = checkout
     com = checkout master
     cob = checkout -b
     copr = !sh -c 'git fo pull/$1/head:pr-$1 && git o pr-$1'
 
-##-- Push -- #
+##-- Push --##
     p = push
     ps = push
     psf = push -f
@@ -88,7 +88,7 @@
     psuoc = !git push -u origin $(git bc)
     psdc = !git push origin :$(git bc)
 
-##-- Pull -- #
+##-- Pull --##
     pu = pull
     pur = pull --rebase
 
@@ -105,19 +105,19 @@
     pbum = pull --rebase upstream master
     pbuc = !git pull --rebase upstream $(git bc)
 
-##-- Clone -- #
+##-- Clone --##
     cl = clone
     cld = clone --depth 1
     clg = !sh -c 'git clone git://github.com/$1 $(basename $1)' -
     clgp = !sh -c 'git clone git@github.com:$1 $(basename $1)' -
     clgu = !sh -c 'git clone git@github.com:$(git config --get user.username)/$1 $1' -
 
-##-- Cherry pick code from branches -- #
+##-- Cherry pick code from branches --##
     cp = cherry-pick
     cpa = cherry-pick --abort
     cpc = cherry-pick --continue
 
-##-- Show changes between commits, commit and working tree, etc -- #
+##-- Show changes between commits, commit and working tree, etc. --##
     df-cache = diff --cached
     df-stage = diff --staged
     df-word = diff --word-diff
@@ -127,15 +127,15 @@
     df-stat = diff --stat --ignore-space-change -r
     df-staged = diff --cached
 
-##-- Download objects and refs from another repository -- #
+##-- Download objects and refs from another repository --##
     f = fetch
     fo = fetch origin
     fu = fetch upstream
 
-##-- Prepare patches for e-mail submission -- #
+##-- Prepare patches for e-mail submission --##
     fp = format-patch
 
-##-- File system consistency check -- #
+##-- File system consistency check --##
     fk = fsck
 
 ##-- Grep -- #
@@ -147,37 +147,37 @@
     grep-all = !"f() { git rev-list --all | xargs git grep \"$@\"; }; f"
   # Find text and group the output lines. A.k.a. `gg`.
     grep-group = grep --break --heading --line-number --color
-  # grep with ack-like formatting
+  # Grep with ack-like formatting
     grep-ack = \
     -c color.grep.linenumber=\"bold yellow\" \
     -c color.grep.filename=\"bold green\" \
     -c color.grep.match=\"reverse yellow\" \
     grep --break --heading --line-number
 
-##-- Show commit logs -- #
+##-- Show commit logs --##
   # log with items appearing in topological order, i.e. descendant commits are shown before their parents.
     lt = log --topo-order
     ll = log --graph --topo-order --date=short --abbrev-commit --decorate --all --boundary --pretty=format:'%Cgreen%ad %Cred%h%Creset -%C(yellow)%d%Creset %s %Cblue[%cn]%Creset %Cblue%G?%Creset'
     lll = log --graph --topo-order --date=iso8601-strict --no-abbrev-commit --abbrev=40 --decorate --all --boundary --pretty=format:'%Cgreen%ad %Cred%h%Creset -%C(yellow)%d%Creset %s %Cblue[%cn <%ce>]%Creset %Cblue%G?%Creset'
 
-##-- Show information about files in the index and the working tree -- #
+##-- Show information about files in the index and the working tree --##
     ls = ls-files
     lsf = !git ls-files | grep -i
 
-##-- Join two or more development histories together -- #
+##-- Join two or more development histories together --##
     m = merge
     ma = merge --abort
     mc = merge --continue
     ms = merge --skip
 
-##-- Reapply commits on top of another base tip -- #
+##-- Reapply commits on top of another base tip --##
     rb = rebase
     rba = rebase --abort
     rbc = rebase --continue
     rbi = rebase --interactive
     rbs = rebase --skip
 
-##-- Reset current HEAD to the specified state -- #
+##-- Reset current HEAD to the specified state --##
     re = reset
     rh = reset HEAD
     reh = reset --hard
@@ -197,18 +197,18 @@
     outgoing = log @{upstream}..
     push-to-all-remotes = !git remote | xargs -I% -n1 git push %
 
-##-- Reflog --#
+##-- Reflog --##
     rl = reflog
 
-##-- Remove files from the working tree and from the index -- #
+##-- Remove files from the working tree and from the index --##
     rmf = rm -f
     rmrf = rm -r -f
 
-##-- Show the working tree status -- #
+##-- Show the working tree status --##
     s = status -uno
     sb = status -s -b
 
-##-- Stash the changes in a dirty working directory away -- #
+##-- Stash the changes in a dirty working directory away --##
     sa = stash apply
     sc = stash clear
     sd = stash drop
@@ -218,33 +218,45 @@
     ssk = stash save -k
     sw = stash show
 
-##-- Create or  delete a tag object
+##-- Create or  delete a tag object --##
     t = tag
     td = tag -d
 
-##-- Pruning -- #
+##-- Pruning --##
     pr = prune -v
     prune-all = !git remote | xargs -n 1 git remote prune
 
-##-- Show various types of objects -- #
+##-- Show various types of objects --##
     w = show
     wp = show -p
     wr = show -p --no-color
 
-##-- Initialize, update or inspect submodules -- #
+##-- Initialize, update or inspect submodules --##
     subadd = !sh -c 'git submodule add git://github.com/$1 $2/$(basename $1)' -
     subrm = !sh -c 'git submodule deinit -f -- $1 && rm -rf .git/modules/$1 && git rm -f $1' -
     subup = submodule update --init --recursive
     subpull = !git submodule foreach git pull --tags origin master
 
-##-- Register file contents in the working tree to the index -- #
+##-- Register file contents in the working tree to the index --##
     assume = update-index --assume-unchanged
     unassume = update-index --no-assume-unchanged
     assumed = !git ls -v | grep ^h | cut -c 3-
     unassumeall = !git assumed | xargs git unassume
     assumeall = !git status -s | awk {'print $2'} | xargs git assume
 
-##-- Misc. -- #
+##-- Lookups --##
+  # Given a string for an author, try to figure out full name and email:
+    whois = "!sh -c 'git log --regexp-ignore-case -1 --pretty=\"format:%an <%ae>\n\" --author=\"$1\"' -"
+  # Given any git object, try to show it briefly
+    whatis = show --no-patch --pretty='tformat:%h (%s, %ad)' --date=short
+  # Show who contributed with summarized changes
+    who = shortlog --summary --
+  # Show who contributed, in descending order by number of commits
+    whorank = shortlog --summary --numbered --no-merges
+  # Search commits
+    searchcommits = !"f() { query=\"$1\"; shift; git log -S\"$query\" \"$@\"; }; f \"$@\""
+
+##-- Misc. --##
     aliases = !git config -l | grep alias | cut -c 7-
     bump = !sh -c 'git commit -am \"Version bump v$1\" && git psuoc && git release $1' -
     release = !sh -c 'git tag v$1 && git pst' -
@@ -260,19 +272,26 @@
     subrepo = !sh -c 'git filter-branch --prune-empty --subdirectory-filter $1 master' -
     human = name-rev --name-only --refs=refs/heads/*
 
-##-- Initalize a repo and immediate add an empty commit, which makes rebase easier --#
+  # Initalize a repo and immediate add an empty commit, which makes rebase easier
     init-empty = !"f() { git init && git commit --allow-empty --allow-empty-message --message ''; }; f"
 
-##-- Rename an alias --##
+  # Rename an alias
     rename-alias = "!f() { [ $# = 3 ] && [ $2 != $3 ] && [ ! -z \"$(git config $1 --get alias.$2)\" ] && [ -z \"$(git config $1 --get alias.$3)\" ] && git config $1 alias.$3 \"$(git config $1 --get alias.$2)\" && git config $1 --unset alias.$2 && return 0 || echo \"Usage: git rename-(local|global)-alias <alias existing name> <new alias name>\nThe alias you are going to rename must exist and new name must not exist.\" >&2 && return 1; };f"
     rename-global-alias = "!git rename-alias --global"
     rename-local-alias = "!git rename-alias --local"
 
-##-- How many commits ahead/behind -- #
+  # How many commits ahead/behind
     behind = !git rev-list --left-only --count $(git bu)...HEAD
     ahead = !git rev-list --right-only --count $(git bu)...HEAD
 
-# summary: print a helpful summary of some typical metrics
+  # Show the number of log items by email
+    log-of-email-and-count         = "!f() { git log-of-format-and-count \"%aE\" $@; }; f"
+    log-of-count-and-email         = "!f() { git log-of-count-and-format \"%aE\" $@; }; f"
+
+  # Show log of files that have many changes
+    churn = !"f() { git log --all --find-copies --find-renames --name-only --format='format:' \"$@\" | awk 'NF{a[$0]++}END{for(i in a){print a[i], i}}' | sort -rn;};f"
+  
+  # Print a helpful summary of some typical metrics
     summary = "!f() { \
     printf \"Summary of this branch...\n\"; \
     printf \"%s\n\" $(git rev-parse --abbrev-ref HEAD); \
@@ -294,15 +313,3 @@
     printf \"\nMost-active dates, with commit count and %%...\n\"; git log-of-count-and-day | head -7; \
     printf \"\nMost-active files, with churn count\n\"; git churn | head -7; \
     }; f"
-
-##-- Lookups --##
-  # whois: given a string for an author, try to figure out full name and email:
-    whois = "!sh -c 'git log --regexp-ignore-case -1 --pretty=\"format:%an <%ae>\n\" --author=\"$1\"' -"
-  # Given any git object, try to show it briefly
-    whatis = show --no-patch --pretty='tformat:%h (%s, %ad)' --date=short
-  # Show who contributed with summarized changes
-    who = shortlog --summary --
-  # Show who contributed, in descending order by number of commits
-    whorank = shortlog --summary --numbered --no-merges
-  # Search commits
-    searchcommits = !"f() { query=\"$1\"; shift; git log -S\"$query\" \"$@\"; }; f \"$@\""
