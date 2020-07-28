@@ -3,6 +3,7 @@
 
 #-- sshrc --#
 export SSHRC_DIR="$SSHHOME"/sshrc.d
+source "$SSHRC_DIR"/functions.sh
 source "$SSHRC_DIR"/.bashrc
 
 #-- correct username --# 
@@ -10,3 +11,7 @@ if [ "$USER" != "$(whoami)" ]; then
   USER=$(whoami)
 fi
 
+# Tmux
+if which tmux >/dev/null 2>&1; then
+  tmuxrc-create-or-attach-session
+fi
