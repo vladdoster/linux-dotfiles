@@ -1,8 +1,10 @@
 #!/bin/bash
 
+
 export LC_ALL=en_US.UTF-8
 export LANG=en_US.UTF-8
-export SHELL=`which bash` # required for sshrc tmux/screen integration
+SHELL="$(which bash)"
+export SHELL=$SHELL   # required for sshrc tmux/screen integration
 export EDITOR=vim
 export VISUAL=vim
 
@@ -21,7 +23,7 @@ alias gsl='git log --decorate --graph --pretty=short'
 
 #-- prompt --#
 # https://git-scm.com/book/en/v2/Appendix-A%3A-Git-in-Other-Environments-Git-in-Bash
-eval $(find /usr/share/git-core/contrib/completion/ -maxdepth 1 -type f -exec echo . \'{}\'';' \;)
+eval "$(find /usr/share/git-core/contrib/completion/ -maxdepth 1 -type f -exec echo . \'{}\'';' \;)"
 export GIT_PS1_SHOWDIRTYSTATE=1
 export PS1='\w$(__git_ps1 " (%s)")\$ '
 
