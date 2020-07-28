@@ -23,6 +23,8 @@ alias gsl='git log --decorate --graph --pretty=short'
 #-- prompt --#
 # https://git-scm.com/book/en/v2/Appendix-A%3A-Git-in-Other-Environments-Git-in-Bash
 #eval "$(find /usr/share/git-core/contrib/completion/ -maxdepth 1 -type f -exec echo . \'{}\'';' \;)"
+cp "$SSHRC_DIR"/.git-completion.bash $HOME && . "$HOME"/.git-completion.bash
+cp "$SSHRC_DIR"/.git-prompt.bash $HOME && . "$HOME"/.git-prompt.bash
 export GIT_PS1_SHOWDIRTYSTATE=1
 export PS1='\w$(__git_ps1 " (%s)")\$ '
 
