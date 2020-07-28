@@ -1,5 +1,4 @@
-set nocompatible
-set viminfo=
+set viminfo+=n$SSHRC_DIR
 set number                     " Enable line numbers
 set backspace=indent,eol,start " Allow backspace in insert mode
 set cursorline                 " Highlight current line
