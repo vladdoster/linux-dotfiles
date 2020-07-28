@@ -6,7 +6,7 @@ SHELL="$(which bash)"
 export SHELL=$SHELL   # required for sshrc tmux/screen integration
 export EDITOR=vim
 export VISUAL=vim
-export $MYVIMRC="$SSHRC_DIR"/.vimrc
+export MYVIMRC="$SSHRC_DIR"/.vimrc
 
 #-- aliases --#
 # misc.
