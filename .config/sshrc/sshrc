@@ -7,3 +7,5 @@ fi
 
 #-- sshrc --#
 export SSHRC_DIR="$SSHHOME/sshrc.d"
+source $SSHRC_DIR/.bash_profile
+source $SSHRC_DIR/.bashrc
