@@ -1,15 +1,15 @@
 #! /bin/bash
 
-export SSHRCD="$SSHRC_CONFIG/sshrc.d"
+export SSHRC_DIR="$SSHRC_CONFIG/sshrc.d"
 
 # Correct username
 if [ "$USER" != "$(whoami)" ]; then
   USER=$(whoami)
 fi
 
-source $SSHRCD/.bash_profile
-source $SSHRCD/.bashrc
-source $SSHRCD/prompt
+source $SSHRC_DIR/.bash_profile
+source $SSHRC_DIR/.bashrc
+source $SSHRC_DIR/prompt
 
 # Attach tmux upon session creation
 if which tmux >/dev/null 2>&1; then
