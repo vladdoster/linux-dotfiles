@@ -1,4 +1,3 @@
-set viminfo+=n
 set viminfo+=n$SSHRC_DIR/viminfo
 set number                     " Enable line numbers
 set backspace=indent,eol,start " Allow backspace in insert mode
