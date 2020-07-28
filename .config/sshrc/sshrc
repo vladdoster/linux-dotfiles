@@ -5,14 +5,6 @@ if [ "$USER" != "$(whoami)" ]; then
   USER=$(whoami)
 fi
 
-#-- history --#
-# Avoid duplicates
-export HISTCONTROL=ignoredups:erasedups
-# When the shell exits, append to the history file instead of overwriting it
-shopt -s histappend
-# After each command, append to the history file and reread it
-export PROMPT_COMMAND="${PROMPT_COMMAND:+$PROMPT_COMMAND$'\n'}history -a; history -c; history -r"
-
 #-- sshrc --#
 export SSHRC_DIR="$SSHHOME/sshrc.d"
 # https://git-scm.com/book/en/v2/Appendix-A%3A-Git-in-Other-Environments-Git-in-Bash
