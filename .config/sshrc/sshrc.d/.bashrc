@@ -7,6 +7,8 @@ export SHELL=$SHELL   # required for sshrc tmux/screen integration
 export EDITOR=vim
 export VISUAL=vim
 
+source "$SSHRC_DIR"/functions.sh
+
 #-- aliases --#
 # misc.
 alias path='echo $PATH | tr ":" "\n" | sort'    # print $path nicely
