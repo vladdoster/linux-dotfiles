@@ -1,4 +1,4 @@
-#! /bin/bash
+#!/bin/bash
 
 #-- correct username --# 
 if [ "$USER" != "$(whoami)" ]; then
@@ -6,7 +6,7 @@ if [ "$USER" != "$(whoami)" ]; then
 fi
 
 #-- sshrc --#
-export SSHRC_DIR="$SSHHOME/sshrc.d"
+export SSHRC_DIR="$SSHHOME"/sshrc.d
 source "$SSHRC_DIR"/.git-completion.bash
 source "$SSHRC_DIR"/.git-prompt.bash
 source "$SSHRC_DIR"/.bash_profile
