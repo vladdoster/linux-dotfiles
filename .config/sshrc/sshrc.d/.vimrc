@@ -1,3 +1,5 @@
+set nocompatible
+set viminfo=
 set number                     " Enable line numbers
 set backspace=indent,eol,start " Allow backspace in insert mode
 set cursorline                 " Highlight current line
