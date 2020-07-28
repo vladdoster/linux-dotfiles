@@ -14,8 +14,3 @@ source $SSHRC_DIR/.git-prompt.sh
 source $SSHRC_DIR/.bash_profile
 source $SSHRC_DIR/.bashrc
 source $SSHRC_DIR/prompt
-
-#-- tmux session --#
-if which tmux >/dev/null 2>&1; then
-  tmuxrc-create-or-attach-session
-fi
