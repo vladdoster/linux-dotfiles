@@ -54,8 +54,8 @@ tmuxrc() {
     mkdir -p $TMUXDIR
   fi
   rm -rf $TMUXDIR/.sshrc.d
-  cp -r $SSHHOME/.sshrc $SSHHOME/bashsshrc $SSHHOME/sshrc $SSHHOME/.sshrc.d $TMUXDIR
-  SSHHOME=$TMUXDIR SHELL=$TMUXDIR/bashsshrc tmux -f $TMUXDIR/.sshrc.d/.tmux.conf $@
+  cp -r $SSHHOME/sshrc $SSHHOME/bashsshrc $SSHHOME/sshrc $SSHHOME/sshrc.d $TMUXDIR
+  SSHHOME=$TMUXDIR SHELL=$TMUXDIR/bashsshrc tmux -f $TMUXDIR/sshrc.d/.tmux.conf $@
 }
 
 # Create or attach a screenrc session
