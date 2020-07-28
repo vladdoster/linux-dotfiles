@@ -13,4 +13,4 @@ source $SSHRC_DIR/.git-prompt.sh
 
 source $SSHRC_DIR/.bash_profile
 source $SSHRC_DIR/.bashrc
-source $SSHRC_DIR/prompt
+source $SSHRC_DIR/.prompt
