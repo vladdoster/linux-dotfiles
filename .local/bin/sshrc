@@ -5,8 +5,10 @@ function sshrc() {
     local SSHHOME=${SSHHOME:=~}
     if [ -f $SSHHOME/sshrc ]; then
         local files=sshrc
+        echo "found sshrc config"
         if [ -d $SSHHOME/sshrc.d ]; then
             files="$files sshrc.d"
+            echo "found sshrc config directory"
         fi
         echo $files
         echo $files
