@@ -11,3 +11,7 @@ fi
 
 # Autocorrect typos in path names when using `cd`
 shopt -s cdspell;
+
+# prompt
+export GIT_PS1_SHOWDIRTYSTATE=1
+export PS1='\w$(__git_ps1 " (%s)")\$ '
