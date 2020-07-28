@@ -6,6 +6,14 @@ export SHELL=`which bash` # required for sshrc tmux/screen integration
 export EDITOR=vim
 export VISUAL=vim
 
+# https://git-scm.com/book/en/v2/Appendix-A%3A-Git-in-Other-Environments-Git-in-Bash
+source $SSHRC_DIR/.git-completion.bash
+source $SSHRC_DIR/.git-prompt.sh
+
+source $SSHRC_DIR/.bash_profile
+source $SSHRC_DIR/.bashrc
+source $SSHRC_DIR/.prompt
+
 #-- aliases --#
 # misc.
 alias path='echo $PATH | tr ":" "\n" | sort'    # print $path nicely
