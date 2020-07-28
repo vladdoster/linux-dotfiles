@@ -58,11 +58,6 @@ tmuxrc() {
   SSHHOME=$TMUXDIR SHELL=$TMUXDIR/bashsshrc tmux -f $TMUXDIR/sshrc.d/.tmux.conf $@
 }
 
-# Create or attach a screenrc session
-screenrc-create-or-attach-session() {
-  screenrc -xRR
-}
-
 # Create or attach a tmuxrc session
 tmuxrc-create-or-attach-session() {
   local TMUX_SESSION_NAME="auto"
