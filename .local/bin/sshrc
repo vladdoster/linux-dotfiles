@@ -1,10 +1,10 @@
 #!/usr/bin/env bash
 function sshrc() {
-    local SSHHOME=${SSHHOME:=~}
-    if [ -f $SSHHOME/.sshrc ]; then
-        local files=.sshrc
-        if [ -d $SSHHOME/.sshrc.d ]; then
-            files="$files .sshrc.d"
+    local SSHHOME=${SSHRC:=$HOME}
+    if [ -f $SSHHOME/sshrc ]; then
+        local files=$SSHHOME/sshrc
+        if [ -d $SSHHOME/sshrc.d ]; then
+            files="$files $SSHHOME/sshrc.d"
         fi
         ssh -t ${*:1} "
             export SSHHOME="'$(mktemp -d)'"
@@ -19,17 +19,17 @@ source '$SSHHOME'/.sshrc;
 export PATH=$PATH:'$SSHHOME'
 ')
 EOF
-)"' | xxd -ps -r > "'$SSHHOME/bashsshrc'"
-            chmod +x "'$SSHHOME/bashsshrc'"
+)"' | xxd -ps -r > "'$SSHHOME/bashrc'"
+            chmod +x "'$SSHHOME/bashrc'"
             export SSHRCCLEANUP="'$SSHHOME'"
             echo $'"$(tar cz -h -C $SSHHOME $files | xxd -ps)"' | xxd -ps -r | tar mxz -C "'$SSHHOME'"
             export SSHHOME="'$SSHHOME'"
             #bash --rcfile <(echo 'if [ -e /etc/bash.bashrc ]; then source /etc/bash.bashrc; fi; if [ -e ~/.bashrc ]; then source ~/.bashrc; fi; source "'$SSHHOME'"/.sshrc; export PATH="'$PATH'":"'$SSHHOME'"')
-            "'$SSHHOME'"/bashsshrc
+            "'$SSHHOME'"/bashrc
             rm -rf "'$SSHRCCLEANUP'" 
             "
     else
-        echo "No such file: $SSHHOME/.sshrc"
+        echo "No such file: $SSHHOME/sshrc"
     fi
 }
 if [ $1 ]; then
