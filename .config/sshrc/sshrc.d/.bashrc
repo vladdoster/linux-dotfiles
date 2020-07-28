@@ -22,6 +22,8 @@ alias gd='git difftool'
 alias gc='git commit -m'
 alias gsl='git log --decorate --graph --pretty=short'
 
+alias tmux='tmux -f $SSHRC_DIR/tmux.conf'
+
 #-- prompt --#
 # https://git-scm.com/book/en/v2/Appendix-A%3A-Git-in-Other-Environments-Git-in-Bash
 #eval "$(find /usr/share/git-core/contrib/completion/ -maxdepth 1 -type f -exec echo . \'{}\'';' \;)"
