@@ -15,6 +15,7 @@ export PROMPT_COMMAND="${PROMPT_COMMAND:+$PROMPT_COMMAND$'\n'}history -a; histor
 
 #-- sshrc --#
 export SSHRC_DIR="$SSHRC_CONFIG/sshrc.d"
+source $SSHRC_DIR/.git-completion.bash
 source $SSHRC_DIR/.bash_profile
 source $SSHRC_DIR/.bashrc
 source $SSHRC_DIR/prompt
