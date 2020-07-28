@@ -10,8 +10,3 @@ if [ "$USER" != "$(whoami)" ]; then
   USER=$(whoami)
 fi
 
-if which tmux >/dev/null 2>&1; then
-  tmuxrc-create-or-attach-session
-fi
-
-
