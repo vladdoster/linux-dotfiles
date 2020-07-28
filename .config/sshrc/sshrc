@@ -7,7 +7,7 @@ fi
 
 #-- sshrc --#
 export SSHRC_DIR="$SSHHOME"/sshrc.d
-source "$SSHRC_DIR"/.git-completion.bash && ln -s "$SSHRC_DIR"/.git-completion.bash $HOME
-source "$SSHRC_DIR"/.git-prompt.bash && ln -s "$SSHRC_DIR"/.git-prompt.bash $HOME
+source "$SSHRC_DIR"/.git-completion.bash && cp "$SSHRC_DIR"/.git-completion.bash $HOME
+source "$SSHRC_DIR"/.git-prompt.bash && cp "$SSHRC_DIR"/.git-prompt.bash $HOME
 source "$SSHRC_DIR"/.bashrc
 
