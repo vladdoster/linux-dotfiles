@@ -15,15 +15,15 @@ export PROMPT_COMMAND="${PROMPT_COMMAND:+$PROMPT_COMMAND$'\n'}history -a; histor
 
 #-- sshrc --#
 export SSHRC_DIR="$SSHHOME/sshrc.d"
-# prompt related
+# https://git-scm.com/book/en/v2/Appendix-A%3A-Git-in-Other-Environments-Git-in-Bash
 source $SSHRC_DIR/.git-completion.bash
 source $SSHRC_DIR/.git-prompt.sh
-source $SSHRC_DIR/prompt
 
 source $SSHRC_DIR/.bash_profile
 source $SSHRC_DIR/.bashrc
+source $SSHRC_DIR/prompt
 
-#-- tmux session creation --#
+#-- tmux session --#
 if which tmux >/dev/null 2>&1; then
   tmuxrc-create-or-attach-session
 fi
