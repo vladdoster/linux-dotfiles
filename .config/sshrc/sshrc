@@ -1,6 +1,5 @@
 #!/bin/bash
 
-
 #-- sshrc --#
 export SSHRC_DIR="$SSHHOME"/sshrc.d
 source "$SSHRC_DIR"/functions.sh
