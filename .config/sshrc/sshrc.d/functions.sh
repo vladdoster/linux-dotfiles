@@ -55,13 +55,14 @@ tmuxrc() {
   fi
   rm -rf $TMUXDIR/sshrc.d
   cp -r $SSHHOME/sshrc $SSHHOME/bashsshrc $SSHHOME/sshrc.d $TMUXDIR
-  SSHHOME=$TMUXDIR SHELL=$TMUXDIR/bashsshrc tmux -f $TMUXDIR/sshrc.d/.tmux.conf $@
+  SSHHOME=$TMUXDIR 
+  SHELL=$TMUXDIR/bashsshrc 
+  tmux -f $TMUXDIR/sshrc.d/.tmux.conf $@
 }
 
 # Create or attach a tmuxrc session
 tmuxrc-create-or-attach-session() {
   local TMUX_SESSION_NAME="auto"
-
   if tmux has-session -t $TMUX_SESSION_NAME >/dev/null 2>&1; then
     tmuxrc -2CC attach-session -t $TMUX_SESSION_NAME
   else
