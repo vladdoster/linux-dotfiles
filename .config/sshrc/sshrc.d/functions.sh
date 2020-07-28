@@ -48,16 +48,8 @@ function parse_git_dirty {
 
 # Start tmux and source sshrc bash
 tmuxrc() {
-  local TMUXDIR=/tmp/tmux-ssh-home
-  if ! [ -d $TMUXDIR ]; then
-    rm -rf $TMUXDIR
-    mkdir -p $TMUXDIR
-  fi
-  rm -rf $TMUXDIR/sshrc.d
-  cp -r $SSHHOME/sshrc $SSHHOME/bashsshrc $SSHHOME/sshrc.d $TMUXDIR
-  SSHHOME=$TMUXDIR 
-  SHELL=$TMUXDIR/bashsshrc 
-  tmux -f $TMUXDIR/sshrc.d/.tmux.conf $@
+  SHELL=$SSHHOME/bashsshrc 
+  tmux -f $SSHHOME/sshrc.d/.tmux.conf $@
 }
 
 # Create or attach a tmuxrc session
