@@ -9,5 +9,5 @@ fi
 export SSHRC_DIR="$SSHHOME/sshrc.d"
 source "$SSHRC_DIR"/.git-completion.bash
 source "$SSHRC_DIR"/.git-prompt.bash
-source $SSHRC_DIR/.bash_profile
-source $SSHRC_DIR/.bashrc
+source "$SSHRC_DIR"/.bash_profile
+source "$SSHRC_DIR"/.bashrc
