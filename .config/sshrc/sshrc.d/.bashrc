@@ -3,6 +3,22 @@
 export LC_ALL=en_US.UTF-8
 export LANG=en_US.UTF-8
 export SHELL=`which bash` # required for sshrc tmux/screen integration
+export EDITOR=vim
+export VISUAL=vim
+
+#-- aliases --#
+# misc.
+alias path='echo $PATH | tr ":" "\n" | sort'    # print $path nicely
+alias mkdir='mkdir -p'                          # creat dirs recursively
+alias ..='cd ..'                                # make .. go up a folder
+# git
+alias gs='git status'
+alias ga='git add -A'
+alias gp='git push origin HEAD'
+alias gd='git difftool'
+alias gc='git commit -m'
+alias gl='git log -n 20 --format="%ai  %Cgreen%h%Creset  %<(10,trunc)%aN  %s"'
+alias gsl='git log --decorate --graph --pretty=short'
 
 #-- history --#
 export HISTCONTROL=ignoredups:erasedups  # Avoid duplicates
