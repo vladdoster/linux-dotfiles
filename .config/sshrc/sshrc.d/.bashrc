@@ -39,15 +39,15 @@ export PROMPT_COMMAND="${PROMPT_COMMAND:+$PROMPT_COMMAND$'\n'}history -a; histor
 #-- autocorrect typos in path names when using `cd` --#
 shopt -s cdspell;
 
-#-- tmux session --#
-# if which tmux >/dev/null 2>&1; then
-#     session="main"
-#     # Check if the session exists, discarding output
-#     if tmux has-session -t "$session"; then
-#       tmux attach-session -t "$session"
-#     fi
-#     tmux new-session -s "$session"
-# fi
+-- tmux session --#
+if which tmux >/dev/null 2>&1; then
+    session="main"
+    # Check if the session exists, discarding output
+    if tmux has-session -t "$session"; then
+      tmux attach-session -t "$session"
+    fi
+    tmux new-session -s "$session"
+fi
 
 #-- gnutar as tar, for sshrc warnings --#
 if [ -e "/usr/local/opt/gnu-tar/libexec/gnubin/tar" ]; then
