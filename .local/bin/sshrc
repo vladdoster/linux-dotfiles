@@ -1,5 +1,4 @@
-#!/usr/bin/env bash
-set -e
+#!/bin/bash
 
 function sshrc() {
     local SSHHOME=${SSHHOME:=~}
@@ -15,14 +14,8 @@ function sshrc() {
             echo >&2 $'sshrc.d and .sshrc files must be less than 64kb\ncurrent size: '$SIZE' bytes'
             exit 1
         fi
-        WELCOME_MSG="
-            if [ -e /etc/motd ]; then cat /etc/motd; fi
-            if [ -e /etc/update-motd.d ]; then run-parts /etc/update-motd.d/ 2>/dev/null; fi
-            last -F \$USER 2>/dev/null | grep -v 'still logged in' | head -n1 | awk '{print \"Last login:\",\$4,\$5,\$6,\$7,\$8,\"from\",\$3;}'
-            "
         ssh -t "$DOMAIN" $SSHARGS "
             command -v openssl >/dev/null 2>&1 || { echo >&2 \"sshrc requires openssl to be installed on the server, but it's not. Aborting.\"; exit 1; }
-            $WELCOME_MSG
             export SSHHOME=\$(mktemp -d -t .$(whoami)sshrc.XXXX)
             export SSHRCCLEANUP=\$SSHHOME
             trap \"rm -rf \$SSHRCCLEANUP; exit\" 0
