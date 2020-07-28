@@ -2,7 +2,7 @@
 function sshrc() {
     local SSHRC_CONFIG=${SSHRC_CONFIG:=~}
     if [ -f $SSHRC_CONFIG/sshrc ]; then
-        local files=.sshrc
+        local files=sshrc
         if [ -d $SSHRC_CONFIG/sshrc.d ]; then
             files="$files sshrc.d"
         fi
