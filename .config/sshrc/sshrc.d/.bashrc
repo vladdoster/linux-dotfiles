@@ -41,7 +41,7 @@ export PROMPT_COMMAND="${PROMPT_COMMAND:+$PROMPT_COMMAND$'\n'}history -a; histor
 #-- autocorrect typos in path names when using `cd` --#
 shopt -s cdspell;
 
--- tmux session --#
+#-- tmux session --#
 if which tmux >/dev/null 2>&1; then
     session="main"
     # Check if the session exists, discarding output
