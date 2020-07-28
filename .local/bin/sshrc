@@ -1,35 +1,35 @@
 #!/usr/bin/env bash
 function sshrc() {
-    local SSH_HOME=${SSHRC:=$HOME}
-    if [ -f $SSH_HOME/sshrc ]; then
-        local files=$SSH_HOME/sshrc
-        if [ -d $SSH_HOME/sshrc.d ]; then
-            files="$files $SSH_HOME/sshrc.d"
+    local SSHRC_CONFIG=${SSHRC_CONFIG:=$HOME}
+    if [ -f $SSHRC_CONFIG/sshrc ]; then
+        local files=$SSHRC_CONFIG/sshrc
+        if [ -d $SSHRC_CONFIG/sshrc.d ]; then
+            files="$files $SSHRC_CONFIG/sshrc.d"
         fi
         ssh -t ${*:1} "
-            export SSH_HOME="'$(mktemp -d)'"
-            echo $'"$(cat `which sshrc` | xxd -ps)"' | xxd -ps -r > "'$SSH_HOME/sshrc'"
-            chmod +x "'$SSH_HOME/sshrc'"
+            export SSHRC_CONFIG="'$(mktemp -d)'"
+            echo $'"$(cat `which sshrc` | xxd -ps)"' | xxd -ps -r > "'$SSHRC_CONFIG/sshrc'"
+            chmod +x "'$SSHRC_CONFIG/sshrc'"
             echo $'"$( cat << 'EOF' | xxd -ps
 #!/usr/bin/env bash
 bash --rcfile <(echo '
 if [ -e /etc/bash.bashrc ]; then source /etc/bash.bashrc; fi
 if [ -e ~/.bashrc ]; then source ~/.bashrc; fi
-source '$SSH_HOME'/.sshrc;
-export PATH=$PATH:'$SSH_HOME'
+source '$SSHRC_CONFIG'/sshrc;
+export PATH=$PATH:'$SSHRC_CONFIG'
 ')
 EOF
-)"' | xxd -ps -r > "'$SSH_HOME/bashrc'"
-            chmod +x "'$SSH_HOME/bashrc'"
-            export SSHRCCLEANUP="'$SSH_HOME'"
-            echo $'"$(tar cz -h -C $SSH_HOME $files | xxd -ps)"' | xxd -ps -r | tar mxz -C "'$SSH_HOME'"
-            export SSH_HOME="'$SSH_HOME'"
-            #bash --rcfile <(echo 'if [ -e /etc/bash.bashrc ]; then source /etc/bash.bashrc; fi; if [ -e ~/.bashrc ]; then source ~/.bashrc; fi; source "'$SSH_HOME'"/.sshrc; export PATH="'$PATH'":"'$SSH_HOME'"')
-            "'$SSH_HOME'"/bashrc
+)"' | xxd -ps -r > "'$SSHRC_CONFIG/bashrc'"
+            chmod +x "'$SSHRC_CONFIG/bashrc'"
+            export SSHRCCLEANUP="'$SSHRC_CONFIG'"
+            echo $'"$(tar cz -h -C $SSHRC_CONFIG $files | xxd -ps)"' | xxd -ps -r | tar mxz -C "'$SSHRC_CONFIG'"
+            export SSHRC_CONFIG="'$SSHRC_CONFIG'"
+            #bash --rcfile <(echo 'if [ -e /etc/bash.bashrc ]; then source /etc/bash.bashrc; fi; if [ -e ~/.bashrc ]; then source ~/.bashrc; fi; source "'$SSHRC_CONFIG'"/.sshrc; export PATH="'$PATH'":"'$SSHRC_CONFIG'"')
+            "'$SSHRC_CONFIG'"/bashrc
             rm -rf "'$SSHRCCLEANUP'"
             "
     else
-        echo "No such file: $SSH_HOME/sshrc"
+        echo "No such file: $SSHRC_CONFIG/sshrc"
     fi
 }
 if [ $1 ]; then
