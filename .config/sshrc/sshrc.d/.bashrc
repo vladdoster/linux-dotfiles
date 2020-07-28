@@ -84,7 +84,6 @@ if [ -e "/usr/local/opt/gnu-tar/libexec/gnubin/tar" ]; then
 fi
 
 #-- tmux session --#
-alias tmux='tmux -f $SSHRC_DIR/tmux.conf'
 if which tmux >/dev/null 2>&1; then
     session="main"
     # Check if the session exists, discarding output
