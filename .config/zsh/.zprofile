@@ -41,6 +41,7 @@ export JUPYTER_CONFIG_DIR="${XDG_CONFIG_HOME}/jupyter"
 export NOTMUCH_CONFIG="${XDG_CONFIG_HOME}/notmuch-config"
 export NPM_CONFIG_USERCONFIG="${XDG_CONFIG_HOME}/npm/npmrc"
 export PYTHONSTARTUP="${XDG_CONFIG_HOME}/python/startup"
+export SSHRC="${XDG_CONFIG_HOME}/sshrc"
 export WGETRC="${XDG_CONFIG_HOME}/wget/wgetrc"
 export ZDOTDIR="${XDG_CONFIG_HOME}/zsh"
 
