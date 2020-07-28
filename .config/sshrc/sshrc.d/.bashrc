@@ -39,11 +39,10 @@ shopt -s cdspell;
 if which tmux >/dev/null 2>&1; then
     session="main"
     # Check if the session exists, discarding output
-    tmux has-session -t $session 2>/dev/null
-    if [ $? != 0 ]; then
-      # Set up your session
+    if tmux has-session -t "$session"; then
+      tmux attach-session -t "$session"
     fi
-    tmux attach-session -t $session
+    tmux new-session -s "$session"
 fi
 
 #-- gnutar as tar, for sshrc warnings --#
