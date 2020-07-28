@@ -21,12 +21,6 @@ alias gc='git commit -m'
 alias gsl='git log --decorate --graph --pretty=short'
 
 #-- prompt --#
-# https://git-scm.com/book/en/v2/Appendix-A%3A-Git-in-Other-Environments-Git-in-Bash
-eval "$(find "$SSHRC_DIR" -E -regex ".*\.(bash)" -maxdepth 1 -type f -exec echo source \'{}\'';' \;)"
-cp "$SSHRC_DIR"/.git-completion.bash $HOME && . "$HOME"/.git-completion.bash
-cp "$SSHRC_DIR"/.git-prompt.bash $HOME; . "$HOME"/.git-prompt.bash
-export GIT_PS1_SHOWDIRTYSTATE=1
-#export PS1='\w$(__git_ps1 " (%s)")\$ '
 
 #-- history --#
 export HISTCONTROL=ignoredups:erasedups  # Avoid duplicates
@@ -37,6 +31,11 @@ export PROMPT_COMMAND="${PROMPT_COMMAND:+$PROMPT_COMMAND$'\n'}history -a; histor
 #-- autocorrect typos in path names when using `cd` --#
 shopt -s cdspell;
 
+#-- gnutar as tar, for sshrc warnings --#
+if [ -e "/usr/local/opt/gnu-tar/libexec/gnubin/tar" ]; then
+  export PATH="/usr/local/opt/gnu-tar/libexec/gnubin:$PATH"
+fi
+
 #-- tmux session --#
 alias tmux='tmux -f $SSHRC_DIR/tmux.conf'
 if which tmux >/dev/null 2>&1; then
@@ -46,9 +45,4 @@ if which tmux >/dev/null 2>&1; then
       tmux attach-session -t "$session"
     fi
     tmux new-session -s "$session"
-fi
-
-#-- gnutar as tar, for sshrc warnings --#
-if [ -e "/usr/local/opt/gnu-tar/libexec/gnubin/tar" ]; then
-  export PATH="/usr/local/opt/gnu-tar/libexec/gnubin:$PATH"
 fi
