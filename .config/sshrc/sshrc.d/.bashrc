@@ -6,14 +6,6 @@ export SHELL=`which bash` # required for sshrc tmux/screen integration
 export EDITOR=vim
 export VISUAL=vim
 
-# https://git-scm.com/book/en/v2/Appendix-A%3A-Git-in-Other-Environments-Git-in-Bash
-source $SSHRC_DIR/.git-completion.bash
-source $SSHRC_DIR/.git-prompt.sh
-
-source $SSHRC_DIR/.bash_profile
-source $SSHRC_DIR/.bashrc
-source $SSHRC_DIR/.prompt
-
 #-- aliases --#
 # misc.
 alias path='echo $PATH | tr ":" "\n" | sort'    # print $path nicely
@@ -25,8 +17,14 @@ alias ga='git add -A'
 alias gp='git push origin HEAD'
 alias gd='git difftool'
 alias gc='git commit -m'
-alias gl='git log -n 20 --format="%ai  %Cgreen%h%Creset  %<(10,trunc)%aN  %s"'
 alias gsl='git log --decorate --graph --pretty=short'
+
+#-- prompt --#
+# https://git-scm.com/book/en/v2/Appendix-A%3A-Git-in-Other-Environments-Git-in-Bash
+source $SSHRC_DIR/.git-completion.bash
+source $SSHRC_DIR/.git-prompt.sh
+export GIT_PS1_SHOWDIRTYSTATE=1
+export PS1='\w$(__git_ps1 " (%s)")\$ '
 
 #-- history --#
 export HISTCONTROL=ignoredups:erasedups  # Avoid duplicates
@@ -36,10 +34,6 @@ export PROMPT_COMMAND="${PROMPT_COMMAND:+$PROMPT_COMMAND$'\n'}history -a; histor
 
 #-- autocorrect typos in path names when using `cd` --#
 shopt -s cdspell;
-
-#-- prompt --#
-export GIT_PS1_SHOWDIRTYSTATE=1
-export PS1='\w$(__git_ps1 " (%s)")\$ '
 
 #-- tmux session --#
 if which tmux >/dev/null 2>&1; then
