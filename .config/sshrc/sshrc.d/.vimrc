@@ -30,15 +30,12 @@ set visualbell t_vb=            " turn off error beep/flash
 set t_vb=
 set tm=500
 
-
 " show location
 set cursorcolumn
 set cursorline
 
-
 " movement
 set scrolloff=7                 " keep 3 lines when scrolling
-
 
 " show
 set ruler                       " show the current row and column
@@ -49,13 +46,11 @@ set showmode                    " display current modes
 set showmatch                   " jump to matches when entering parentheses
 set matchtime=2                 " tenths of a second to show the matching parenthesis
 
-
 " search
 set hlsearch                    " highlight searches
 set incsearch                   " do incremental searching, search as you type
 set ignorecase                  " ignore case when searching
 set smartcase                   " no ignorecase if Uppercase char present
-
 
 " tab
 set expandtab                   " expand tabs to spaces
@@ -67,23 +62,6 @@ set autoindent smartindent shiftround
 set shiftwidth=4
 set tabstop=4
 set softtabstop=4                " insert mode tab and backspace use 4 spaces
-
-" NOT SUPPORT
-" fold
-set foldenable
-set foldmethod=indent
-set foldlevel=99
-let g:FoldMethod = 0
-map <leader>zz :call ToggleFold()<cr>
-fun! ToggleFold()
-    if g:FoldMethod == 0
-        exe "normal! zM"
-        let g:FoldMethod = 1
-    else
-        exe "normal! zR"
-        let g:FoldMethod = 0
-    endif
-endfun
 
 " encoding
 set encoding=utf-8
@@ -111,11 +89,6 @@ if has("autocmd")
   au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
 endif
 
-" NOT SUPPORT
-" Enable basic mouse behavior such as resizing buffers.
-" set mouse=a
-
-
 " ============================ theme and status line ============================
 
 " theme
@@ -130,3 +103,7 @@ hi! link ShowMarksHLu DiffChange
 " status line
 set statusline=%<%f\ %h%m%r%=%k[%{(&fenc==\"\")?&enc:&fenc}%{(&bomb?\",BOM\":\"\")}]\ %-14.(%l,%c%V%)\ %P
 set laststatus=2   " Always show the status line - use 2 lines for the status bar
+
+set backupdir=/tmp//
+set directory=/tmp//
+set undodir=/tmp//
