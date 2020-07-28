@@ -14,7 +14,6 @@ filetype on
 filetype plugin on
 filetype indent on
 
-
 " base
 set nocompatible                " don't bother with vi compatibility
 set autoread                    " reload files when changed on disk, i.e. via `git checkout`
@@ -38,7 +37,6 @@ set cursorline
 set scrolloff=7                 " keep 3 lines when scrolling
 
 " show
-set ruler                       " show the current row and column
 set number                      " show line numbers
 set nowrap
 set showcmd                     " display incomplete commands
