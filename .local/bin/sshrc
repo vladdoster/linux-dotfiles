@@ -1,15 +1,15 @@
 #!/usr/bin/env bash
 function sshrc() {
-    local SSHRC_CONFIG=${SSHRC_CONFIG:=$HOME}
+    local SSHRC_CONFIG=${SSHRC_CONFIG:=~}
     if [ -f $SSHRC_CONFIG/sshrc ]; then
-        local files=$SSHRC_CONFIG/sshrc
+        local files=.sshrc
         if [ -d $SSHRC_CONFIG/sshrc.d ]; then
-            files="$files $SSHRC_CONFIG/sshrc.d"
+            files="$files sshrc.d"
         fi
         ssh -t ${*:1} "
             export SSHRC_CONFIG="'$(mktemp -d)'"
             echo $'"$(cat `which sshrc` | xxd -ps)"' | xxd -ps -r > "'$SSHRC_CONFIG/sshrc'"
-            chmod +x "'$SSHRC_CONFIG/sshrc'"
+            chmod +x "'$SSHHOME/sshrc'"
             echo $'"$( cat << 'EOF' | xxd -ps
 #!/usr/bin/env bash
 bash --rcfile <(echo '
@@ -19,14 +19,14 @@ source '$SSHRC_CONFIG'/sshrc;
 export PATH=$PATH:'$SSHRC_CONFIG'
 ')
 EOF
-)"' | xxd -ps -r > "'$SSHRC_CONFIG/bashrc'"
-            chmod +x "'$SSHRC_CONFIG/bashrc'"
+)"' | xxd -ps -r > "'$SSHRC_CONFIG/bashsshrc'"
+            chmod +x "'$SSHRC_CONFIG/bashsshrc'"
             export SSHRCCLEANUP="'$SSHRC_CONFIG'"
             echo $'"$(tar cz -h -C $SSHRC_CONFIG $files | xxd -ps)"' | xxd -ps -r | tar mxz -C "'$SSHRC_CONFIG'"
             export SSHRC_CONFIG="'$SSHRC_CONFIG'"
             #bash --rcfile <(echo 'if [ -e /etc/bash.bashrc ]; then source /etc/bash.bashrc; fi; if [ -e ~/.bashrc ]; then source ~/.bashrc; fi; source "'$SSHRC_CONFIG'"/.sshrc; export PATH="'$PATH'":"'$SSHRC_CONFIG'"')
-            "'$SSHRC_CONFIG'"/bashrc
-            rm -rf "'$SSHRCCLEANUP'"
+            "'$SSHRC_CONFIG'"/bashsshrc
+            rm -rf "'$SSHRCCLEANUP'" 
             "
     else
         echo "No such file: $SSHRC_CONFIG/sshrc"
