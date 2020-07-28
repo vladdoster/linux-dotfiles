@@ -1,3 +1,4 @@
+let skip_defaults_vim=1
 set number                     " Enable line numbers
 set backspace=indent,eol,start " Allow backspace in insert mode
 set cursorline                 " Highlight current line
