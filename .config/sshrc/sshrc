@@ -1,17 +1,26 @@
 #! /bin/bash
 
-export SSHRC_DIR="$SSHRC_CONFIG/sshrc.d"
-
-# Correct username
+#-- correct username --# 
 if [ "$USER" != "$(whoami)" ]; then
   USER=$(whoami)
 fi
 
+#-- history --#
+# Avoid duplicates
+export HISTCONTROL=ignoredups:erasedups
+# When the shell exits, append to the history file instead of overwriting it
+shopt -s histappend
+# After each command, append to the history file and reread it
+export PROMPT_COMMAND="${PROMPT_COMMAND:+$PROMPT_COMMAND$'\n'}history -a; history -c; history -r"
+
+#-- sshrc --#
+export SSHRC_DIR="$SSHRC_CONFIG/sshrc.d"
 source $SSHRC_DIR/.bash_profile
 source $SSHRC_DIR/.bashrc
 source $SSHRC_DIR/prompt
 
-# Attach tmux upon session creation
+
+#-- tmux session creation --#
 if which tmux >/dev/null 2>&1; then
   tmuxrc-create-or-attach-session
 fi
