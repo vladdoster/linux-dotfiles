@@ -1,8 +1,0 @@
-# Get tmux/screen session info
-session_info() {
-  if [[ -n "${TMUX+set}" ]]; then
-    tmux display-message -p "#{window_id}" | xargs printf '[tmux:%s]'
-  elif [[ "$TERM" =~ ^screen.* ]]; then
-    echo $STY | cut -d '.' -f1 | xargs printf '[screen:%s]'
-  fi
-}
