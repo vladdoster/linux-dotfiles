@@ -7,8 +7,6 @@ export SHELL=$SHELL   # required for sshrc tmux/screen integration
 export EDITOR=vim
 export VISUAL=vim
 
-# source "$SSHRC_DIR"/functions.sh
-
 #-- aliases --#
 # misc.
 alias path='echo $PATH | tr ":" "\n" | sort'    # print $path nicely
@@ -26,9 +24,9 @@ alias tmux='tmux -f $SSHRC_DIR/tmux.conf'
 
 #-- prompt --#
 # https://git-scm.com/book/en/v2/Appendix-A%3A-Git-in-Other-Environments-Git-in-Bash
-#eval "$(find /usr/share/git-core/contrib/completion/ -maxdepth 1 -type f -exec echo . \'{}\'';' \;)"
+eval "$(find "$SSHRC_DIR" -E -regex ".*\.(bash)" -maxdepth 1 -type f -exec echo source \'{}\'';' \;)"
 cp "$SSHRC_DIR"/.git-completion.bash $HOME && . "$HOME"/.git-completion.bash
-cp "$SSHRC_DIR"/.git-prompt.bash $HOME && . "$HOME"/.git-prompt.bash
+cp "$SSHRC_DIR"/.git-prompt.bash $HOME; . "$HOME"/.git-prompt.bash
 export GIT_PS1_SHOWDIRTYSTATE=1
 export PS1='\w$(__git_ps1 " (%s)")\$ '
 
