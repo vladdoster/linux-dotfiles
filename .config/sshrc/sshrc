@@ -14,13 +14,14 @@ shopt -s histappend
 export PROMPT_COMMAND="${PROMPT_COMMAND:+$PROMPT_COMMAND$'\n'}history -a; history -c; history -r"
 
 #-- sshrc --#
-export SSHRC_DIR="$SSHRC_CONFIG/sshrc.d"
+export SSHRC_DIR="$SSHHOME/sshrc.d"
+# prompt related
 source $SSHRC_DIR/.git-completion.bash
 source $SSHRC_DIR/.git-prompt.sh
-source $SSHRC_DIR/.bash_profile
-source $SSHRC_DIR/.bashrc
 source $SSHRC_DIR/prompt
 
+source $SSHRC_DIR/.bash_profile
+source $SSHRC_DIR/.bashrc
 
 #-- tmux session creation --#
 if which tmux >/dev/null 2>&1; then
