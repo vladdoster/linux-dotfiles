@@ -21,7 +21,7 @@ alias gc='git commit -m'
 alias gsl='git log --decorate --graph --pretty=short'
 
 #-- prompt --#
-export PS1="[\u@\h \W\ (`parse_git_branch\`]$ "
+export PS1="[\u@\h \W (\`parse_git_branch\`)]$ "
 
 #-- history --#
 export HISTFILE="$SSHRC_DIR"/.bash_history
