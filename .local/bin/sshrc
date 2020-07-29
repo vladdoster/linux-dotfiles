@@ -47,14 +47,14 @@ function sshrc() {
   echo $'"$(cat "$0" | openssl enc -base64)" | tr -s ' ' $'\n' | openssl enc -base64 -d > \"$REMOTE_SSHRC_DIR/sshrc"
   chmod +x \$SSHHOME/sshrc
   
-  echo $'"$( cat <<-"SSHRC_GENERATION" | openssl enc -base64
+  echo $'"$( cat <<-"SSHRC_BASHRC_GENERATION" | openssl enc -base64
     $source_files_cmd
     export PATH=$PATH:$SSHHOME
     source $SSHHOME/sshrc;
 SSHRC_BASHRC_GENERATION
   )"' | tr -s ' ' $'\n' | openssl enc -base64 -d > \$SSHHOME/sshrc.bashrc
   
-  echo $'"$( cat <<-'SSHRC_BASHRC_GENERATION' | openssl enc -base64
+  echo $'"$( cat <<-'BASH_SSHRC_GENERATION' | openssl enc -base64
       #!/usr/bin/env bash
       exec bash --rcfile <(echo '
       $source_files_command
