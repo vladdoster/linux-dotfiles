@@ -38,7 +38,7 @@ fi
 "
 
 function sshrc() {
-  ssh -t "$DOMAIN $SSH_ARGS"
+  ssh -t "$DOMAIN" "$SSH_ARGS" "
     check_for_openssl
     export REMOTE_SSHRC_DIR=\$(mktemp -d -t .$(whoami)sshrc.XXXX)
     export REMOTE_SSHRC_CLEANUP=\"$REMOTE_SSHRC_DIR"
