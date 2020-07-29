@@ -13,6 +13,10 @@ function check_for_files() {
       printf "SSHRC_DIR: %s\nFiles: %s\nFiles size: %s KiB\n" "$SSHRC_DIR" "$FILES" "$SIZE"
       exit 1
     fi
+  else
+    echo "No such file: $LOCAL_SSHRC_DIR/sshrc " >&2
+    exit 1
+  fi
 }
 
 source_files_cmd="
