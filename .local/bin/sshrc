@@ -1,18 +1,5 @@
 #!/usr/bin/env bash
 
-source_files_cmd="
-if [ -r /etc/profile ]; then
-  source /etc/profile; 
-fi
-if [ -r ~/.bash_profile ]; then
-  source ~/.bash_profile
-elif [ -r ~/.bash_login ]; then 
-  source ~/.bash_login
-elif [ -r ~/.profile ]; then 
-  source ~/.profile
-fi
-"
-
 function ssh_into_host() {
   
   local LOCAL_SSHRC_DIR="${LOCAL_SSHRC_DIR:=~}"
@@ -30,13 +17,14 @@ function ssh_into_host() {
       printf "LOCAL_SSHRC_DIR: %s\nFiles: %s\nFiles size: %s KiB\n" "$LOCAL_SSHRC_DIR" "$FILES" "$SIZE"
     fi
   else
-    echo "No such file: $LOCAL_SSHRC_DIR/sshrc " >&2
+    echo >&2 $"No such file: $LOCAL_SSHRC_DIR/sshrc"
     exit 1
   fi
   
-  ssh -t "$DOMAIN" "$SSH_ARGS" "
-    command -v openssl > /dev/null 2>&1 || {
-      printf \"SSHrc requires openssl to be installed. Exiting.\"; exit 1; }
+  ssh -t "$DOMAIN" $SSH_ARGS "
+    
+    command -v openssl > /dev/null 2>&1 || { printf \"SSHrc requires openssl to be installed. Exiting.\"; exit 1; }
+    
     export REMOTE_SSHRC_DIR=\$(mktemp -d -t .$(whoami)-sshrc-XXXX)
     export REMOTE_SSHRC_CLEANUP=\$REMOTE_SSHRC_DIR
     trap \"rm -rf \$REMOTE_SSHRC_CLEANUP; exit\" 0
@@ -44,19 +32,37 @@ function ssh_into_host() {
     echo $'"$(cat "$0" | openssl enc -base64)" | tr -s ' ' $'\n' | openssl enc -base64 -d > \$REMOTE_SSHRC_DIR/sshrc
     chmod +x \$REMOTE_SSHRC_DIR/sshrc
 
-    echo $'"$( cat <<-"SSHRC_BASHRC_GENERATION" | openssl enc -base64
-      $source_files_cmd
+    echo $'"$( cat <<-'SSHRC_BASHRC_GENERATION' | openssl enc -base64
+      if [ -r /etc/profile ]; then
+        source /etc/profile; 
+      fi
+      if [ -r ~/.bash_profile ]; then
+        source ~/.bash_profile
+      elif [ -r ~/.bash_login ]; then 
+        source ~/.bash_login
+      elif [ -r ~/.profile ]; then 
+        source ~/.profile
+      fi
       export PATH=$PATH:$REMOTE_SSHRC_DIR
       source $REMOTE_SSHRC_DIR/sshrc;
 SSHRC_BASHRC_GENERATION
     )"' | tr -s ' ' $'\n' | openssl enc -base64 -d > \$REMOTE_SSHRC_DIR/sshrc.bashrc
 
-    echo $'"$( cat <<-'BASH_SSHRC_GENERATION' | openssl enc -base64
-        #!/usr/bin/env bash
-        exec bash --rcfile <(echo '
-        $source_files_command
-        source '$REMOTE_SSHRC_DIR'/sshrc;
-        export PATH=$PATH:'$REMOTE_SSHRC_DIR'
+    echo $'"$( cat << 'BASH_SSHRC_GENERATION' | openssl enc -base64
+      #!/usr/bin/env bash
+      exec bash --rcfile <(echo '
+      if [ -r /etc/profile ]; then
+        source /etc/profile; 
+      fi
+      if [ -r ~/.bash_profile ]; then
+        source ~/.bash_profile
+      elif [ -r ~/.bash_login ]; then 
+        source ~/.bash_login
+      elif [ -r ~/.profile ]; then 
+        source ~/.profile
+      fi
+      source '$REMOTE_SSHRC_DIR'/sshrc;
+      export PATH=$PATH:'$REMOTE_SSHRC_DIR'
       ') "$@"
 BASH_SSHRC_GENERATION
     )"' | tr -s ' ' $'\n' | openssl enc -base64 -d > \$REMOTE_SSHRC_DIR/bashsshrc
