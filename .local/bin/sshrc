@@ -72,6 +72,7 @@ BASH_SSHRC_GENERATION
       export REMOTE_SSHRC_DIR=\$REMOTE_SSHRC_DIR
       echo \"$CMD_ARG\" >> \$REMOTE_SSHRC_DIR/sshrc.bashrc
       bash --rcfile \$REMOTE_SSHRC_DIR/sshrc.bashrc
+      clear
       "
 }
 
