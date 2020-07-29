@@ -1,13 +1,5 @@
 #!/usr/bin/env bash
 
-function check_for_openssl() {
-  command -v openssl > /dev/null 2>&1 ||
-    {
-      printf \"SSHrc requires openssl to be installed. Exiting."
-      exit 1
-    }
-}
-
 function check_for_files() {
   LOCAL_SSHRC_DIR="${LOCAL_SSHRC_DIR:=~}"
   if [ -f "$LOCAL_SSHRC_DIR"/sshrc ]; then
@@ -39,8 +31,9 @@ fi
 
 function sshrc() {
   ssh -t "$DOMAIN" "$SSH_ARGS" "
-    check_for_openssl
-    export REMOTE_SSHRC_DIR=\$(mktemp -d -t .$(whoami)sshrc.XXXX)
+    command -v openssl > /dev/null 2>&1 || {
+      printf \"SSHrc requires openssl to be installed. Exiting.\"; exit 1; }
+    export REMOTE_SSHRC_DIR=\$(mktemp -d -t .$(whoami)-sshrc-XXXX)
     export REMOTE_SSHRC_CLEANUP=\$REMOTE_SSHRC_DIR
     trap \"rm -rf \$REMOTE_SSHRC_CLEANUP; exit\" 0
 
