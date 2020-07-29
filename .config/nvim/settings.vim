@@ -1,7 +1,7 @@
 " @Author: Vlad Doster <mvdoster@gmail.com>
 " @Date: 2020-06-23 08:17:13
 " @Last Modified by: Vlad Doster <mvdoster@gmail.com>
-" @Last Modified time: 2020-07-24 12:27:21
+" @Last Modified time: 2020-07-28 17:35:54
 
 syntax enable
 
@@ -64,3 +64,6 @@ syntax enable
 " Automatically deletes all trailing whitespace and newlines at end of file on save.
 	autocmd BufWritePre * %s/\s\+$//e
 	autocmd BufWritepre * %s/\n\+\%$//e
+" Format shell scripts on save
+  let g:shfmt_extra_args = '-i 2 -ci -fn -sr'
+  let g:shfmt_fmt_on_save = 1
