@@ -2,7 +2,6 @@
 
 SHELL="$(which bash)"
 export EDITOR=vim
-export GITCONFIG="$REMOTE_SSHRC_CONFIGS_DIR"/.git-config
 export LANG=en_US.UTF-8
 export LC_ALL=en_US.UTF-8
 export MYVIMRC="$REMOTE_SSHRC_CONFIGS_DIR"/.vimrc
@@ -12,6 +11,7 @@ source "$REMOTE_SSHRC_CONFIGS_DIR"/.git-completion.bash
 
 #-- aliases --#
 #-> PROGRAMS
+git --file "$REMOTE_SSHRC_CONFIGS_DIR"/.git-config
 alias vim="vim -i NONE -u '$REMOTE_SSHRC_CONFIGS_DIR'/.vimrc"
 #-> MISC.
 alias ..='cd ..'                             # make .. go up a folder
