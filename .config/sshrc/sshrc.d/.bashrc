@@ -2,7 +2,7 @@
 
 SHELL="$(which bash)"
 export EDITOR=vim
-export GITCONFIG="$REMOTE_SSHRC_CONFIGS_DIR"/.gitconfig
+export GITCONFIG="$REMOTE_SSHRC_CONFIGS_DIR"/.git-config
 export LANG=en_US.UTF-8
 export LC_ALL=en_US.UTF-8
 export MYVIMRC="$REMOTE_SSHRC_CONFIGS_DIR"/.vimrc
