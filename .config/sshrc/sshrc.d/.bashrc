@@ -6,16 +6,10 @@ SHELL="$(which bash)"
 export SHELL=$SHELL   # required for sshrc tmux/screen integration
 export EDITOR=vim
 export VISUAL=vim
+export GITCONFIG="$REMOTE_SSHRC_CONFIGS_DIR"/.gitconfig
 export MYVIMRC="$REMOTE_SSHRC_CONFIGS_DIR"/.vimrc
 
 #-- aliases --#
-#-> GIT
-alias gs='git status'
-alias ga='git add -A'
-alias gp='git push origin HEAD'
-alias gd='git difftool'
-alias gc='git commit -m'
-alias gsl='git log --decorate --graph --pretty=short'
 #-> PROGRAMS
 alias vim="vim -i NONE -u '$REMOTE_SSHRC_CONFIGS_DIR'/.vimrc"
 #-> MISC.
