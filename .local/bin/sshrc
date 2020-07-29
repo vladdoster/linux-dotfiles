@@ -68,7 +68,7 @@ BASH_SSHRC_GENERATION
     )"' | tr -s ' ' $'\n' | openssl enc -base64 -d > \$REMOTE_SSHRC_DIR/bashsshrc
       chmod +x \$REMOTE_SSHRC_DIR/bashsshrc
 
-      echo $'"$(tar czf - -h -C $LOCAL_SSHRC_DIR $FILES | openssl enc -base64)"' | tr -s ' ' $'\n' | openssl enc -base64 -d | tar mxzf - -C \$REMOTE_SSHRC_DIR
+      echo $'"$(tar czf - -h -C $LOCAL_SSHRC_DIR $LOCAL_FILES | openssl enc -base64)"' | tr -s ' ' $'\n' | openssl enc -base64 -d | tar mxzf - -C \$REMOTE_SSHRC_DIR
       export REMOTE_SSHRC_DIR=\$REMOTE_SSHRC_DIR
       echo \"$CMD_ARG\" >> \$REMOTE_SSHRC_DIR/sshrc.bashrc
       bash --rcfile \$REMOTE_SSHRC_DIR/sshrc.bashrc
