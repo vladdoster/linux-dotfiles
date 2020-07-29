@@ -79,28 +79,24 @@ BASH_SSHRC_GENERATION
 function sshrc_parse() {
   while [[ -n $1 ]]; do
     case $1 in
-      -b | -c | -D | -E | -e | -F | -I | -i | -L | -l | -m | -O | -o | -p | -Q | -R | -S | -W | -w)
-        SSHARGS="$SSHARGS $1 $2"
-        shift
-        ;;
-      -*)
-        SSHARGS="$SSHARGS $1"
-        ;;
+      -b | -c | -D | -E | -e | -F | -I | -i | -L | -l | -m | -O | -o | -p | -Q | -R | -S | -W | -w )
+        SSHARGS="$SSHARGS $1 $2"; shift ;;
+      -* )
+        SSHARGS="$SSHARGS $1" ;;
       *)
         if [ -z "$DOMAIN" ]; then
-          DOMAIN="$1"
+         DOMAIN="$1"
         else
           local SEMICOLON=$([[ "$@" = *[![:space:]]* ]] && echo '; ')
           CMD_ARG="$@$SEMICOLON exit"
-          return
+          return;
         fi
         ;;
     esac
     shift
   done
   if [ -z $DOMAIN ]; then
-    ssh $SSHARGS
-    exit 1
+    ssh $SSHARGS; exit 1;
   fi
 }
 
