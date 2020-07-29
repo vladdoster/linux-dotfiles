@@ -4,12 +4,12 @@ function check_for_openssl()
 {
   command -v openssl > /dev/null 2>&1 ||
     {
-      printf "SSHrc requires openssl to be installed. Exiting." &&
-        exit 1
+      printf "SSHrc requires openssl to be installed. Exiting."
+      exit 1
     }
 }
 
-function get_files()
+function check_for_files()
 {
   local LOCAL_SSHRC_DIR="${SSHHOME:=~}"
   if [ -f "$LOCAL_SSHRC_DIR"/sshrc ]; then
@@ -50,23 +50,22 @@ function sshrc(){
   trap rm -rf $REMOTE_SSHRC_CLEANUP; exit 0;
   $(cat "$0" | openssl enc -base64)" | tr -s ' ' $'\n' | openssl enc -base64 -d > "$REMOTE_SSHRC_DIR/sshrc"
     chmod +x \$SSHHOME/sshrc
-    echo $'"$( cat << 'EOF' \
-    | openssl enc -base64
+    echo $'"$( cat << 'EOF' | openssl enc -base64
     export PATH=$PATH:$SSHHOME
     source $SSHHOME/sshrc;
 EOF
-                )"' | tr -s ' ' $'\n' | openssl enc -base64 -d > \$SSHHOME/sshrc.bashrc
+)"' | tr -s ' ' $'\n' | openssl enc -base64 -d > \$SSHHOME/sshrc.bashrc
             echo $'"$( cat << 'EOF' | openssl enc -base64
 #!/usr/bin/env bash
-                exec bash --rcfile <(echo '
-                [ -r /etc/profile ] && source /etc/profile
-                if [ -r ~/.bash_profile ]; then source ~/.bash_profile
-                elif [ -r ~/.bash_login ]; then source ~/.bash_login
-                elif [ -r ~/.profile ]; then source ~/.profile
-                fi
-                source '$SSHHOME'/sshrc;
-                export PATH=$PATH:"$SSHHOME"
-                ') "$@"
+exec bash --rcfile <(echo '
+[ -r /etc/profile ] && source /etc/profile
+if [ -r ~/.bash_profile ]; then source ~/.bash_profile
+elif [ -r ~/.bash_login ]; then source ~/.bash_login
+elif [ -r ~/.profile ]; then source ~/.profile
+fi
+source '$SSHHOME'/sshrc;
+export PATH=$PATH:"$SSHHOME"
+') "$@"
 EOF
                 )"' | tr -s ' ' $'\n' | openssl enc -base64 -d > \$SSHHOME/bashsshrc
             chmod +x \$SSHHOME/bashsshrc
@@ -119,4 +118,4 @@ function sshrc_parse()
 }
 
 check_for_openssl
-get_files
+check_for_files
