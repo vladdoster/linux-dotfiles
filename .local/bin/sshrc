@@ -32,7 +32,7 @@ elif [ -r ~/.profile ]; then
 fi
 "
 
-function sshrc() {
+function ssh_into_host() {
   ssh -t "$DOMAIN" "$SSH_ARGS" "
     command -v openssl > /dev/null 2>&1 || {
       printf \"SSHrc requires openssl to be installed. Exiting.\"; exit 1; }
