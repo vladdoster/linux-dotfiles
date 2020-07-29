@@ -39,45 +39,41 @@ fi
 
 function sshrc() {
   ssh -t "$DOMAIN $SSH_ARGS"
-  check_for_openssl
-  export REMOTE_SSHRC_DIR=\$(mktemp -d -t .$(whoami)sshrc.XXXX)
-  export REMOTE_SSHRC_CLEANUP=\"$REMOTE_SSHRC_DIR"
-  trap \"rm -rf \$REMOTE_SSHRC_CLEANUP; exit\" 0
-  
-  echo $'"$(cat "$0" | openssl enc -base64)" | tr -s ' ' $'\n' | openssl enc -base64 -d > \"$REMOTE_SSHRC_DIR/sshrc"
-  chmod +x \$REMOTE_SSHRC_DIR/sshrc
-  
-  echo $'"$( cat <<-"SSHRC_BASHRC_GENERATION" | openssl enc -base64
-    $source_files_cmd
-    export PATH=$PATH:$REMOTE_SSHRC_DIR
-    source $REMOTE_SSHRC_DIR/sshrc;
-SSHRC_BASHRC_GENERATION
-  )"' | tr -s ' ' $'\n' | openssl enc -base64 -d > \$REMOTE_SSHRC_DIR/sshrc.bashrc
-  
-  echo $'"$( cat <<-'BASH_SSHRC_GENERATION' | openssl enc -base64
-      #!/usr/bin/env bash
-      exec bash --rcfile <(echo '
-      $source_files_command
-      source '$REMOTE_SSHRC_DIR'/sshrc;
-      export PATH=$PATH:'$REMOTE_SSHRC_DIR'
-    ') "$@"
-BASH_SSHRC_GENERATION
-  )"' | tr -s ' ' $'\n' | openssl enc -base64 -d > \$REMOTE_SSHRC_DIR/bashsshrc
-    chmod +x \$REMOTE_SSHRC_DIR/bashsshrc
-    
-    echo $'"$(tar czf - -h -C $LOCAL_SSHRC_DIR $FILES | openssl enc -base64)"' | tr -s ' ' $'\n' | openssl enc -base64 -d | tar mxzf - -C \$REMOTE_SSHRC_DIR
-    export REMOTE_SSHRC_DIR=\$REMOTE_SSHRC_DIR
-    echo \"$CMDARG\" >> \$REMOTE_SSHRC_DIR/sshrc.bashrc
-    bash --rcfile \$REMOTE_SSHRC_DIR/sshrc.bashrc
-    "
-  else
-    echo "No such file: $REMOTE_SSHRC_DIR/sshrc" >&2
-    exit 1
-  fi
-}
+    check_for_openssl
+    export REMOTE_SSHRC_DIR=\$(mktemp -d -t .$(whoami)sshrc.XXXX)
+    export REMOTE_SSHRC_CLEANUP=\"$REMOTE_SSHRC_DIR"
+    trap \"rm -rf \$REMOTE_SSHRC_CLEANUP; exit\" 0
 
-function ssh_into_host() {
-  ssh -t "$DOMAIN" $SSHARGS sshrc
+    echo $'"$(cat "$0" | openssl enc -base64)" | tr -s ' ' $'\n' | openssl enc -base64 -d > \"$REMOTE_SSHRC_DIR/sshrc"
+    chmod +x \$REMOTE_SSHRC_DIR/sshrc
+
+    echo $'"$( cat <<-"SSHRC_BASHRC_GENERATION" | openssl enc -base64
+      $source_files_cmd
+      export PATH=$PATH:$REMOTE_SSHRC_DIR
+      source $REMOTE_SSHRC_DIR/sshrc;
+SSHRC_BASHRC_GENERATION
+    )"' | tr -s ' ' $'\n' | openssl enc -base64 -d > \$REMOTE_SSHRC_DIR/sshrc.bashrc
+
+    echo $'"$( cat <<-'BASH_SSHRC_GENERATION' | openssl enc -base64
+        #!/usr/bin/env bash
+        exec bash --rcfile <(echo '
+        $source_files_command
+        source '$REMOTE_SSHRC_DIR'/sshrc;
+        export PATH=$PATH:'$REMOTE_SSHRC_DIR'
+      ') "$@"
+BASH_SSHRC_GENERATION
+    )"' | tr -s ' ' $'\n' | openssl enc -base64 -d > \$REMOTE_SSHRC_DIR/bashsshrc
+      chmod +x \$REMOTE_SSHRC_DIR/bashsshrc
+
+      echo $'"$(tar czf - -h -C $LOCAL_SSHRC_DIR $FILES | openssl enc -base64)"' | tr -s ' ' $'\n' | openssl enc -base64 -d | tar mxzf - -C \$REMOTE_SSHRC_DIR
+      export REMOTE_SSHRC_DIR=\$REMOTE_SSHRC_DIR
+      echo \"$CMD_ARG\" >> \$REMOTE_SSHRC_DIR/sshrc.bashrc
+      bash --rcfile \$REMOTE_SSHRC_DIR/sshrc.bashrc
+      "
+    else
+      echo "No such file: $REMOTE_SSHRC_DIR/sshrc" >&2
+      exit 1
+    fi
 }
 
 function sshrc_parse() {
@@ -95,7 +91,7 @@ function sshrc_parse() {
           DOMAIN="$1"
         else
           local SEMICOLON=$([[ "$@" = *[![:space:]]* ]] && echo '; ')
-          CMDARG="$@$SEMICOLON exit"
+          CMD_ARG="$@$SEMICOLON exit"
           return
         fi
         ;;
