@@ -1,7 +1,7 @@
 #!/bin/bash
 
 #-> sshrc
-export REMOTE_SSHRC_CONFIGS_DIR=$REMOTE_SSHRC_DIR/sshrc.d
+export REMOTE_SSHRC_CONFIGS_DIR="$REMOTE_SSHRC_DIR"/sshrc.d
 source $REMOTE_SSHRC_CONFIGS_DIR/functions.sh
 source $REMOTE_SSHRC_CONFIGS_DIR/.bashrc
 
