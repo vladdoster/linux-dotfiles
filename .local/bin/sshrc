@@ -45,22 +45,22 @@ function sshrc() {
   trap \"rm -rf \$REMOTE_SSHRC_CLEANUP; exit\" 0
   
   echo $'"$(cat "$0" | openssl enc -base64)" | tr -s ' ' $'\n' | openssl enc -base64 -d > \"$REMOTE_SSHRC_DIR/sshrc"
-  chmod +x \$SSHHOME/sshrc
+  chmod +x \$REMOTE_SSHRC_DIR/sshrc
   
   echo $'"$( cat <<-"SSHRC_BASHRC_GENERATION" | openssl enc -base64
     $source_files_cmd
-    export PATH=$PATH:$SSHHOME
-    source $SSHHOME/sshrc;
+    export PATH=$PATH:$REMOTE_SSHRC_DIR
+    source $REMOTE_SSHRC_DIR/sshrc;
 SSHRC_BASHRC_GENERATION
-  )"' | tr -s ' ' $'\n' | openssl enc -base64 -d > \$SSHHOME/sshrc.bashrc
+  )"' | tr -s ' ' $'\n' | openssl enc -base64 -d > \$REMOTE_SSHRC_DIR/sshrc.bashrc
   
   echo $'"$( cat <<-'BASH_SSHRC_GENERATION' | openssl enc -base64
       #!/usr/bin/env bash
       exec bash --rcfile <(echo '
       $source_files_command
-      source "$REMOTE_SSHRC_DIR"/sshrc;
-      export PATH=$PATH:"$REMOTE_SSHRC_DIR"'
-    ) "$@"
+      source '$REMOTE_SSHRC_DIR'/sshrc;
+      export PATH=$PATH:'$REMOTE_SSHRC_DIR'
+    ') "$@"
 BASH_SSHRC_GENERATION
   )"' | tr -s ' ' $'\n' | openssl enc -base64 -d > \$REMOTE_SSHRC_DIR/bashsshrc
     chmod +x \$REMOTE_SSHRC_DIR/bashsshrc
@@ -70,10 +70,10 @@ BASH_SSHRC_GENERATION
     echo \"$CMDARG\" >> \$REMOTE_SSHRC_DIR/sshrc.bashrc
     bash --rcfile \$REMOTE_SSHRC_DIR/sshrc.bashrc
     "
-    else
-      echo "No such file: $REMOTE_SSHRC_DIR/sshrc" >&2
-      exit 1
-    fi
+  else
+    echo "No such file: $REMOTE_SSHRC_DIR/sshrc" >&2
+    exit 1
+  fi
 }
 
 function ssh_into_host() {
