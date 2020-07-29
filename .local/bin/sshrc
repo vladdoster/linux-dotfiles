@@ -41,10 +41,10 @@ function sshrc() {
   ssh -t "$DOMAIN" "$SSH_ARGS" "
     check_for_openssl
     export REMOTE_SSHRC_DIR=\$(mktemp -d -t .$(whoami)sshrc.XXXX)
-    export REMOTE_SSHRC_CLEANUP=\"$REMOTE_SSHRC_DIR"
+    export REMOTE_SSHRC_CLEANUP=\$REMOTE_SSHRC_DIR
     trap \"rm -rf \$REMOTE_SSHRC_CLEANUP; exit\" 0
 
-    echo $'"$(cat "$0" | openssl enc -base64)" | tr -s ' ' $'\n' | openssl enc -base64 -d > \"$REMOTE_SSHRC_DIR/sshrc"
+    echo $'"$(cat "$0" | openssl enc -base64)" | tr -s ' ' $'\n' | openssl enc -base64 -d > \$REMOTE_SSHRC_DIR/sshrc
     chmod +x \$REMOTE_SSHRC_DIR/sshrc
 
     echo $'"$( cat <<-"SSHRC_BASHRC_GENERATION" | openssl enc -base64
