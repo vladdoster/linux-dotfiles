@@ -6,8 +6,8 @@ SHELL="$(which bash)"
 export SHELL=$SHELL   # required for sshrc tmux/screen integration
 export EDITOR=vim
 export VISUAL=vim
-export MYVIMRC="$SSHRC_DIR"/.vimrc
-alias vim="vim -i NONE -u $SSHRC_DIR/.vimrc"
+export MYVIMRC="$REMOTE_SSHRC_CONFIGS_DIR"/.vimrc
+alias vim="vim -i NONE -u $REMOTE_SSHRC_CONFIGS_DIR/.vimrc"
 
 #-- aliases --#
 # misc.
@@ -26,7 +26,7 @@ alias gsl='git log --decorate --graph --pretty=short'
 export PS1="[\u@\h \W \`parse_git_branch\`]$ "
 
 #-- history --#
-export HISTFILE="$SSHRC_DIR"/.bash_history
+export HISTFILE="$REMOTE_SSHRC_CONFIGS_DIR"/.bash_history
 export HISTCONTROL=ignoredups:erasedups  # Avoid duplicates
 shopt -s histappend  # append to the history file instead of overwriting it
 # After each command, append to the history file and reread it
