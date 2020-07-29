@@ -3,15 +3,17 @@
 function check_for_files() {
   LOCAL_SSHRC_DIR="${LOCAL_SSHRC_DIR:=~}"
   if [ -f "$LOCAL_SSHRC_DIR"/sshrc ]; then
-    LOCAL_FILES="sshrc"
+    LOCAL_FILES=sshrc
     if [ -d "$LOCAL_SSHRC_DIR"/sshrc.d ]; then
       LOCAL_FILES="$LOCAL_FILES sshrc.d"
     fi
     SIZE=$(tar cfz - -h -C "$LOCAL_SSHRC_DIR" "$LOCAL_FILES" | wc -c)
     if [ "$SIZE" -gt 65536 ]; then
       printf "SSHrc.d and sshrc files must be smaller than 64kb\nCurrent size: %d bytes\n" "$SIZE"
-      printf "SSHRC_DIR: %s\nFiles: %s\nFiles size: %s KiB\n" "$SSHRC_DIR" "$FILES" "$SIZE"
+      printf "SSHRC_DIR: %s\nFiles: %s\nFiles size: %s KiB\n" "$LOCAL_SSHRC_DIR" "$FILES" "$SIZE"
       exit 1
+    else
+      printf "LOCAL_SSHRC_DIR: %s\nFiles: %s\nFiles size: %s KiB\n" "$LOCAL_SSHRC_DIR" "$FILES" "$SIZE"
     fi
   else
     echo "No such file: $LOCAL_SSHRC_DIR/sshrc " >&2
