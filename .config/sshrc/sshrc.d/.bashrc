@@ -26,7 +26,7 @@ alias gsl='git log --decorate --graph --pretty=short'
 export PS1="[\u@\h \W \`parse_git_branch\`]$ "
 
 #-- history --#
-export HISTFILE="$REMOTE_SSHRC_CONFIGS_DIR"/.bash_history
+export HISTFILE="${HOME:=/tmp}/.bash_history
 export HISTCONTROL=ignoredups:erasedups  # Avoid duplicates
 shopt -s histappend  # append to the history file instead of overwriting it
 # After each command, append to the history file and reread it
