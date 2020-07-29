@@ -4,16 +4,15 @@ function check_for_files() {
   LOCAL_SSHRC_DIR="${LOCAL_SSHRC_DIR:=~}"
   if [ -f "$LOCAL_SSHRC_DIR"/sshrc ]; then
     LOCAL_FILES="sshrc"
-  fi
-  if [ -d "$LOCAL_SSHRC_DIR"/sshrc.d ]; then
-    LOCAL_FILES="$LOCAL_FILES sshrc.d"
-  fi
-  SIZE=$(tar cfz - -h -C "$LOCAL_SSHRC_DIR" "$LOCAL_FILES" | wc -c)
-  if [ "$SIZE" -gt 65536 ]; then
-    printf "SSHrc.d and sshrc files must be smaller than 64kb\nCurrent size: %d bytes\n" "$SIZE"
-    exit 1
-  fi
-  printf "SSHRC_DIR: %s\nFiles: %s\nFiles size: %s KiB\n" "$SSHRC_DIR" "$FILES" "$SIZE"
+    if [ -d "$LOCAL_SSHRC_DIR"/sshrc.d ]; then
+      LOCAL_FILES="$LOCAL_FILES sshrc.d"
+    fi
+    SIZE=$(tar cfz - -h -C "$LOCAL_SSHRC_DIR" "$LOCAL_FILES" | wc -c)
+    if [ "$SIZE" -gt 65536 ]; then
+      printf "SSHrc.d and sshrc files must be smaller than 64kb\nCurrent size: %d bytes\n" "$SIZE"
+      printf "SSHRC_DIR: %s\nFiles: %s\nFiles size: %s KiB\n" "$SSHRC_DIR" "$FILES" "$SIZE"
+      exit 1
+    fi
 }
 
 source_files_cmd="
@@ -63,10 +62,6 @@ BASH_SSHRC_GENERATION
       echo \"$CMD_ARG\" >> \$REMOTE_SSHRC_DIR/sshrc.bashrc
       bash --rcfile \$REMOTE_SSHRC_DIR/sshrc.bashrc
       "
-    else
-      echo "No such file: $REMOTE_SSHRC_DIR/sshrc" >&2
-      exit 1
-    fi
 }
 
 function sshrc_parse() {
