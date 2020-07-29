@@ -92,7 +92,6 @@ function sshrc_parse() {
   fi
 }
 
-check_for_openssl
 check_for_files
 sshrc_parse "$@"
 ssh_into_host
