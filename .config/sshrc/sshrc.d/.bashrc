@@ -8,6 +8,7 @@ export LC_ALL=en_US.UTF-8
 export MYVIMRC="$REMOTE_SSHRC_CONFIGS_DIR"/.vimrc
 export SHELL=$SHELL # required for sshrc tmux/screen integration
 export VISUAL=vim
+source "$REMOTE_SSHRC_CONFIGS_DIR"/.git-completion.bash
 
 #-- aliases --#
 #-> PROGRAMS
