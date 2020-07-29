@@ -1,84 +1,115 @@
-#!/bin/bash
+#!/usr/bin/env bash
+
+function check_for_openssl() {
+  command -v openssl > /dev/null 2>&1 ||
+    {
+      printf \"SSHrc requires openssl to be installed. Exiting."
+      exit 1
+    }
+}
+
+function check_for_files() {
+  LOCAL_SSHRC_DIR="${LOCAL_SSHRC_DIR:=~}"
+  if [ -f "$LOCAL_SSHRC_DIR"/sshrc ]; then
+    LOCAL_FILES="sshrc"
+  fi
+  if [ -d "$LOCAL_SSHRC_DIR"/sshrc.d ]; then
+    LOCAL_FILES="$LOCAL_FILES sshrc.d"
+  fi
+  SIZE=$(tar cfz - -h -C "$LOCAL_SSHRC_DIR" "$LOCAL_FILES" | wc -c)
+  if [ "$SIZE" -gt 65536 ]; then
+    printf "SSHrc.d and sshrc files must be smaller than 64kb\nCurrent size: %d bytes\n" "$SIZE"
+    exit 1
+  fi
+  printf "SSHRC_DIR: %s\nFiles: %s\nFiles size: %s KiB\n" "$SSHRC_DIR" "$FILES" "$SIZE"
+}
+
+source_files_cmd="
+if [ -r /etc/profile ]; then
+  source /etc/profile; 
+fi
+if [ -r ~/.bash_profile ]; then
+  source ~/.bash_profile
+elif [ -r ~/.bash_login ]; then 
+  source ~/.bash_login
+elif [ -r ~/.profile ]; then 
+  source ~/.profile
+fi
+"
 
 function sshrc() {
-    local SSHHOME=${SSHHOME:=~}
-    if [ -f $SSHHOME/sshrc ]; then
-        local files=sshrc
-        echo "found sshrc config"
-        if [ -d $SSHHOME/sshrc.d ]; then
-            files="$files sshrc.d"
-            echo "found sshrc config directory"
-        fi
-        SIZE=$(tar cfz - -h -C $SSHHOME $files | wc -c)
-        if [ $SIZE -gt 65536 ]; then
-            echo >&2 $'sshrc.d and .sshrc files must be less than 64kb\ncurrent size: '$SIZE' bytes'
-            exit 1
-        fi
-        ssh -t "$DOMAIN" $SSHARGS "
-            command -v openssl >/dev/null 2>&1 || { echo >&2 \"sshrc requires openssl to be installed on the server, but it's not. Aborting.\"; exit 1; }
-            export SSHHOME=\$(mktemp -d -t .$(whoami)sshrc.XXXX)
-            export SSHRCCLEANUP=\$SSHHOME
-            trap \"rm -rf \$SSHRCCLEANUP; exit\" 0
-            echo $'"$(cat "$0" | openssl enc -base64)"' | tr -s ' ' $'\n' | openssl enc -base64 -d > \$SSHHOME/sshrc
-            chmod +x \$SSHHOME/sshrc
-            echo $'"$( cat << 'EOF' | openssl enc -base64
-                if [ -r /etc/profile ]; then source /etc/profile; fi
-                if [ -r ~/.bash_profile ]; then source ~/.bash_profile
-                elif [ -r ~/.bash_login ]; then source ~/.bash_login
-                elif [ -r ~/.profile ]; then source ~/.profile
-                fi
-                export PATH=$PATH:$SSHHOME
-                source $SSHHOME/sshrc;
-EOF
-                )"' | tr -s ' ' $'\n' | openssl enc -base64 -d > \$SSHHOME/sshrc.bashrc
-            echo $'"$( cat << 'EOF' | openssl enc -base64
-#!/usr/bin/env bash
-                exec bash --rcfile <(echo '
-                [ -r /etc/profile ] && source /etc/profile
-                if [ -r ~/.bash_profile ]; then source ~/.bash_profile
-                elif [ -r ~/.bash_login ]; then source ~/.bash_login
-                elif [ -r ~/.profile ]; then source ~/.profile
-                fi
-                source '$SSHHOME'/sshrc;
-                export PATH=$PATH:"$SSHHOME"
-                ') "$@"
-EOF
-                )"' | tr -s ' ' $'\n' | openssl enc -base64 -d > \$SSHHOME/bashsshrc
-            chmod +x \$SSHHOME/bashsshrc
-            echo $'"$(tar czf - -h -C $SSHHOME $files | openssl enc -base64)"' | tr -s ' ' $'\n' | openssl enc -base64 -d | tar mxzf - -C \$SSHHOME
-            export SSHHOME=\$SSHHOME
-            echo \"$CMDARG\" >> \$SSHHOME/sshrc.bashrc
-            bash --rcfile \$SSHHOME/sshrc.bashrc
-            "
+  ssh -t "$DOMAIN $SSH_ARGS"
+  check_for_openssl
+  export REMOTE_SSHRC_DIR=\$(mktemp -d -t .$(whoami)sshrc.XXXX)
+  export REMOTE_SSHRC_CLEANUP=\"$REMOTE_SSHRC_DIR"
+  trap \"rm -rf \$REMOTE_SSHRC_CLEANUP; exit\" 0
+  
+  echo $'"$(cat "$0" | openssl enc -base64)" | tr -s ' ' $'\n' | openssl enc -base64 -d > \"$REMOTE_SSHRC_DIR/sshrc"
+  chmod +x \$SSHHOME/sshrc
+  
+  echo $'"$( cat <<-"SSHRC_GENERATION" | openssl enc -base64
+    $source_files_cmd
+    export PATH=$PATH:$SSHHOME
+    source $SSHHOME/sshrc;
+SSHRC_BASHRC_GENERATION
+  )"' | tr -s ' ' $'\n' | openssl enc -base64 -d > \$SSHHOME/sshrc.bashrc
+  
+  echo $'"$(
+    cat <<-'SSHRC_BASHRC_GENERATION' | openssl enc -base64
+      #!/usr/bin/env bash
+      exec bash --rcfile <(echo '
+      $source_files_command
+      source "$REMOTE_SSHRC_DIR"/sshrc;
+      export PATH=$PATH:"$REMOTE_SSHRC_DIR"'
+    ) "$@"
+BASH_SSHRC_GENERATION
+  )"' | tr -s ' ' $'\n' | openssl enc -base64 -d > \$REMOTE_SSHRC_DIR/bashsshrc
+    chmod +x \$REMOTE_SSHRC_DIR/bashsshrc
+    
+    echo $'"$(tar czf - -h -C $LOCAL_SSHRC_DIR $FILES | openssl enc -base64)"' | tr -s ' ' $'\n' | openssl enc -base64 -d | tar mxzf - -C \$REMOTE_SSHRC_DIR
+    export REMOTE_SSHRC_DIR=\$REMOTE_SSHRC_DIR
+    echo \"$CMDARG\" >> \$REMOTE_SSHRC_DIR/sshrc.bashrc
+    bash --rcfile \$REMOTE_SSHRC_DIR/sshrc.bashrc
+    "
     else
-        echo "No such file: $SSHHOME/sshrc" >&2
-        exit 1
+      echo "No such file: $REMOTE_SSHRC_DIR/sshrc" >&2
+      exit 1
     fi
+}
+
+function ssh_into_host() {
+  ssh -t "$DOMAIN" $SSHARGS sshrc
 }
 
 function sshrc_parse() {
   while [[ -n $1 ]]; do
     case $1 in
-      -b | -c | -D | -E | -e | -F | -I | -i | -L | -l | -m | -O | -o | -p | -Q | -R | -S | -W | -w )
-        SSHARGS="$SSHARGS $1 $2"; shift ;;
-      -* )
-        SSHARGS="$SSHARGS $1" ;;
+      -b | -c | -D | -E | -e | -F | -I | -i | -L | -l | -m | -O | -o | -p | -Q | -R | -S | -W | -w)
+        SSHARGS="$SSHARGS $1 $2"
+        shift
+        ;;
+      -*)
+        SSHARGS="$SSHARGS $1"
+        ;;
       *)
         if [ -z "$DOMAIN" ]; then
-         DOMAIN="$1"
+          DOMAIN="$1"
         else
           local SEMICOLON=$([[ "$@" = *[![:space:]]* ]] && echo '; ')
           CMDARG="$@$SEMICOLON exit"
-          return;
+          return
         fi
         ;;
     esac
     shift
   done
   if [ -z $DOMAIN ]; then
-    ssh $SSHARGS; exit 1;
+    ssh $SSHARGS
+    exit 1
   fi
 }
-command -v openssl >/dev/null 2>&1 || { echo >&2 "sshrc requires openssl to be installed locally, but it's not. Aborting."; exit 1; }
+
+check_for_openssl
+check_for_files
 sshrc_parse "$@"
-sshrc
+ssh_into_host
