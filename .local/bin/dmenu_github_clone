@@ -9,7 +9,7 @@ clone_repository(){
   if [[ -z "$1" ]]; then
     echo "ERROR: You need to enter the name of the repository you wish to clone."
   else
-    git clone "${GITHUB_USER_URL}$1"
+    git clone "${GITHUB_USER_URL}$1" "$HOME/code_repositories/$1"
   fi
 }
 
