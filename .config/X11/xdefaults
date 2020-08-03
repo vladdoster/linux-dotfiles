@@ -1,5 +1,0 @@
-# For use with MacOS only
-
-# Change colors since X11 uxterm is launched as a non-login shell
-XTerm*foreground: white
-XTerm*background: black
