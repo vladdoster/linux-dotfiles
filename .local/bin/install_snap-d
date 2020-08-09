@@ -1,0 +1,27 @@
+#!/usr/bin/env bash
+#
+# Installs snapd from source and enables systemd services
+# https://snapcraft.io/docs/installing-snap-on-arch-linux
+#
+
+set -o errexit
+set -o pipefail
+set -o nounset
+# set -o xtrace
+
+# ref: https://askubuntu.com/a/30157/8698
+if ! [ $(id -u) = 0 ]; then
+  echo "The script need to be run as root." >&2
+  exit 1
+fi
+
+echo "Downloading snapd" &&
+  git clone https://aur.archlinux.org/snapd.git &&
+  cd snapd &&
+  makepkg -si
+
+echo "Enabling snapd" &&
+  systemctl enable --now snapd.socket &&
+  ln -s /var/lib/snapd/snap /snap
+
+echo "Successfully installed snapd.\nSystem requires a reboot."

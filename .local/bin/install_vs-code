@@ -1,0 +1,15 @@
+#!/usr/bin/env bash
+#
+# Installs vscode via snap
+# https://snapcraft.io/code
+#
+
+set -o errexit
+set -o pipefail
+set -o nounset
+# set -o xtrace
+
+echo "Downloading vscode insiders build a.k.a. nightly" &&
+  sudo snap install --classic code-insiders
+
+echo "Successfully installed vscode."
