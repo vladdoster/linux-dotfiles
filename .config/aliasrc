@@ -31,6 +31,5 @@ alias \
 alias \
   magit="nvim -c MagitOnly" \
   refresh_aliases="generate_shortcutrc; source ${XDG_CONFIG_HOME:-$HOME/.config}/shortcutrc;" \
-  ssh="sshrc" \
   tmux="tmux -f ${XDG_CONFIG_HOME:-$HOME/.config}/tmux/tmux.conf" \
   wget="wget --hsts-file=${XDG_CACHE_HOME:-$HOME/.cache}/wget-hsts"
