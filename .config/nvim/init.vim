@@ -6,7 +6,7 @@
 " --- python 2 & 3 locations --- "
 let g:python_host_prog="/home/vlad/.pyenv/versions/2.7.13/bin/python"
 " python3 location
-let g:python3_host_prog="/home/vlad/.pyenv/versions/3.8.0/bin/python3"
+let g:python3_host_prog="/home/vlad/.pyenv/versions/3.8.0/bin/python"
 
 " --- source configs --- "
 source $HOME/.config/nvim/mappings.vim
