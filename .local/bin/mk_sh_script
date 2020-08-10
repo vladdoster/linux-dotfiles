@@ -3,7 +3,7 @@
 # @Author: Vlad Doster <mvdoster@gmail.com>
 # @Date: 2020-06-17 21:56:33
 # @Last Modified by: Vlad Doster <mvdoster@gmail.com>
-# @Last Modified time: 2020-08-09 23:04:53
+# @Last Modified time: 2020-08-09 23:09:28
 
 import argparse
 import os
@@ -11,11 +11,11 @@ import sys
 import time
 
 # Create CLI parser
-parser = argparse.ArgumentParser(prog="mk_sh_script", description="Create new shell script(s) with shebang and is executable", formatter_class=argparse.ArgumentDefaultsHelpFormatter)
-parser.add_argument("-e", "--f-ext", choices=[".bash", ".sh"], default=None, dest="f_ext", help="Add a file extension")
+parser = argparse.ArgumentParser(prog="mk_sh_script", description="Create new shell script(s) with shebang and is executable.", formatter_class=argparse.ArgumentDefaultsHelpFormatter)
+parser.add_argument("-e", "--f-ext", choices=[".bash", ".sh"], default="", dest="f_ext", help="Add a file extension.")
 parser.add_argument("-p", "--path", default=os.getcwd(), dest="path", help="Path that scripts should be created at", metavar="PATH", type=str, nargs=1)
-parser.add_argument("-s", "--shell", choices=["bash", "fish", "ksh", "sh", "zsh"], default="bash", dest="shell", help="The shell to be used in shebang")
-parser.add_argument("file_names", nargs="+", help="File name(s) that should be created")
+parser.add_argument("-s", "--shell", choices=["bash", "fish", "ksh", "sh", "zsh"], default="bash", dest="shell", help="The shell to be used in shebang.")
+parser.add_argument("file_names", nargs="+", help="File name(s) of scripts to be created.")
 
 # Parse user arguments
 args = parser.parse_args()
@@ -23,14 +23,14 @@ path, shell = args.path, args.shell
 
 # Poor mans here-doc
 shell_script_boilerplate = """\
-#/usr/bin/env bash
+#/usr/bin/env {0}
 #
 # <purpose>
 #
-# Copyright (c) {0} Vlad Doster • mvdoster@gmail.com
+# Copyright (c) {1} Vlad Doster <mvdoster@gmail.com>
 #
 
-""".format(time.strftime("%Y"))
+""".format(args.shell, time.strftime("%Y"))
 
 # Create shell script(s)
 for f_name in args.file_names:
