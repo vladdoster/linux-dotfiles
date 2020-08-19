@@ -18,5 +18,5 @@ function message(){
 
 is_root
 killall pulseaudio >/dev/null 2>&1
-sudo -u "$USER" pulseaudio --start || message "Unable to start pulseaudio systemd service."
+sudo -u "$USER" pulseaudio --start || message "Unable to start pulseaudio."
 message "Successfully started pulseaudio"
