@@ -1,0 +1,22 @@
+#!/usr/bin/env bash
+#
+# <purpose>
+#
+# Copyright (c) 2020 Vlad Doster <mvdoster@gmail.com>
+#
+
+function is_root(){
+  if [[ $EUID -eq 0 ]]; then
+    message "Must run start_pulse-audio as non-root."
+  fi
+}
+
+function message(){
+  notify-send "$1" || echo "$1"
+  exit 0
+}
+
+is_root
+killall pulseaudio >/dev/null 2>&1
+sudo -u "$USER" pulseaudio --start || message "Unable to start pulseaudio systemd service."
+message "Successfully started pulseaudio"
