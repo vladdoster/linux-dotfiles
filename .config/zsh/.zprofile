@@ -3,7 +3,7 @@
 # --- default programs --- #
 export EDITOR="nvim"
 export TERMINAL="st"
-export BROWSER="google-chrome-unstable"
+export BROWSER="google-chrome-stable"
 export READER="zathura"
 
 # --- directory variables --- #
