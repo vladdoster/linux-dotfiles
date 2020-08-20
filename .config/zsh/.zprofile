@@ -1,14 +1,9 @@
 #!/usr/bin/env zsh
 
-# Author: Vlad Doster <mvdoster@gmail.com>
-# Date: 2020-07-06 14:20:50
-# Last Modified by: Vlad Doster <mvdoster@gmail.com>
-# Last Modified time: 2020-07-24 12:28:37
-
 # --- default programs --- #
 export EDITOR="nvim"
 export TERMINAL="st"
-export BROWSER="firefox"
+export BROWSER="google-chrome-unstable"
 export READER="zathura"
 
 # --- directory variables --- #
@@ -52,10 +47,10 @@ export MACHINE_STORAGE_PATH="${XDG_DATA_HOME}/docker-machine"
 export NVM_DIR="${XDG_DATA_HOME}/nvm"                        
 export PASSWORD_STORE_DIR="${XDG_DATA_HOME}/password-store"  
 
-export TMUX_TMPDIR="${XDG_RUNTIME_DIR}"      
-
-# --- misc. program settings --- #
+# --- fzf --- #
 export FZF_DEFAULT_OPTS="--layout=reverse --height 40%"
+
+# --- less --- #
 export LESS=-R
 export LESSHISTFILE="-"
 export LESSOPEN="| /usr/bin/highlight -O ansi %s 2>/dev/null"
@@ -66,6 +61,9 @@ export LESS_TERMCAP_so="$(printf '%b' '[01;44;33m')"
 export LESS_TERMCAP_se="$(printf '%b' '[0m')"
 export LESS_TERMCAP_us="$(printf '%b' '[1;32m')"
 export LESS_TERMCAP_ue="$(printf '%b' '[0m')"
+
+# --- misc. environment variables --- #
+export TMUX_TMPDIR="${XDG_RUNTIME_DIR}"
 export QT_QPA_PLATFORMTHEME="gtk2"
 export SUDO_ASKPASS="${XDG_USER_LOCAL}/bin/dmenu_pass"
 export _JAVA_AWT_WM_NONREPARENTING=1	# Java doesn't understand tiling windows
