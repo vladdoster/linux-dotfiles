@@ -1,6 +1,6 @@
 # GNU/Linux system dotfiles
 
-These dotfiles also work on MacOS via [vladdoster/mac_os-dotfiles](https://github.com/vladdoster/mac_os-dotfiles).
+MacOS flavour can be found at [vladdoster/mac_os-dotfiles](https://github.com/vladdoster/mac_os-dotfiles).
 
 ### Utilizes the following repositories:
 
@@ -11,3 +11,12 @@ These dotfiles also work on MacOS via [vladdoster/mac_os-dotfiles](https://githu
 |  dynamic menu  | [vladdoster/dmenu](https://github.com/vladdoster/dmenu)           |
 |    terminal    | [vladdoster/st](https://github.com/vladdoster/st)                 |
 
+## Author
+
+All code was written by [Vlad Doster](https://vdoster.com).
+
+This project is [hosted on GitHub](https://github.com/vladdoster/linux-dotfiles). Please feel free to submit pull requests.
+
+## License
+
+Copyright © 2018-2020 Vlad Doster. This program is released under the MIT license, which you can find in the file [LICENSE](LICENSE).
